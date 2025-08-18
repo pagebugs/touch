@@ -720,12 +720,10 @@ SITE LOGO
   transition: color 0.3s ease; /* 색상 변경 시 부드러운 효과 */
 }
 
-/* 로고에 마우스 오버 시 */
+/* 로고에 마우스 오버 시
 .site-logo:hover {
-  color: #ffe600; /* 원하는 노란색 */
-  /* 호버 시에는 blend-mode를 해제하여 노란색이 그대로 보이게 함 */
-  mix-blend-mode: normal;
-}
+  color: #ffe600;
+  mix-blend-mode: normal; } */
 
 
 /*
@@ -1041,3 +1039,407 @@ MOBILE QUOTE ROLLING ANIMATION
 https://www.stilhaus-praxismarketing.de/
 ================================
 */
+
+/*
+================================
+touch.html 전용 스타일
+================================
+*/
+@import url('https://cdn.jsdelivr.net/gh/sunn-us/SUIT/fonts/static/woff2/SUIT.css');
+    /*
+    ================================
+    커스텀 스타일: BG 무비, 글래스모피즘, 멀티스텝 폼
+    ================================
+    */
+    /* 배경색과 기본 폰트 색상을 r_ask.html에 맞게 설정 */
+    html, body {
+      background-color: black;
+      color: white;
+      font-size: 14px;
+    }
+
+    /* 히어로 섹션: BG 무비와 폼이 위치하는 영역 */
+    #hero-section {
+      position: relative;
+      width: 100vw;
+      min-height: 100vh; /* BG 무비 영역 (푸터 높이를 고려한 80vh) */
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 0 20px;
+      box-sizing: border-box;
+    }
+
+    .bg-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+    }
+
+    /* 헤드 카피 영역 (인풋과 분리) */
+    .head-copy-wrapper {
+      position: relative;
+      z-index: 3;
+      text-align: center;
+      margin-bottom: 20px;
+      max-width: 600px;
+      color: #fff;
+    }
+
+    .head-copy-wrapper .line {
+        /* 기존 스타일 유지 */
+        display: block;
+        font-size: 1.5rem;
+        font-weight: 200;
+        line-height: 1.5;
+        animation: riseUp 1s ease-out forwards;
+        word-break: keep-all;
+    }
+
+    /* 첫 번째 줄에 폰트 두께를 강조 */
+    .head-copy-wrapper .uspH {
+        font-weight: 500;
+        font-size: 2rem;
+    }
+    .head-copy-wrapper .now {
+        font-weight: 700;
+    }
+
+    .head-copy-wrapper .subline {
+        font-weight: 500;
+        font-size: 0.9rem;
+        margin-top: 10px;
+    }
+
+    .head-copy-wrapper .line:nth-child(2) { animation-delay: 0.2s; }
+
+    @keyframes riseUp {
+      from { transform: translateY(40px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+
+    /* 글래스모피즘 폼 컨테이너 */
+    .glass-form-wrapper {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 560px;
+      height: 540px; /* 모든 스텝의 높이를 고정 */
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(10px);
+      border: 0px solid rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      padding: 40px 20px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden; /* 슬라이드 액션을 위해 필수 */
+    }
+
+    /* 인디케이터 (폼 상단) */
+    .form-indicator {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .form-indicator .step-dot {
+      width: 8px;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      transition: background-color 0.3s ease;
+    }
+    .form-indicator .step-dot.active {
+      background: #ffe600;
+    }
+
+    /* 폼 스텝 컨테이너 (슬라이드 애니메이션 적용) */
+    .form-steps-container {
+      display: flex;
+      width: 300%; /* 3개의 스텝이 가로로 나열되도록 */
+      transition: transform 0.6s ease-in-out;
+      flex: 1; /* 남은 공간을 채우도록 설정 */
+    }
+
+    /* 각 스텝 */
+    .form-step {
+      width: calc(100% / 3);
+      padding: 0 10px;
+      box-sizing: border-box;
+    }
+
+    /* 폼 요소 스타일 */
+    .form-section__title {
+      font-size: 1.5rem;
+      font-weight: 500;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+    .form-group {
+    margin-bottom: 30px;
+    max-width: 460px; /* 예를 들어, 400px로 제한 */
+    margin-left: auto; /* 중앙 정렬을 위한 속성 */
+    margin-right: auto;
+    font-weight: 200;
+    }
+
+    .needed {
+    color: #ffe600;
+    font-size: 0.8rem;
+    margin-left: 8px;
+    font-weight: 500;
+    }
+
+    label {
+      display: block;
+      font-size: 1.25rem;
+      margin-bottom: 4px;
+      color: #fff;
+    }
+    /* 인풋 박스 디자인: 하단 언더라인만 표시 */
+    input[type="text"],
+    input[type="tel"],
+    input[type="email"],
+    select {
+      width: 100%;
+      padding: 8px 0px; /* 상하 패딩 조정 */
+      font-size: 1.5rem;
+      background: transparent; /* 배경 투명 */
+      border: none; /* 기본 보더 제거 */
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3); /* 하단 보더만 남김 */
+      color: white;
+      font-family: 'SUIT', sans-serif;
+      box-sizing: border-box;
+      transition: border-color 0.3s ease;
+      border-radius: 0; /* 둥근 모서리 제거 */
+      font-weight: 500;
+    }
+    input[type="text"]:focus,
+    input[type="tel"]:focus,
+    input[type="email"]:focus,
+    select:focus {
+      outline: none;
+      border-bottom-color: #ffe600; /* 포커스 시 색상 변경 */
+    }
+
+    /* placeholder 텍스트의 색상을 연한 회색으로 변경하는 예시 */
+    input::placeholder {
+    color: #f2f2f2;
+    font-style: italic;
+    font-size: 1rem;
+    }
+
+    /* 폼 요소 전체에 적용하려면 다음과 같이 작성합니다. */
+    input[type="text"]::placeholder,
+    input[type="tel"]::placeholder,
+    input[type="email"]::placeholder,
+    select::placeholder {
+    color: rgba(255, 255, 255, 0.6); /* 투명도가 적용된 흰색 */
+    }
+
+/* 자동 완성(autofill) 시 브라우저 기본 스타일 초기화 */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px black inset !important;
+    -webkit-text-fill-color: white !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+/* 추가적으로 input의 기본 배경색과 폰트색을 재정의 */
+input, select {
+  background-color: black;
+  color: white;
+}
+
+#specialty {
+  /* 이메일 스타일과 동일하게 적용 */
+  width: 100%;
+  padding: 8px 0px;
+  font-size: 1rem;
+  background-color: #000;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  font-family: 'SUIT', sans-serif;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+  border-radius: 0;
+  font-weight: 300;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg fill="white" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+}
+
+
+    /* 네비게이션 버튼 영역 (하단 중앙 정렬) */
+    .form-navigation {
+      margin-top: auto;
+      padding-top: 20px;
+      text-align: center;
+    }
+    .nav-button {
+      background: #fff;
+      color: #000;
+      padding: 10px 25px;
+      border: 1px solid #fff;
+      border-radius: 999px;
+      font-size: 1.25rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin: 0 5px; /* 버튼 간 간격 */
+    }
+    .nav-button.prev-button {
+      background: transparent;
+      color: white;
+    }
+    .nav-button.prev-button:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+    .nav-button.next-button {
+      background: #ffe600;
+      color: #222;
+    }
+    .nav-button.next-button:hover {
+      background: #ffcc00;
+    }
+    .nav-button.submit-button {
+      background: #e74c3c;
+      color: white;
+      border-color: #e74c3c;
+    }
+    .nav-button.submit-button:hover {
+      background: #c0392b;
+    }
+
+    /* 버튼 비활성화 상태 */
+    .nav-button.disabled {
+      background: #555;
+      color: #aaa;
+      border-color: #555;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    /* 추후 추가될 섹션 스타일 */
+    #usp-content {
+      height: 20vh;
+      display: none; /* 현재는 숨김 */
+    }
+
+#hero-section {
+    background-color: #000;
+}
+
+.bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1; /* 오버레이 아래에 위치 */
+}
+
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* 불투명도 40%의 검정색 오버레이 */
+    z-index: 2; /* 비디오 위에 위치 */
+}
+
+/* 개인 정보 수집 동의 체크박스 스타일 */
+.form-group.consent {
+    display: flex;
+    align-items: center; /* 체크박스와 라벨을 세로 중앙 정렬 */
+    gap: 8px; /* 체크박스와 텍스트 사이 간격 */
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.form-group.consent label {
+    font-size: 1rem;
+    font-weight: 200;
+    margin: 0;
+    color: #e2e2e2;
+}
+.form-group.consent input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  background: transparent;
+  border: 1px solid #e2e2e2;
+  border-radius: 4px;
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: none;
+  position: relative;
+  flex-shrink: 0;
+}
+.form-group.consent input[type="checkbox"]:checked {
+  background-color: #ffe600;
+  border-color: #ffe600;
+}
+.form-group.consent input[type="checkbox"]:checked::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 5px;
+  width: 4px;
+  height: 8px;
+  border: solid #222;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+    .address-search-group { display: flex; gap: 10px; align-items: flex-end; }
+    .address-search-group .search-button {
+    padding: 10px 14px;
+    font-size: 1rem;
+    white-space: nowrap;
+    background: #ffe600;
+    color: #222;
+    border-radius: 8px;
+    font-weight: 300;
+    cursor: pointer;
+    }
+
+.form-tip {
+    font-size: 0.9rem;
+    font-weight: 200;
+    line-height: 1.4;
+    color: #e0e0e0; /* 연한 회색 */
+    margin-top: 20px;
+    margin-bottom: 0;
+}
+    /* 모바일 반응형 */
+    @media (max-width: 768px) {
+      #hero-section { height: 100vh; padding-top: 100px; }
+      .head-copy-wrapper .line { font-size: 1.25rem; }
+      .head-copy-wrapper .uspH { font-size: 2rem; }
+      .glass-form-wrapper { padding: 20px; height: 400px; }
+      .form-section__title { font-size: 1rem; }
+      label, input, select, .email-group span, .address-search-group .search-button, .nav-button { font-size: 0.9rem; }
+      .form-indicator { margin-bottom: 20px; }
+       .form-group.consent {
+      gap: 5px;
+  }
+    }

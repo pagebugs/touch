@@ -23,6 +23,7 @@ html, body {
   color: white;
   transition: background-color 1.5s ease-in-out, color 1.5s ease-in-out;
   position: relative; /* 반드시 있어야 getBoundingClientRect 기준 잡힘 */
+    overflow-x: hidden; /* 수평 스크롤 방지 */
 }
 
 .scroll-section {

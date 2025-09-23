@@ -137,14 +137,23 @@ document.addEventListener("DOMContentLoaded", () => {
     privacyConsentCheckbox.addEventListener("change", checkButtonState);
 
     submitButton.addEventListener("click", async () => {
-      if (validateStep()) {
+    if (validateStep()) {
         submitButton.disabled = true;
         submitButton.textContent = "처리 중...";
-        try { await fetchData(); }
-        catch { submitButton.disabled = false; submitButton.textContent = "제출"; }
-      } else {
+        try {
+        // 1. Google Sheets에 저장
+        await fetchSubmitForm();
+
+        // 2. Runcomm API 분석 호출
+        await fetchData();
+        } catch (error) {
+        console.error("제출 처리 오류:", error);
+        submitButton.disabled = false;
+        submitButton.textContent = "제출";
+        }
+    } else {
         alert("필수 정보를 모두 입력하고 개인정보 수집에 동의해주세요.");
-      }
+    }
     });
 
     // --- 7. Google Sheet 연동 (0923 추가) ---

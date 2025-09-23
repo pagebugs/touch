@@ -136,57 +136,64 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll("#multi-step-form input, #multi-step-form select").forEach((input) => input.addEventListener("input", checkButtonState));
     privacyConsentCheckbox.addEventListener("change", checkButtonState);
 
+    // 오버레이 DOM 잡기
+    const loadingOverlay = document.getElementById("loadingOverlay");
+
     submitButton.addEventListener("click", async () => {
     if (validateStep()) {
         submitButton.disabled = true;
         submitButton.textContent = "처리 중...";
-        try {
-        // 1. Google Sheets에 저장
-        await fetchSubmitForm();
 
-        // 2. Runcomm API 분석 호출
-        await fetchData();
+        // ✅ API 시작 전에 오버레이 표시
+        if (loadingOverlay) loadingOverlay.style.display = "flex";
+
+        try {
+        await fetchSubmitForm();   // Google Sheets 저장
+        await fetchData();         // Runcomm API 호출
+        // 성공 시에는 r.html로 이동 → 새 페이지로 넘어가면서 오버레이 자동 종료
         } catch (error) {
         console.error("제출 처리 오류:", error);
         submitButton.disabled = false;
         submitButton.textContent = "제출";
+
+        // ❌ 실패 시 오버레이 닫기
+        if (loadingOverlay) loadingOverlay.style.display = "none";
         }
     } else {
         alert("필수 정보를 모두 입력하고 개인정보 수집에 동의해주세요.");
     }
     });
-
     // --- 7. Google Sheet 연동 (0923 추가) ---
-async function fetchSubmitForm() {
-  // ✅ 선택된 옵션 요소
-  const specialtyOption = specialtySelect.options[specialtySelect.selectedIndex];
-  const ageOption = ageSelect.options[ageSelect.selectedIndex];
+    async function fetchSubmitForm() {
+    // ✅ 선택된 옵션 요소
+    const specialtyOption = specialtySelect.options[specialtySelect.selectedIndex];
+    const ageOption = ageSelect.options[ageSelect.selectedIndex];
 
-  const response = await fetch("/api/submit", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      name: nameInput.value,
-      phone: phoneInput.value,
-      email: emailInput.value,
-      "hospital-name": hospitalNameInput.value,
-      // ✅ 사람이 읽는 값으로 저장
-      specialty: specialtyOption.getAttribute("name") || specialtyOption.text,
-      "address-base": addressBaseInput.value,
-      "address-detail": addressDetailInput.value,
-      gender: genderSelect.value, // 성별은 코드값(M/F) 그대로
-      age: ageOption.getAttribute("name") || ageOption.text,
-      "privacy-consent": privacyConsentCheckbox.checked,
-    }),
-  });
+    const response = await fetch("/api/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+        name: nameInput.value,
+        phone: phoneInput.value,
+        email: emailInput.value,
+        "hospital-name": hospitalNameInput.value,
+        // ✅ 사람이 읽는 값으로 저장
+        specialty: specialtyOption.getAttribute("name") || specialtyOption.text,
+        "address-base": addressBaseInput.value,
+        "address-detail": addressDetailInput.value,
+        gender: genderSelect.value, // 성별은 코드값(M/F) 그대로
+        age: ageOption.getAttribute("name") || ageOption.text,
+        "privacy-consent": privacyConsentCheckbox.checked,
+        }),
+    });
 
-  const result = await response.json();
-  if (result.uuid) {
-    localStorage.setItem("user_uuid", result.uuid);
-    localStorage.setItem("user_uid", result.uid);
-    window.location.href = "r.html";
-  }
-}
+    const result = await response.json();
+    if (result.uuid) {
+        localStorage.setItem("user_uuid", result.uuid);
+        localStorage.setItem("user_uid", result.uid);
+        window.location.href = "r.html";
+    }
+    }
 
     const userForm = document.getElementById("multi-step-form");
     if (userForm) {

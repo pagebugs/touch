@@ -1472,3 +1472,89 @@ input, select {
   font-size: 24px;
   cursor: pointer;
 }
+
+
+/* =========================
+   1. 로딩 오버레이
+   ========================= */
+.overlay {
+  display: none; /* 기본은 숨김 */
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.85);
+  z-index: 2000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: #fff;
+  text-align: center;
+}
+
+.overlay-content { text-align: center; }
+
+.spinner {
+  width: 60px;
+  height: 60px;
+  border: 6px solid rgba(255,255,255,0.2);
+  border-top: 6px solid #ffe600;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 20px auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* =========================
+   2. 멀티스텝 폼 너비 수정 (3단계 → 4단계)
+   ========================= */
+.form-steps-container {
+  display: flex;
+  width: 400%; /* 4단계니까 400% */
+  transition: transform 0.6s ease-in-out;
+  flex: 1;
+}
+.form-step {
+  width: 25%; /* 100 / 4 */
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+/* =========================
+   3. 입력 시 번쩍임 현상 완화
+   ========================= */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px #000 inset !important;
+  -webkit-text-fill-color: #fff !important;
+  transition: none !important; /* 깜빡임 방지 */
+}
+
+/* =========================
+   4. 반응형 (모바일 환경 조정)
+   ========================= */
+@media (max-width: 768px) {
+  /* 멀티스텝 폼 너비 모바일에서도 4단계 기준 */
+  .form-steps-container {
+    width: 400%;
+  }
+  .form-step {
+    width: 25%;
+  }
+
+  /* 로딩 오버레이 글자 크기/스피너 축소 */
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border-width: 4px;
+  }
+  .overlay-content p {
+    font-size: 0.8rem;
+  }
+}

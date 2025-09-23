@@ -178,11 +178,11 @@ async function fetchSubmitForm() {
       phone: phoneInput.value,
       email: emailInput.value,
       "hospital-name": hospitalNameInput.value,
-      specialty: specialtyOption.value,              // API 호출과 동일하게 value 저장
+      specialty: specialtyOption.getAttribute("name"),  //
       "address-base": addressBaseInput.value,
       "address-detail": addressDetailInput.value,
       gender: genderSelect.value,                    // 성별은 코드값(M/F)
-      age: ageOption.value,                          // 연령대도 코드값(A~G)
+      age: ageOption.getAttribute("name"),
       "privacy-consent": privacyConsentCheckbox.checked,
     }),
   });

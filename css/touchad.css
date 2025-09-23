@@ -1535,6 +1535,10 @@ input:-webkit-autofill:active {
   transition: none !important; /* 깜빡임 방지 */
 }
 
+.multi-step-form {
+  overflow: hidden; /* 가로 스크롤 숨김 */
+}
+
 /* =========================
    4. 반응형 (모바일 환경 조정)
    ========================= */

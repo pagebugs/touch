@@ -444,6 +444,22 @@
 
         mainContainer.addEventListener("scroll", handleScrollIndicator);
       });
+      await fetch("/api/submit", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    name: nameInput.value,
+    phone: phoneInput.value,
+    email: emailInput.value,
+    "hospital-name": hospitalNameInput.value,
+    specialty: specialtySelect.value,
+    "address-base": addressBaseInput.value,
+    "address-detail": addressDetailInput.value,
+    gender: genderSelect.value,
+    age: ageSelect.value,
+    "privacy-consent": privacyConsentCheckbox.checked,
+  }),
+});
     </script>
   </body>
 </html>

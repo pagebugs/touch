@@ -1,0 +1,11 @@
+버전 1(2025. 9. 23., 오전 11:53)
+
+배포 ID
+AKfycbwyAkOZxXFFdQS7QzlvuWi2y60ZDorzG1S0tvxQ5R7FHs8S5D9qVaKdEbO79Oco2To2Pw
+
+웹 앱 URL
+https://script.google.com/macros/s/AKfycbwyAkOZxXFFdQS7QzlvuWi2y60ZDorzG1S0tvxQ5R7FHs8S5D9qVaKdEbO79Oco2To2Pw/exec
+
+
+라이브러리 URL
+https://script.google.com/macros/library/d/1lrDJh1MhknKBg-COXFvQmpQORAzQMnawKBdjfq26K8GzSP5uFmpS9kJ2/1

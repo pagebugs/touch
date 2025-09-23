@@ -2,7 +2,7 @@
 // Vercel 배포 도메인에서 API 호출 테스트
 // 실행 방법: node test-submit.js
 
-import fetch from "node-fetch";  // Node 18 이상이면 내장 fetch 사용 가능
+//import fetch from "node-fetch";  // Node 18 이상이면 내장 fetch 사용 가능
 
 // 배포된 Vercel 도메인 (Andy님 프로젝트 기준)
 const BASE_URL = "https://touch-two.vercel.app/api/submit";

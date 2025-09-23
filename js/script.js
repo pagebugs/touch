@@ -157,32 +157,38 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // --- 7. Google Sheet 연동 (0923 추가) ---
-    async function fetchSubmitForm() {
-      const response = await fetch("/api/submit", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: nameInput.value,
-          phone: phoneInput.value,
-          email: emailInput.value,
-          "hospital-name": hospitalNameInput.value,
-          specialty: specialtySelect.value,
-          "address-base": addressBaseInput.value,
-          "address-detail": addressDetailInput.value,
-          gender: genderSelect.value,
-          age: ageSelect.value,
-          "privacy-consent": privacyConsentCheckbox.checked,
-        }),
-      });
-      const result = await response.json();
-      if (result.uuid) {
-        localStorage.setItem("user_uuid", result.uuid);
-        localStorage.setItem("user_uid", result.uid);
-        window.location.href = "r.html"; // ✅ rr.html → r.html
-      }
-    }
+async function fetchSubmitForm() {
+  // ✅ 선택된 옵션 요소
+  const specialtyOption = specialtySelect.options[specialtySelect.selectedIndex];
+  const ageOption = ageSelect.options[ageSelect.selectedIndex];
 
-    const userForm = document.getElementById("userForm");
+  const response = await fetch("/api/submit", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      name: nameInput.value,
+      phone: phoneInput.value,
+      email: emailInput.value,
+      "hospital-name": hospitalNameInput.value,
+      // ✅ 사람이 읽는 값으로 저장
+      specialty: specialtyOption.getAttribute("name") || specialtyOption.text,
+      "address-base": addressBaseInput.value,
+      "address-detail": addressDetailInput.value,
+      gender: genderSelect.value, // 성별은 코드값(M/F) 그대로
+      age: ageOption.getAttribute("name") || ageOption.text,
+      "privacy-consent": privacyConsentCheckbox.checked,
+    }),
+  });
+
+  const result = await response.json();
+  if (result.uuid) {
+    localStorage.setItem("user_uuid", result.uuid);
+    localStorage.setItem("user_uid", result.uid);
+    window.location.href = "r.html";
+  }
+}
+
+    const userForm = document.getElementById("multi-step-form");
     if (userForm) {
       userForm.addEventListener("submit", async (e) => {
         e.preventDefault();

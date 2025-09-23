@@ -178,11 +178,11 @@ document.addEventListener("DOMContentLoaded", () => {
         email: emailInput.value,
         "hospital-name": hospitalNameInput.value,
         // ✅ 사람이 읽는 값으로 저장
-        specialty: specialtyOption.getAttribute("name") || specialtyOption.text,
+        specialty: specialtyOption.getAttribute("name"), // 항상 사람이 읽는 전문과명,
         "address-base": addressBaseInput.value,
         "address-detail": addressDetailInput.value,
         gender: genderSelect.value, // 성별은 코드값(M/F) 그대로
-        age: ageOption.getAttribute("name") || ageOption.text,
+        age: ageOption.getAttribute("name"),             // 항상 사람이 읽는 연령대명
         "privacy-consent": privacyConsentCheckbox.checked,
         }),
     });

@@ -444,22 +444,44 @@
 
         mainContainer.addEventListener("scroll", handleScrollIndicator);
       });
-      await fetch("/api/submit", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({
-    name: nameInput.value,
-    phone: phoneInput.value,
-    email: emailInput.value,
-    "hospital-name": hospitalNameInput.value,
-    specialty: specialtySelect.value,
-    "address-base": addressBaseInput.value,
-    "address-detail": addressDetailInput.value,
-    gender: genderSelect.value,
-    age: ageSelect.value,
-    "privacy-consent": privacyConsentCheckbox.checked,
-  }),
+
+//0923
+// 신규 제출 처리 (Google Sheet 연동)
+async function fetchSubmitForm() {
+  const response = await fetch("/api/submit", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      name: document.getElementById("nameInput").value,
+      phone: document.getElementById("phoneInput").value,
+      email: document.getElementById("emailInput").value,
+      "hospital-name": document.getElementById("hospitalNameInput").value,
+      specialty: document.getElementById("specialtySelect").value,
+      "address-base": document.getElementById("addressBaseInput").value,
+      "address-detail": document.getElementById("addressDetailInput").value,
+      gender: document.getElementById("genderSelect").value,
+      age: document.getElementById("ageSelect").value,
+      "privacy-consent": document.getElementById("privacyConsentCheckbox").checked,
+    }),
+  });
+
+  const result = await response.json();
+  console.log("Sheet API 응답:", result);
+
+  if (result.uuid) {
+    localStorage.setItem("user_uuid", result.uuid);
+    localStorage.setItem("user_uid", result.uid);
+    // 기존 UX 흐름과 이어지도록 페이지 전환
+    window.location.href = "rr.html";
+  }
+}
+
+// 기존 form submit 이벤트에 추가 연결
+document.getElementById("userForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  await fetchSubmitForm(); // Google Sheet 저장 실행
 });
+
     </script>
   </body>
 </html>

@@ -163,46 +163,42 @@ document.addEventListener("DOMContentLoaded", () => {
         alert("필수 정보를 모두 입력하고 개인정보 수집에 동의해주세요.");
     }
     });
-    // --- 7. Google Sheet 연동 (0923 추가) ---
-    async function fetchSubmitForm() {
-    // ✅ 선택된 옵션 요소
-    const specialtyOption = specialtySelect.options[specialtySelect.selectedIndex];
-    const ageOption = ageSelect.options[ageSelect.selectedIndex];
+// --- 7. Google Sheet 연동 (0923 수정본) ---
+async function fetchSubmitForm() {
+  // ✅ 선택된 옵션 요소
+  const specialtyOption = specialtySelect.options[specialtySelect.selectedIndex];
+  const ageOption = ageSelect.options[ageSelect.selectedIndex];
 
-    const response = await fetch("/api/submit", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-        name: nameInput.value,
-        phone: phoneInput.value,
-        email: emailInput.value,
-        "hospital-name": hospitalNameInput.value,
-        // ✅ 사람이 읽는 값으로 저장
-        specialty: specialtyOption.getAttribute("name"), // 항상 사람이 읽는 전문과명,
-        "address-base": addressBaseInput.value,
-        "address-detail": addressDetailInput.value,
-        gender: genderSelect.value, // 성별은 코드값(M/F) 그대로
-        age: ageOption.getAttribute("name"),             // 항상 사람이 읽는 연령대명
-        "privacy-consent": privacyConsentCheckbox.checked,
-        }),
-    });
+  // ✅ Google Sheet에는 API value 값 저장 (card_sub와 동일)
+  const response = await fetch("/api/submit", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      name: nameInput.value,
+      phone: phoneInput.value,
+      email: emailInput.value,
+      "hospital-name": hospitalNameInput.value,
+      specialty: specialtyOption.value,              // API 호출과 동일하게 value 저장
+      "address-base": addressBaseInput.value,
+      "address-detail": addressDetailInput.value,
+      gender: genderSelect.value,                    // 성별은 코드값(M/F)
+      age: ageOption.value,                          // 연령대도 코드값(A~G)
+      "privacy-consent": privacyConsentCheckbox.checked,
+    }),
+  });
 
-    const result = await response.json();
-    if (result.uuid) {
-        localStorage.setItem("user_uuid", result.uuid);
-        localStorage.setItem("user_uid", result.uid);
-        window.location.href = "r.html";
-    }
-    }
+  const result = await response.json();
+  if (result.uuid) {
+    // ✅ 시트 저장 후 필요한 식별값만 로컬스토리지에 남김
+    localStorage.setItem("user_uuid", result.uuid);
+    localStorage.setItem("user_uid", result.uid);
 
-    const userForm = document.getElementById("multi-step-form");
-    if (userForm) {
-      userForm.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        await fetchSubmitForm();
-      });
-    }
+    // 📌 localStorage에 touchadData는 여기서 덮어쓰지 않음!
+    // 화면 출력용 데이터는 fetchData()에서만 저장하도록 역할 분리
 
+    // 이후 결과 페이지로 이동은 fetchData()가 처리
+  }
+}
     // --- 8. 이메일 도메인 입력/선택 토글 ---
     const emailDomainInput = document.getElementById("email-domain-input");
     const emailDomainSelect = document.getElementById("email-domain-select");

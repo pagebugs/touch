@@ -10,13 +10,36 @@
   </head>
   <body>
     <!-- 로딩 오버레이 -->
-    <div id="loadingOverlay" class="overlay">
-      <div class="overlay-content">
-        <div class="spinner"></div>
-        <p>데이터를 분석하고 있습니다...</p>
-        <p style="font-size: 0.9rem; margin-top: 10px; opacity: 0.8">잠시만 기다려주세요</p>
+  <div id="loadingOverlay" class="overlay">
+    <div class="overlay-content">
+      <!-- 파형 애니메이션 -->
+      <div class="wave-loader" id="waveLoader">
+        <svg viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+          <polyline points="0,20 20,10 40,30 60,5 80,25 100,10 120,20"
+                    fill="none" stroke="#ffe600" stroke-width="3">
+            <animate attributeName="points"
+                    dur="2s" repeatCount="indefinite"
+                    values="
+                      0,20 20,10 40,30 60,5 80,25 100,10 120,20;
+                      0,25 20,5 40,20 60,15 80,30 100,20 120,10;
+                      0,20 20,10 40,30 60,5 80,25 100,10 120,20"/>
+          </polyline>
+        </svg>
+      </div>
+
+      <!-- 메시지 (순환) -->
+      <div class="processing-messages" id="processingMessages">
+        <p>카드 소비 데이터 수집 중…</p>
+        <p>연령·성별별 소비 패턴 분석 중…</p>
+        <p>병원 맞춤 리포트 생성 중…</p>
+      </div>
+
+      <!-- 실패 메시지 (기본은 숨김) -->
+      <div class="error-message" id="errorMessage" style="display:none;">
+        서버 트랜잭션이 많아<br/>서비스가 원활하지 않습니다.<br/>잠시 후 다시 시도해주세요.
       </div>
     </div>
+  </div>
 
     <!-- 실제 데이터 표시 영역 -->
     <div id="result"></div>

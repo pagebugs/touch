@@ -140,28 +140,33 @@ document.addEventListener("DOMContentLoaded", () => {
     const loadingOverlay = document.getElementById("loadingOverlay");
 
     submitButton.addEventListener("click", async () => {
-    if (validateStep()) {
+      if (validateStep()) {
         submitButton.disabled = true;
         submitButton.textContent = "처리 중...";
 
         // ✅ API 시작 전에 오버레이 표시
-        if (loadingOverlay) loadingOverlay.style.display = "flex";
+        if (loadingOverlay) {
+          loadingOverlay.style.display = "flex";
+          startOverlayTimeout(); // <-- 여기서 타임아웃 타이머 시작
+        }
 
         try {
-        await fetchSubmitForm();   // Google Sheets 저장
-        await fetchData();         // Runcomm API 호출
-        // 성공 시에는 r.html로 이동 → 새 페이지로 넘어가면서 오버레이 자동 종료
-        } catch (error) {
-        console.error("제출 처리 오류:", error);
-        submitButton.disabled = false;
-        submitButton.textContent = "제출";
+          await fetchSubmitForm();   // Google Sheets 저장
+          await fetchData();         // Runcomm API 호출
 
-        // ❌ 실패 시 오버레이 닫기
-        if (loadingOverlay) loadingOverlay.style.display = "none";
+          clearOverlayTimeout();     // ✅ 성공 시 타이머 해제
+          // 성공하면 r.html로 이동 → 새 페이지에서 오버레이 종료됨
+        } catch (error) {
+          console.error("제출 처리 오류:", error);
+          submitButton.disabled = false;
+          submitButton.textContent = "제출";
+
+          clearOverlayTimeout();     // ❌ 실패 시에도 타이머 해제
+          if (loadingOverlay) loadingOverlay.style.display = "none";
         }
-    } else {
+      } else {
         alert("필수 정보를 모두 입력하고 개인정보 수집에 동의해주세요.");
-    }
+      }
     });
 // --- 7. Google Sheet 연동 (0923 수정본) ---
 async function fetchSubmitForm() {
@@ -543,4 +548,26 @@ async function fetchSubmitForm() {
       window.addEventListener("click", (e) => { if (e.target === modal) modal.style.display = "none"; });
     }
   }
+// --- [오버레이] 20초 타임아웃 처리 --- //
+let overlayTimeout;
+
+// 오버레이 시작 시 타이머 가동
+function startOverlayTimeout() {
+  // 20초 후 실패 처리
+  overlayTimeout = setTimeout(() => {
+    // 파형 숨김
+    document.getElementById("waveLoader").style.display = "none";
+    document.getElementById("processingMessages").style.display = "none";
+    // 실패 메시지 노출
+    document.getElementById("errorMessage").style.display = "block";
+  }, 20000); // 20초
+}
+
+// API 완료되면 타임아웃 해제
+function clearOverlayTimeout() {
+  clearTimeout(overlayTimeout);
+}
+
+
+
 });

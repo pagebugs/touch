@@ -1564,6 +1564,33 @@ input:-webkit-autofill:active {
   display: none;
 }
 
+.wave-loader {
+  width: 120px;
+  height: 40px;
+  margin: 0 auto 20px;
+}
+
+.processing-messages p {
+  display: none;
+  font-size: 1rem;
+  font-weight: 500;
+  opacity: 0;
+  transition: opacity 0.5s;
+  text-align: center;
+}
+.processing-messages p.active {
+  display: block;
+  opacity: 1;
+}
+
+.error-message {
+  color: #ff4d4f; /* 붉은 경고 톤 */
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 20px;
+}
+
 .multi-step-form {
   overflow: hidden; /* 가로 스크롤 숨김 */
 }

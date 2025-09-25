@@ -1479,6 +1479,10 @@ input, select {
 /* =========================
    1. 로딩 오버레이
    ========================= */
+#loadingOverlay{
+  display: none;
+}
+
 .overlay {
   display: none; /* 기본은 숨김 */
   position: fixed;
@@ -1558,10 +1562,6 @@ input:-webkit-autofill:active {
   .overlay-content p {
     font-size: 0.8rem;
   }
-}
-
-#loadingOverlay {
-  display: none;
 }
 
 .wave-loader {

@@ -33,6 +33,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let currentStep = 0;
     const totalSteps = 4;
+    let isTimedOut = false;  // 타임아웃 여부 플래그
+    let msgInterval;         // 메시지 순환 interval ID
 
     // --- 2. 단계 전환 ---
     function updateForm() {
@@ -569,7 +571,7 @@ async function fetchSubmitForm() {
     }
 
     // 3초마다 메시지 순환
-    setInterval(rotateProcessingMessages, 3000);
+    msgInterval = setInterval(rotateProcessingMessages, 3000);
 
     // 초기 실행 (첫 메시지 표시)
     rotateProcessingMessages();
@@ -588,7 +590,7 @@ async function fetchSubmitForm() {
       document.getElementById("processingMessages").style.display = "none";
       // 실패 메시지 노출
       document.getElementById("errorMessage").style.display = "block";
-    }, 30000); // 20초
+    }, 30000); // 30초
   }
 
   // API 완료되면 타임아웃 해제

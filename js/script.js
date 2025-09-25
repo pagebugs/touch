@@ -122,17 +122,33 @@ document.addEventListener("DOMContentLoaded", () => {
           },
           resData: apiData,
         };
-        localStorage.setItem("touchadData", JSON.stringify(localData));
-        // ✅ 성공 시에는 overlay 유지 → 곧바로 r.html 이동
-        if (!isTimedOut) {
-          document.getElementById("processingMessages").innerHTML =
-            "<p>리포트 페이지로 이동 중...</p>"; // 안내 메시지 교체
-          window.location.href = "r.html";
-        }
+    localStorage.setItem("touchadData", JSON.stringify(localData));
 
-      } catch (err) {
-        resultEl.innerHTML = `<p style="color:red;">에러 발생: ${err.message}</p>`;
-        overlay.style.display = "none"; // ❌ 실패 시에만 닫기
+    // ✅ 성공 시에는 overlay 유지 → 곧바로 r.html 이동
+    if (!isTimedOut) {
+      window.location.href = "r.html";
+    }
+
+    } catch (err) {
+      console.error("API 호출 오류:", err);
+      // ✅ 실패 시 오버레이는 닫지 않고, 실패 메시지로 교체
+      document.getElementById("waveLoader").style.display = "none";
+      document.getElementById("processingMessages").style.display = "none";
+      document.getElementById("errorMessage").style.display = "block";
+    }
+    // --- [오버레이] 실패 재시도 버튼 --- //
+      const retryBtn = document.getElementById("retryBtn");
+      if (retryBtn) {
+        retryBtn.addEventListener("click", async () => {
+          // 실패 메시지 감추고 다시 파형+메시지 보여줌
+          document.getElementById("errorMessage").style.display = "none";
+          document.getElementById("waveLoader").style.display = "flex";
+          document.getElementById("processingMessages").style.display = "block";
+
+          isTimedOut = false;     // 타임아웃 플래그 초기화
+          startOverlayTimeout();  // 다시 30초 타이머 시작
+          await fetchData();      // ✅ Runcomm API만 재호출
+        });
       }
     }
 

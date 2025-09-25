@@ -123,16 +123,17 @@ document.addEventListener("DOMContentLoaded", () => {
           resData: apiData,
         };
         localStorage.setItem("touchadData", JSON.stringify(localData));
-          // ✅ 타임아웃이 안 났을 때만 이동
-          if (!isTimedOut) {
-            window.location.href = "r.html";
-          }
-
-        } catch (err) {
-          resultEl.innerHTML = `<p style="color:red;">에러 발생: ${err.message}</p>`;
-        } finally {
-          overlay.style.display = "none";
+        // ✅ 성공 시에는 overlay 유지 → 곧바로 r.html 이동
+        if (!isTimedOut) {
+          document.getElementById("processingMessages").innerHTML =
+            "<p>리포트 페이지로 이동 중...</p>"; // 안내 메시지 교체
+          window.location.href = "r.html";
         }
+
+      } catch (err) {
+        resultEl.innerHTML = `<p style="color:red;">에러 발생: ${err.message}</p>`;
+        overlay.style.display = "none"; // ❌ 실패 시에만 닫기
+      }
     }
 
     // --- 6. 이벤트 리스너 ---

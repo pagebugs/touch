@@ -1561,7 +1561,7 @@ input:-webkit-autofill:active {
 }
 
 #loadingOverlay {
-  display: none !important;
+  display: none;
 }
 
 .multi-step-form {

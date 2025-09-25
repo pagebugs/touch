@@ -121,12 +121,16 @@ document.addEventListener("DOMContentLoaded", () => {
           resData: apiData,
         };
         localStorage.setItem("touchadData", JSON.stringify(localData));
-        window.location.href = "r.html"; // ✅ rr.html → r.html
-      } catch (err) {
-        resultEl.innerHTML = `<p style="color:red;">에러 발생: ${err.message}</p>`;
-      } finally {
-        overlay.style.display = "none";
-      }
+          // ✅ 타임아웃이 안 났을 때만 이동
+          if (!isTimedOut) {
+            window.location.href = "r.html";
+          }
+
+        } catch (err) {
+          resultEl.innerHTML = `<p style="color:red;">에러 발생: ${err.message}</p>`;
+        } finally {
+          overlay.style.display = "none";
+        }
     }
 
     // --- 6. 이벤트 리스너 ---
@@ -161,8 +165,11 @@ document.addEventListener("DOMContentLoaded", () => {
           submitButton.disabled = false;
           submitButton.textContent = "제출";
 
-          clearOverlayTimeout();     // ❌ 실패 시에도 타이머 해제
-          if (loadingOverlay) loadingOverlay.style.display = "none";
+          clearOverlayTimeout(); // 타임아웃 해제
+          // 오버레이 닫기 대신 실패 메시지 표시
+          document.getElementById("waveLoader").style.display = "none";
+          document.getElementById("processingMessages").style.display = "none";
+          document.getElementById("errorMessage").style.display = "block";
         }
       } else {
         alert("필수 정보를 모두 입력하고 개인정보 수집에 동의해주세요.");
@@ -548,25 +555,45 @@ async function fetchSubmitForm() {
       window.addEventListener("click", (e) => { if (e.target === modal) modal.style.display = "none"; });
     }
   }
-// --- [오버레이] 20초 타임아웃 처리 --- //
-let overlayTimeout;
 
-// 오버레이 시작 시 타이머 가동
-function startOverlayTimeout() {
-  // 20초 후 실패 처리
-  overlayTimeout = setTimeout(() => {
-    // 파형 숨김
-    document.getElementById("waveLoader").style.display = "none";
-    document.getElementById("processingMessages").style.display = "none";
-    // 실패 메시지 노출
-    document.getElementById("errorMessage").style.display = "block";
-  }, 20000); // 20초
-}
+    // --- [오버레이] 프로세싱 메시지 순환 --- //
+    const messages = document.querySelectorAll(".processing-messages p");
+    let msgIndex = 0;
 
-// API 완료되면 타임아웃 해제
-function clearOverlayTimeout() {
-  clearTimeout(overlayTimeout);
-}
+    // 메시지 교체 함수
+    function rotateProcessingMessages() {
+      messages.forEach(m => m.classList.remove("active"));   // 모든 메시지 숨김
+      messages[msgIndex].classList.add("active");            // 현재 메시지 표시
+      msgIndex = (msgIndex + 1) % messages.length;           // 인덱스 증가, 루프
+    }
+
+    // 3초마다 메시지 순환
+    setInterval(rotateProcessingMessages, 3000);
+
+    // 초기 실행 (첫 메시지 표시)
+    rotateProcessingMessages();
+
+  // --- [오버레이] 20초 타임아웃 처리 --- //
+  let overlayTimeout;
+
+  // 오버레이 시작 시 타이머 가동
+  function startOverlayTimeout() {
+    // 30초 후 실패 처리
+    overlayTimeout = setTimeout(() => {
+    isTimedOut = true; // ✅ 타임아웃 발생 시 true로 세팅
+    clearInterval(msgInterval); // 메시지 순환 중지
+      // 파형 숨김
+      document.getElementById("waveLoader").style.display = "none";
+      document.getElementById("processingMessages").style.display = "none";
+      // 실패 메시지 노출
+      document.getElementById("errorMessage").style.display = "block";
+    }, 30000); // 20초
+  }
+
+  // API 완료되면 타임아웃 해제
+  function clearOverlayTimeout() {
+    clearTimeout(overlayTimeout);
+  }
 
 
 

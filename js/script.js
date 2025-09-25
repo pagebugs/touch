@@ -145,6 +145,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     submitButton.addEventListener("click", async () => {
       if (validateStep()) {
+        isTimedOut = false; // ✅ 새 요청 시작할 때 항상 초기화
         submitButton.disabled = true;
         submitButton.textContent = "처리 중...";
 

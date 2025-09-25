@@ -10,22 +10,26 @@
   </head>
   <body>
     <!-- 로딩 오버레이 -->
-<!-- 디지털 파형 -->
-    <div id="waveLoader" class="wave-loader">
-      <span></span><span></span><span></span><span></span><span></span>
-    </div>
+  <div id="loadingOverlay" class="overlay" style="display:none;">
+    <div class="overlay-content">
+      <!-- 디지털 파형 -->
+      <div id="waveLoader" class="wave-loader">
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
 
-    <!-- 메시지 -->
-    <div id="processingMessages" class="processing-messages">
-      <p>카드 소비 데이터 수집 중…</p>
-      <p>연령·성별별 소비 패턴 분석 중…</p>
-      <p>병원 맞춤 리포트 생성 중…</p>
-    </div>
+      <!-- 메시지 -->
+      <div id="processingMessages" class="processing-messages">
+        <p>카드 소비 데이터 수집 중…</p>
+        <p>연령·성별별 소비 패턴 분석 중…</p>
+        <p>병원 맞춤 리포트 생성 중…</p>
+      </div>
 
-    <!-- 실패 메시지 -->
-    <div id="errorMessage" class="error-message" style="display:none;">
-      서버 트랜잭션이 많아<br/>서비스가 원활하지 않습니다.<br/>잠시 후 다시 시도해주세요.
+      <!-- 실패 메시지 -->
+      <div id="errorMessage" class="error-message" style="display:none;">
+        서버 트랜잭션이 많아<br/>서비스가 원활하지 않습니다.<br/>잠시 후 다시 시도해주세요.
+      </div>
     </div>
+  </div>
 
     <!-- 실제 데이터 표시 영역 -->
     <div id="result"></div>

@@ -6,9 +6,12 @@ export default async function handler(req, res) {
   }
 
   const { name, phone } = req.body;
+  // CTA 전용 요청이면 name/phone 검증 생략
+if (!ctaForm) {
   if (!name || !phone) {
     return res.status(400).json({ error: "Invalid input" });
   }
+}
 
   try {
     console.log(">>> [Submit API] 요청 데이터:", req.body);

@@ -7,9 +7,9 @@ export default async function handler(req, res) {
   }
 console.log(">>> [CTA Request Body]", req.body);
 
-const { name, phone, ctaForm } = req.body;
+const { name, phone, ctaForm, request } = req.body;
 
-// CTA 요청은 uuid + request=Y 로만 판단
+// ctaForm 이 true/문자열 "true" 이거나, request === "Y" 면 CTA 요청으로 처리
 const isCta = (ctaForm === true || ctaForm === "true" || request === "Y");
 
 if (!isCta) {

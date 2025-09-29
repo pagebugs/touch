@@ -1,3 +1,5 @@
+console.log(">>> [CTA Request Body]", req.body);
+
 import { sign } from "../lib/token";
 
 export default async function handler(req, res) {
@@ -5,9 +7,10 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const { name, phone } = req.body;
-  // CTA 전용 요청이면 name/phone 검증 생략
-if (!ctaForm) {
+const { name, phone, ctaForm } = req.body;
+
+// ctaForm이 true/문자열 "true" 가 아니면 name/phone 필수 검사
+if (!(ctaForm === true || ctaForm === "true")) {
   if (!name || !phone) {
     return res.status(400).json({ error: "Invalid input" });
   }

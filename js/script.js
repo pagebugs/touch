@@ -211,7 +211,7 @@ async function fetchSubmitForm() {
     console.warn("IP 조회 실패:", err);
   }
 
-  // ✅ Google Sheet에는 API value 값 저장 (card_sub와 동일)
+  // ✅ Google Sheet 저장
   const response = await fetch("/api/submit", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -220,25 +220,27 @@ async function fetchSubmitForm() {
       phone: phoneInput.value,
       email: emailInput.value,
       "hospital-name": hospitalNameInput.value,
-      specialty: specialtyOption.getAttribute("name"),  //
+      specialty: specialtyOption.getAttribute("name"),
       "address-base": addressBaseInput.value,
       "address-detail": addressDetailInput.value,
-      gender: genderSelect.value,                    // 성별은 코드값(M/F)
+      gender: genderSelect.value,      // 성별 코드값 (M/F)
       age: ageOption.getAttribute("name"),
       "privacy-consent": privacyConsentCheckbox.checked,
+      ip: clientIp
     }),
   });
 
   const result = await response.json();
   if (result.uuid) {
-    // ✅ 시트 저장 후 필요한 식별값만 로컬스토리지에 남김
+    // ✅ 시트 저장 후 로컬스토리지에 값 저장
     localStorage.setItem("user_uuid", result.uuid);
     localStorage.setItem("user_uid", result.uid);
 
-    // 📌 localStorage에 touchadData는 여기서 덮어쓰지 않음!
-    // 화면 출력용 데이터는 fetchData()에서만 저장하도록 역할 분리
-
-    // 이후 결과 페이지로 이동은 fetchData()가 처리
+    // 📌 CTA 모달 value 세팅용
+    localStorage.setItem("name", nameInput.value);
+    localStorage.setItem("phone", phoneInput.value);
+    localStorage.setItem("hospital-name", hospitalNameInput.value);
+    localStorage.setItem("email", emailInput.value);
   }
 }
     // --- 8. 이메일 도메인 입력/선택 토글 ---
@@ -538,34 +540,34 @@ async function fetchSubmitForm() {
       }
     }
 
-    // --- 4. CTA 버튼 Google Sheet 업데이트 (0923 추가) ---
-    const ctaForm = document.getElementById("ctaForm");
-    const ctaOverlay = document.getElementById("ctaOverlay");
-    const cancelBtn = document.querySelector(".cancel-btn");   // ✅ 추가
+// --- 4. CTA 버튼 Google Sheet 업데이트 (0923 추가) ---
+const ctaForm = document.getElementById("ctaForm");
+const ctaOverlay = document.getElementById("ctaOverlay");
+const cancelBtn = document.querySelector(".cancel-btn");
 
-    function attachCTAEvent(selector) {
-      const elements = document.querySelectorAll(selector);
-      elements.forEach(el => {
-        el.addEventListener("click", async (e) => {
-          e.preventDefault();
-          const uuid = localStorage.getItem("user_uuid");
-          if (!uuid) {
-            alert("사용자 정보가 없습니다. 처음부터 다시 진행해주세요.");
-            return;
-          }
-          try {
-            const response = await fetch("/api/submit", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ uuid: uuid, request: "Y" }),
-            });
-            const result = await response.json();
-            if (result.result === "updated") {
-          // ✅ 추가: 폼 placeholder 값 세팅
-          document.getElementById("ctaName").placeholder = localStorage.getItem("name") || "";
-          document.getElementById("ctaPhone").placeholder = localStorage.getItem("phone") || "";
-          document.getElementById("ctaHospital").placeholder = localStorage.getItem("hospital-name") || "";
-          document.getElementById("ctaEmail").placeholder = localStorage.getItem("email") || "";
+function attachCTAEvent(selector) {
+  const elements = document.querySelectorAll(selector);
+  elements.forEach(el => {
+    el.addEventListener("click", async (e) => {
+      e.preventDefault();
+      const uuid = localStorage.getItem("user_uuid");
+      if (!uuid) {
+        alert("사용자 정보가 없습니다. 처음부터 다시 진행해주세요.");
+        return;
+      }
+      try {
+        const response = await fetch("/api/submit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ uuid: uuid, request: "Y" }),
+        });
+        const result = await response.json();
+        if (result.result === "updated") {
+          // ✅ localStorage 값으로 모달 input.value 세팅
+          document.getElementById("ctaName").value = localStorage.getItem("name") || "";
+          document.getElementById("ctaPhone").value = localStorage.getItem("phone") || "";
+          document.getElementById("ctaHospital").value = localStorage.getItem("hospital-name") || "";
+          document.getElementById("ctaEmail").value = localStorage.getItem("email") || "";
 
           // 모달 열기
           document.getElementById("ctaModal").style.display = "flex";
@@ -580,7 +582,7 @@ async function fetchSubmitForm() {
   });
 }
 
-// 2) 제출 버튼 → 별도 시트 저장
+// 2) 제출 버튼 → CTA_Responses 탭 저장
 ctaForm?.addEventListener("submit", async (e) => {
   e.preventDefault();
   const uuid = localStorage.getItem("user_uuid");
@@ -595,19 +597,19 @@ ctaForm?.addEventListener("submit", async (e) => {
     return;
   }
 
-try {
-  const res = await fetch("/api/submit", {   // ✅ 기존 WebApp 엔드포인트 그대로 사용
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      uuid,
-      name,
-      phone,
-      hospital,
-      email,
-      ctaForm: true   // 📌 이 플래그로 CASE 구분
-    }),
-  });
+  try {
+    const res = await fetch("/api/submit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        uuid,
+        name,
+        phone,
+        "hospital-name": hospital, // ✅ hospital-name 키 사용
+        email,
+        ctaForm: true              // 📌 CTA 플래그
+      }),
+    });
     const data = await res.json();
 
     if (data.result === "inserted") {
@@ -628,8 +630,9 @@ cancelBtn?.addEventListener("click", () => {
   document.getElementById("ctaModal").style.display = "none";
 });
 
-    attachCTAEvent(".floating-cta");
-    attachCTAEvent(".cta__button");
+// ✅ 두 개 CTA 버튼 모두 이벤트 연결
+attachCTAEvent(".floating-cta");
+attachCTAEvent(".cta__button");
 
     // 모달 닫기
     const modal = document.getElementById("ctaModal");

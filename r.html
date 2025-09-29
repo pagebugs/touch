@@ -9,6 +9,9 @@
     <script src="js/script.js"></script>
   </head>
   <body>
+  <!-- 결과 영역 -->
+  <div id="result">Loading...</div>
+  <div id="protected" style="display:none;">
     <a href="#" class="site-logo">TOUCH AD</a>
 
     <main class="scroll-container">
@@ -249,6 +252,33 @@
         접수되었습니다. 리포트를 생성하여 곧 회신드리겠습니다.
       </div>
     </div>
-
+  </div>
   </body>
+  <script>
+    (async () => {
+      const params = new URLSearchParams(window.location.search);
+      const token = params.get("token");
+
+      if (!token) {
+        document.getElementById("result").innerText = "❌ 접근 불가 (토큰 없음)";
+        return;
+      }
+
+      try {
+        const res = await fetch(`/api/verify?token=${encodeURIComponent(token)}`);
+        const data = await res.json();
+
+        if (!data.ok) {
+          document.getElementById("result").innerText = "❌ 접근 불가 (토큰 만료/잘못됨)";
+          return;
+        }
+
+        // ✅ 정상일 때: 안내 문구 숨기고, protected 영역 보이기
+        document.getElementById("result").style.display = "none";
+        document.getElementById("protected").style.display = "block";
+      } catch (err) {
+        document.getElementById("result").innerText = "서버 오류";
+      }
+    })();
+  </script>
 </html>

@@ -1,4 +1,4 @@
-import { sign } from "../../lib/token";
+import { sign } from "../lib/token";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {

@@ -1,4 +1,4 @@
-import { verify } from "../../lib/token";
+import { verify } from "../lib/token";
 
 export default async function handler(req, res) {
   const { token } = req.query;

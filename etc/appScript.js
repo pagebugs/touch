@@ -24,7 +24,7 @@ function doPost(e) {
       uid, uuid, new Date(),
       decodeUTF8(data.name),
       decodeUTF8(data.phone),
-      decodeUTF8(data.hospital),
+      decodeUTF8(data.hospital || data["hospital-name"]),
       decodeUTF8(data.email || "")
     ]);
 

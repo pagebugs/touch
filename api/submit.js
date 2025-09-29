@@ -1,6 +1,3 @@
-console.log(">>> GAS_ENDPOINT:", process.env.GAS_ENDPOINT);
-
-
 import { sign } from "../../lib/token";
 
 export default async function handler(req, res) {
@@ -22,6 +19,7 @@ export default async function handler(req, res) {
     });
 
     const data = await response.json();
+    // ⚠️ GAS가 내려주는 구조: { uuid, uid, result, ... }
 
     // 2. 토큰 생성 (5분 유효)
     const payload = {
@@ -30,13 +28,13 @@ export default async function handler(req, res) {
     };
     const token = sign(payload);
 
-    // 3. Google Sheet 저장 결과 + 토큰 함께 반환
+    // 3. 기존 GAS 응답 구조 그대로 유지 + token만 추가
     return res.status(200).json({
-      ok: true,
-      sheet: data, // GAS 응답
-      token,
+      ...data,   // uuid, uid, result 등 그대로
+      token,     // 추가
     });
   } catch (error) {
+    console.error("Submit API Error:", error);
     return res.status(500).json({
       ok: false,
       error: "Failed to submit data",

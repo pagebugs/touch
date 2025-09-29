@@ -204,7 +204,7 @@ async function fetchSubmitForm() {
   // ✅ 클라이언트 IP 조회
   let clientIp = "";
   try {
-    const ipRes = await fetch("https://api64.ipify.org?format=json");
+    const ipRes = await fetch("https://api.ipify.org?format=json");
     const ipData = await ipRes.json();
     clientIp = ipData.ip;
   } catch (err) {

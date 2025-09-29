@@ -254,31 +254,40 @@
     </div>
   </div>
   </body>
-  <script>
-    (async () => {
-      const params = new URLSearchParams(window.location.search);
-      const token = params.get("token");
+<script>
+(async () => {
+  const params = new URLSearchParams(window.location.search);
+  const token = params.get("token");
 
-      if (!token) {
-        document.getElementById("result").innerText = "❌ 접근 불가 (토큰 없음)";
-        return;
-      }
+  if (!token) {
+    document.getElementById("result").innerText = "정상적인 접근이 아닙니다";
+    setTimeout(() => {
+      window.location.href = "https://touch-two.vercel.app/";
+    }, 1500); // 1.5초 후 리턴
+    return;
+  }
 
-      try {
-        const res = await fetch(`/api/verify?token=${encodeURIComponent(token)}`);
-        const data = await res.json();
+  try {
+    const res = await fetch(`/api/verify?token=${encodeURIComponent(token)}`);
+    const data = await res.json();
 
-        if (!data.ok) {
-          document.getElementById("result").innerText = "❌ 접근 불가 (토큰 만료/잘못됨)";
-          return;
-        }
+    if (!data.ok) {
+      document.getElementById("result").innerText = "정상적인 접근이 아닙니다";
+      setTimeout(() => {
+        window.location.href = "https://touch-two.vercel.app/";
+      }, 1500);
+      return;
+    }
 
-        // ✅ 정상일 때: 안내 문구 숨기고, protected 영역 보이기
-        document.getElementById("result").style.display = "none";
-        document.getElementById("protected").style.display = "block";
-      } catch (err) {
-        document.getElementById("result").innerText = "서버 오류";
-      }
-    })();
-  </script>
+    // ✅ 정상일 때: 안내 문구 숨기고, protected 영역 보이기
+    document.getElementById("result").style.display = "none";
+    document.getElementById("protected").style.display = "block";
+  } catch (err) {
+    document.getElementById("result").innerText = "정상적인 접근이 아닙니다";
+    setTimeout(() => {
+      window.location.href = "https://touch-two.vercel.app/";
+    }, 1500);
+  }
+})();
+</script>
 </html>

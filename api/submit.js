@@ -9,8 +9,10 @@ console.log(">>> [CTA Request Body]", req.body);
 
 const { name, phone, ctaForm } = req.body;
 
-// ctaForm이 true/문자열 "true" 가 아니면 name/phone 필수 검사
-if (!(ctaForm === true || ctaForm === "true")) {
+// CTA 요청은 uuid + request=Y 로만 판단
+const isCta = (ctaForm === true || ctaForm === "true" || request === "Y");
+
+if (!isCta) {
   if (!name || !phone) {
     return res.status(400).json({ error: "Invalid input" });
   }

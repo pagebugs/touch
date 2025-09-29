@@ -9,14 +9,11 @@ function decodeUTF8(str) {
 
 function doPost(e) {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
-  const data = JSON.parse(e.postData.contents); // 전달받은 JSON 데이터를 객체로 변환
+  const data = JSON.parse(e.postData.contents);
 
-  /**
-   * CASE (신규): CTA 입력폼 별도 저장
-   * - 요청 JSON에 ctaForm:true 가 포함된 경우 실행
-   */
+  // CASE 1: r.html의 CTA 입력폼 제출 시 ('CTA_Responses' 시트에만 저장)
   if (data.ctaForm) {
-    const sheet = ss.getSheetByName("CTA_Responses");   // 📌 새 탭 이름
+    const sheet = ss.getSheetByName("CTA_Responses");
     const uid = "CTA-" + (sheet.getLastRow() + 1);
     const uuid = data.uuid || Utilities.getUuid();
 
@@ -32,66 +29,50 @@ function doPost(e) {
       JSON.stringify({ result: "inserted", uid, uuid })
     ).setMimeType(ContentService.MimeType.JSON);
   }
-
-  /**
-   * CASE 1: 기존 row의 request 값 업데이트 (CTA 버튼 클릭 시)
-   * - 요청 JSON에 uuid와 request 값이 모두 포함된 경우 실행
-   */
-  if (data.uuid && data.request) {
-    const sheet = ss.getActiveSheet();
+  // CASE 2: r.html의 CTA 버튼 클릭 시 ('시트1'의 request 필드 업데이트)
+  else if (data.uuid && data.request) {
+    const sheet = ss.getSheetByName("시트1");
     const lastRow = sheet.getLastRow();
-    const uuidColumn = 2;      // uuid 컬럼 (2번째 열)
-    const requestColumn = 13;  // request 컬럼 (13번째 열)
-
-    // uuid 값들 추출 (2행부터 마지막 행까지)
+    if (lastRow < 2) { // 데이터가 헤더만 있는 경우 예외 처리
+        return ContentService.createTextOutput(JSON.stringify({ result: "not_found", uuid: data.uuid })).setMimeType(ContentService.MimeType.JSON);
+    }
+    const uuidColumn = 2;
+    const requestColumn = 13;
     const values = sheet.getRange(2, uuidColumn, lastRow - 1, 1).getValues();
 
     for (let i = 0; i < values.length; i++) {
       if (values[i][0] == data.uuid) {
-        // uuid가 일치하는 행을 찾으면 request 값을 "Y"로 업데이트
         sheet.getRange(i + 2, requestColumn).setValue("Y");
-
-        return ContentService.createTextOutput(
-          JSON.stringify({ result: "updated", uuid: data.uuid })
-        ).setMimeType(ContentService.MimeType.JSON);
+        return ContentService.createTextOutput(JSON.stringify({ result: "updated", uuid: data.uuid })).setMimeType(ContentService.MimeType.JSON);
       }
     }
 
-    // uuid가 시트에서 발견되지 않은 경우
+    return ContentService.createTextOutput(JSON.stringify({ result: "not_found", uuid: data.uuid })).setMimeType(ContentService.MimeType.JSON);
+  }
+  // CASE 3: tt.html의 최초 폼 제출 시 ('시트1'에 신규 행 추가)
+  else {
+    const sheet = ss.getSheetByName("시트1");
+    const lastRow = sheet.getLastRow();
+    const uid = "UID-" + (lastRow + 1);
+    const uuid = Utilities.getUuid();
+
+    sheet.appendRow([
+      uid, uuid, new Date(),
+      decodeUTF8(data.name),
+      decodeUTF8(data.phone),
+      decodeUTF8(data.email),
+      decodeUTF8(data["hospital-name"]),
+      decodeUTF8(data.specialty),
+      decodeUTF8(data["address-base"]),
+      decodeUTF8(data["address-detail"]),
+      decodeUTF8(data.gender),
+      decodeUTF8(data.age),
+      "", // request (초기 공란)
+      decodeUTF8(data.ip || "")
+    ]);
+
     return ContentService.createTextOutput(
-      JSON.stringify({ result: "not_found", uuid: data.uuid })
+      JSON.stringify({ result: "inserted", uid, uuid })
     ).setMimeType(ContentService.MimeType.JSON);
   }
-
- /**
- * CASE 2: 신규 row 추가 (폼 입력 단계)
- * - request 값이 없을 경우, 새로운 데이터 행을 추가
- */
-const sheet = ss.getActiveSheet();
-const lastRow = sheet.getLastRow();
-const uid = "UID-" + (lastRow + 1);
-const uuid = Utilities.getUuid();
-
-// 새로운 행 추가 (UTF-8 디코딩 적용)
-sheet.appendRow([
-  uid,                                // UID
-  uuid,                               // UUID
-  new Date(),                         // timestamp
-  decodeUTF8(data.name),              // 성함
-  decodeUTF8(data.phone),             // 연락처
-  decodeUTF8(data.email),             // 이메일
-  decodeUTF8(data["hospital-name"]),  // 병원 이름
-  decodeUTF8(data.specialty),         // 전문 진료 분야
-  decodeUTF8(data["address-base"]),   // 기본 주소
-  decodeUTF8(data["address-detail"]), // 상세 주소
-  decodeUTF8(data.gender),            // 성별
-  decodeUTF8(data.age),               // 연령대
-  "",                                 // request (초기 공란)
-  decodeUTF8(data.ip || "")           // 📌 신규 추가: 사용자 IP
-]);
-
-  // ✅ 반드시 응답 반환
-  return ContentService.createTextOutput(
-    JSON.stringify({ result: "inserted", uid, uuid })
-  ).setMimeType(ContentService.MimeType.JSON);
 }

@@ -1616,3 +1616,29 @@ input:-webkit-autofill:active {
 .multi-step-form {
   overflow: hidden; /* 가로 스크롤 숨김 */
 }
+
+
+/* CTA 제출 완료 오버레이 스타일 */
+#ctaOverlay {
+  background: rgba(0, 0, 0, 0.85); /* 배경은 유지 */
+}
+
+#ctaOverlay .overlay-content {
+  background: rgba(0, 0, 0, 0.5);   /* 글래스모피즘 */
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 40px 30px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  color: #fff;
+  font-family: 'SUIT', sans-serif;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+#ctaOverlay .overlay-content p,
+#ctaOverlay .overlay-content {
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1.6;
+}

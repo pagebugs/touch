@@ -403,11 +403,6 @@ async function fetchSubmitForm() {
 
     mainContainer.addEventListener("scroll", handleScroll);
 
-    // CTA 버튼 (기본 alert 제거 → Sheet 업데이트로 대체됨)
-    document.querySelector(".cta__button")?.addEventListener("click", () => {
-      console.log("CTA 버튼 클릭됨");
-    });
-
     // 테이블 인터랙션
     if (isMobile) {
       const quoteOverlay = document.querySelector(".quote-overlay-row");
@@ -546,6 +541,7 @@ async function fetchSubmitForm() {
     // --- 4. CTA 버튼 Google Sheet 업데이트 (0923 추가) ---
     const ctaForm = document.getElementById("ctaForm");
     const ctaOverlay = document.getElementById("ctaOverlay");
+    const cancelBtn = document.querySelector(".cancel-btn");   // ✅ 추가
 
     function attachCTAEvent(selector) {
       const elements = document.querySelectorAll(selector);

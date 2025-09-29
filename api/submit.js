@@ -1,4 +1,3 @@
-console.log(">>> [CTA Request Body]", req.body);
 
 import { sign } from "../lib/token";
 
@@ -6,6 +5,7 @@ export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
+console.log(">>> [CTA Request Body]", req.body);
 
 const { name, phone, ctaForm } = req.body;
 

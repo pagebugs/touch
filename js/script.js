@@ -201,6 +201,16 @@ async function fetchSubmitForm() {
   const specialtyOption = specialtySelect.options[specialtySelect.selectedIndex];
   const ageOption = ageSelect.options[ageSelect.selectedIndex];
 
+  // ✅ 클라이언트 IP 조회
+  let clientIp = "";
+  try {
+    const ipRes = await fetch("https://api64.ipify.org?format=json");
+    const ipData = await ipRes.json();
+    clientIp = ipData.ip;
+  } catch (err) {
+    console.warn("IP 조회 실패:", err);
+  }
+
   // ✅ Google Sheet에는 API value 값 저장 (card_sub와 동일)
   const response = await fetch("/api/submit", {
     method: "POST",
@@ -534,6 +544,9 @@ async function fetchSubmitForm() {
     }
 
     // --- 4. CTA 버튼 Google Sheet 업데이트 (0923 추가) ---
+    const ctaForm = document.getElementById("ctaForm");
+    const ctaOverlay = document.getElementById("ctaOverlay");
+
     function attachCTAEvent(selector) {
       const elements = document.querySelectorAll(selector);
       elements.forEach(el => {
@@ -552,17 +565,72 @@ async function fetchSubmitForm() {
             });
             const result = await response.json();
             if (result.result === "updated") {
-              document.getElementById("ctaModal").style.display = "flex";
-            } else {
-              alert("문의 요청 처리에 문제가 발생했습니다.");
-            }
-          } catch (err) {
-            console.error("API 호출 오류:", err);
-            alert("서버 연결에 실패했습니다.");
-          }
-        });
-      });
+          // ✅ 추가: 폼 placeholder 값 세팅
+          document.getElementById("ctaName").placeholder = localStorage.getItem("name") || "";
+          document.getElementById("ctaPhone").placeholder = localStorage.getItem("phone") || "";
+          document.getElementById("ctaHospital").placeholder = localStorage.getItem("hospital-name") || "";
+          document.getElementById("ctaEmail").placeholder = localStorage.getItem("email") || "";
+
+          // 모달 열기
+          document.getElementById("ctaModal").style.display = "flex";
+        } else {
+          alert("문의 요청 처리에 문제가 발생했습니다.");
+        }
+      } catch (err) {
+        console.error("API 호출 오류:", err);
+        alert("서버 연결에 실패했습니다.");
+      }
+    });
+  });
+}
+
+// 2) 제출 버튼 → 별도 시트 저장
+ctaForm?.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const uuid = localStorage.getItem("user_uuid");
+
+  const name = document.getElementById("ctaName").value.trim();
+  const phone = document.getElementById("ctaPhone").value.trim();
+  const hospital = document.getElementById("ctaHospital").value.trim();
+  const email = document.getElementById("ctaEmail").value.trim();
+
+  if (!name || !phone || !hospital) {
+    alert("이름, 전화번호, 병원명은 필수 입력 항목입니다.");
+    return;
+  }
+
+try {
+  const res = await fetch("/api/submit", {   // ✅ 기존 WebApp 엔드포인트 그대로 사용
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      uuid,
+      name,
+      phone,
+      hospital,
+      email,
+      ctaForm: true   // 📌 이 플래그로 CASE 구분
+    }),
+  });
+    const data = await res.json();
+
+    if (data.result === "inserted") {
+      document.getElementById("ctaModal").style.display = "none";
+      ctaOverlay.style.display = "flex";   // ✅ 접수완료 오버레이 표시
+      setTimeout(() => { ctaOverlay.style.display = "none"; }, 4000);
+    } else {
+      alert("저장 중 문제가 발생했습니다.");
     }
+  } catch (err) {
+    console.error("저장 오류:", err);
+    alert("서버 연결에 실패했습니다.");
+  }
+});
+
+// 3) 취소 버튼
+cancelBtn?.addEventListener("click", () => {
+  document.getElementById("ctaModal").style.display = "none";
+});
 
     attachCTAEvent(".floating-cta");
     attachCTAEvent(".cta__button");

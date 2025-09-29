@@ -214,15 +214,41 @@
       <span class="floating-cta__text">잠재 고객 리포트 무료 신청</span>
     </a>
 
-  <!-- 모달 (처음에는 숨김 상태) -->
-  <div id="ctaModal" class="modal">
-    <div class="modal__content">
-      <span class="modal__close">&times;</span>
-      <h2>추가 입력폼</h2>
-      <p>문의 요청이 접수되었습니다. 필요한 내용을 추가 입력해 주세요.</p>
-      <!-- 추후 입력폼 넣을 자리 -->
+<!-- 모달 -->
+    <div id="ctaModal" class="modal">
+      <div class="modal__content">
+        <span class="modal__close">&times;</span>
+        <h2>추가 입력폼</h2>
+        <p>문의 요청이 접수되었습니다. 필요한 내용을 추가 입력해 주세요.</p>
+
+        <!-- 📌 개인정보 입력폼 -->
+        <form id="ctaForm">
+          <label>이름 (필수)</label>
+          <input type="text" id="ctaName" required />
+
+          <label>전화번호 (필수)</label>
+          <input type="text" id="ctaPhone" required />
+
+          <label>병원명 (필수)</label>
+          <input type="text" id="ctaHospital" required />
+
+          <label>이메일 (선택)</label>
+          <input type="email" id="ctaEmail" />
+
+          <div class="cta-form-buttons">
+            <button type="submit" class="submit-btn">제출</button>
+            <button type="button" class="cancel-btn">취소</button>
+          </div>
+        </form>
+      </div>
     </div>
-  </div>
+
+    <!-- 제출 완료 오버레이 -->
+    <div id="ctaOverlay" class="overlay" style="display:none;">
+      <div class="overlay-content">
+        접수되었습니다. 리포트를 생성하여 곧 회신드리겠습니다.
+      </div>
+    </div>
 
   </body>
 </html>

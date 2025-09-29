@@ -126,8 +126,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // ✅ 성공 시에는 overlay 유지 → 곧바로 r.html 이동
     if (!isTimedOut) {
-      window.location.href = "r.html";
-    }
+  const token = localStorage.getItem("user_token");
+  if (token) {
+    window.location.href = `r.html?token=${encodeURIComponent(token)}`;
+  } else {
+    window.location.href = "r.html"; // fallback
+  }
+}
 
     } catch (err) {
       console.error("API 호출 오류:", err);
@@ -242,6 +247,12 @@ async function fetchSubmitForm() {
     localStorage.setItem("hospital-name", hospitalNameInput.value);
     localStorage.setItem("email", emailInput.value);
   }
+
+  // 📌 토큰 저장 (신규 추가)
+if (result.token) {
+  localStorage.setItem("user_token", result.token);
+}
+
 }
     // --- 8. 이메일 도메인 입력/선택 토글 ---
     const emailDomainInput = document.getElementById("email-domain-input");

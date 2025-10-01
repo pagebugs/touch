@@ -665,22 +665,23 @@ attachCTAEvent(".cta__button");
     }
   }
 
-    // --- [오버레이] 프로세싱 메시지 순환 --- //
-    const messages = document.querySelectorAll(".processing-messages p");
-    let msgIndex = 0;
+ // --- [오버레이] 프로세싱 메시지 순환 --- //
+const messages = document.querySelectorAll(".processing-messages p");
+let msgIndex = 0;
 
-    // 메시지 교체 함수
-    function rotateProcessingMessages() {
-      messages.forEach(m => m.classList.remove("active"));   // 모든 메시지 숨김
-      messages[msgIndex].classList.add("active");            // 현재 메시지 표시
-      msgIndex = (msgIndex + 1) % messages.length;           // 인덱스 증가, 루프
-    }
+// 메시지 교체 함수
+function rotateProcessingMessages() {
+  if (messages.length === 0) return;       // ✅ DOM 없으면 중단
+  messages.forEach(m => m.classList.remove("active")); // 모든 메시지 숨김
+  messages[msgIndex].classList.add("active");          // 현재 메시지 표시
+  msgIndex = (msgIndex + 1) % messages.length;         // 인덱스 증가, 루프
+}
 
-    // 3초마다 메시지 순환
-    msgInterval = setInterval(rotateProcessingMessages, 3000);
-
-    // 초기 실행 (첫 메시지 표시)
-    rotateProcessingMessages();
+// 메시지가 있을 때만 실행
+if (messages.length > 0) {
+  setInterval(rotateProcessingMessages, 3000);
+  rotateProcessingMessages(); // 초기 실행
+}
 
   // --- [오버레이] 20초 타임아웃 처리 --- //
   let overlayTimeout;

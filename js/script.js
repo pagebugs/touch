@@ -316,44 +316,27 @@ if (result.token) {
   // ============================================================
   if (document.getElementById("intro")) {
     // --- 1. 변수 선언 ---
+    const mainContainer = document.querySelector(".scroll-container");
+    const sections = document.querySelectorAll(".scroll-section");
+    const dots = document.querySelectorAll(".scroll-dot");
+    const parallaxImage = document.querySelector(".parallax__image");
+    const tableRows = document.querySelectorAll(".data-table tbody tr");
+    const logo = document.querySelector(".site-logo");
+    const floatingButton = document.querySelector(".floating-cta");
+    const footer = document.querySelector(".site-footer");
     const { hospitalName, generalData, resData } = JSON.parse(localStorage.getItem("touchadData"));
     const introLeft = document.querySelector(".intro__left-pane");
-    const userName = localStorage.getItem("name") || "";
+    const userName = localStorage.getItem("name") || "";  // 이름 불러오기
 
+    // 비율 계산
     const agePercent = Math.round((resData[1].target / resData[0].target) * 100, 1);
     const genderPercent = Math.round((resData[2].target / resData[0].target) * 100, 1);
-    introLeft.innerHTML = `<span class="line"><span class="uspH">${userName}</span> 원장님!</span>`;
+    introLeft.innerHTML = `<span class="line"><span class="uspH">${userName}</sapn>원장님!</span>`;
 
     const span = document.createElement("span");
     span.className = "line";
     span.innerHTML = `지난 4주간, <span class="uspH">${hospitalName}</span> 반경 1km 내에서 <span class="uspH">${resData[0].target.toLocaleString()}</span>건의 <span class="uspH">${generalData.partnerCd} 관련 소비</span>가 있었습니다. 이 중 ${generalData.age}는 <span class="uspH">${isNaN(agePercent) ? 0 : agePercent}%</span>, 그들 중 ${generalData.gender}은 <span class="uspH">${isNaN(genderPercent) ? 0 : genderPercent}%</span>입니다.`;
     introLeft.appendChild(span);
-
-    // --- 2. 보조메시지 ---
-    async function loadBudgetMessageWithCalc() {
-      try {
-        const res = await fetch("https://script.google.com/macros/s/AKfycbwtg02SkZOrxR2EPvEMqnXd5XMbey719Qig_lUiDV2rrW0Y9-Go0N5VMd37o1Wo5yOS/exec");
-        const config = await res.json();
-        const consumerCount = resData[0]?.target || 0;
-        const touchAdBudget = Number(config.Budget_TouchAd || 0);
-        const days = Number(config.Period_Days || 0);
-        const conversionRate = Number(config.Conversion_Rate || 0);
-        const naverCost = consumerCount * Number(config.Naver_CPC || 0);
-
-        const rightPane = document.querySelector(".intro__right-pane");
-        if (rightPane) {
-          rightPane.innerHTML = `
-            비슷한 특성의 고객 <span class="highlight-copy">${consumerCount.toLocaleString()}명</span>에게 도달하기 위해,<br/>
-            필요한 <span class="highlight-copy">터치애드 예산은 ${touchAdBudget.toLocaleString()}원</span> (${days}일 동안 집행 예상)입니다.<br/>
-            평균 <span class="highlight-copy">${(conversionRate * 100).toFixed(0)}% 수준의 고객 전환</span>을 기대할 수 있습니다.<br/>
-            동일 조건의 <span class="highlight-copy">네이버 키워드 광고 집행 비용은 약 ${naverCost.toLocaleString()}원</span>이 소요 됩니다.
-          `;
-        }
-      } catch (err) {
-        console.error("Config 불러오기 오류:", err);
-      }
-    }
-    window.addEventListener("load", loadBudgetMessageWithCalc);
 
     // isMobile 체크
     const isMobile = window.innerWidth <= 768;

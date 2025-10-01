@@ -761,7 +761,10 @@ function loadKakaoMap() {
               });
 
               const infowindow = new kakao.maps.InfoWindow({
-                content: `<div style="padding:4px 6px;">${place.place_name}</div>`
+                content: `<div style="padding:6px 8px; font-size:13px; line-height:1.4;">
+            <strong>${place.place_name || "상호명 없음"}</strong><br/>
+            ${place.road_address_name || place.address_name || ""}
+          </div>`
               });
 
               kakao.maps.event.addListener(marker, "click", () => {

@@ -719,8 +719,26 @@ function loadKakaoMap() {
   const defaultCenter = new kakao.maps.LatLng(37.5665, 126.9780); // 기본 중심: 서울 시청
   const map = new kakao.maps.Map(mapEl, { center: defaultCenter, level: 4 });
   // ✅ 지도 조작 제한 (드래그, 휠 줌 막기)
+  let mapLocked = true;
+
   map.setDraggable(false);
   map.setZoomable(false);
+
+  mapEl.addEventListener("click", () => {
+    if (mapLocked) {
+      map.setDraggable(true);
+      map.setZoomable(true);
+      mapLocked = false;
+    }
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!mapEl.contains(e.target)) {
+      map.setDraggable(false);
+      map.setZoomable(false);
+      mapLocked = true;
+    }
+  });
   const geocoder = new kakao.maps.services.Geocoder();
   const ps = new kakao.maps.services.Places(map);
 

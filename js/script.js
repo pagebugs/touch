@@ -338,6 +338,45 @@ if (result.token) {
     span.innerHTML = `지난 4주간, <span class="uspH">${hospitalName}</span> 반경 1km 내에서 <span class="uspH">${resData[0].target.toLocaleString()}</span>건의 <span class="uspH">${generalData.partnerCd} 관련 소비</span>가 있었습니다. 이 중 ${generalData.age}는 <span class="uspH">${isNaN(agePercent) ? 0 : agePercent}%</span>, 그들 중 ${generalData.gender}은 <span class="uspH">${isNaN(genderPercent) ? 0 : genderPercent}%</span>입니다.`;
     introLeft.appendChild(span);
 
+    //보조메시지 계산
+async function loadBudgetMessageWithCalc() {
+  try {
+    // 1. Config 값 불러오기
+    const res = await fetch("https://script.google.com/macros/s/AKfycbwtg02SkZOrxR2EPvEMqnXd5XMbey719Qig_lUiDV2rrW0Y9-Go0N5VMd37o1Wo5yOS/exec");
+    const config = await res.json();
+
+    // 2. LocalStorage에서 분석 데이터(resData) 불러오기
+    const touchadData = JSON.parse(localStorage.getItem("touchadData")) || {};
+    const resData = touchadData.resData || [];
+    if (resData.length === 0) return;
+
+    // 3. 소비건수 = 소비자수 (임시 가정)
+    const consumerCount = resData[0].target;
+
+    // 4. Config 기반 값 계산
+    const touchAdBudget = Number(config.Budget_TouchAd); // 터치애드 예산
+    const days = Number(config.Period_Days);             // 집행 기간
+    const conversionRate = Number(config.Conversion_Rate); // 전환율
+    const naverCost = consumerCount * Number(config.Naver_CPC); // 네이버 비용 (소비자수 × CPC)
+
+    // 5. 메시지 영역 업데이트
+    const rightPane = document.querySelector(".intro__right-pane");
+    if (rightPane) {
+      rightPane.innerHTML = `
+        비슷한 특성의 고객 <span class="highlight-copy">${consumerCount.toLocaleString()}명</span>에게 도달하기 위해,<br/>
+        필요한 <span class="highlight-copy">터치애드 예산은 ${touchAdBudget.toLocaleString()}원</span> (${days}일 동안 집행 예상)입니다.<br/>
+        평균 <span class="highlight-copy">${(conversionRate * 100).toFixed(0)}% 수준의 고객 전환</span>을 기대할 수 있습니다.<br/>
+        동일 조건의 <span class="highlight-copy">네이버 키워드 광고 집행 비용은 약 ${naverCost.toLocaleString()}원</span>이 소요 됩니다.
+      `;
+    }
+  } catch (err) {
+    console.error("Config 불러오기 오류:", err);
+  }
+}
+
+// ✅ 페이지 로드 시 실행
+window.addEventListener("load", loadBudgetMessageWithCalc);
+
     // isMobile 체크
     const isMobile = window.innerWidth <= 768;
 

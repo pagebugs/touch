@@ -699,50 +699,55 @@ attachCTAEvent(".cta__button");
     clearTimeout(overlayTimeout);
   }
 
-  // map
-function loadGoogleMap() {
+// --- Kakao Map 전용 ---
+function loadKakaoMap() {
   const mapEl = document.getElementById("map");
   if (!mapEl) return;
 
-  const hospitalAddress = localStorage.getItem("hospital-name") || "";
+  const hospitalName = localStorage.getItem("hospital-name") || "";
   const addressBase = localStorage.getItem("address-base") || "";
   const addressDetail = localStorage.getItem("address-detail") || "";
   const fullAddress = (addressBase + " " + addressDetail).trim();
 
-  const geocoder = new google.maps.Geocoder();
-  geocoder.geocode({ address: fullAddress }, (results, status) => {
-    if (status === "OK" && results[0]) {
-      const location = results[0].geometry.location;
+  const mapOption = {
+    center: new kakao.maps.LatLng(37.5665, 126.9780), // 초기 좌표: 서울 시청
+    level: 3
+  };
 
-      const map = new google.maps.Map(mapEl, {
-        zoom: 16,
-        center: location,
-        disableDefaultUI: true
-      });
+  const map = new kakao.maps.Map(mapEl, mapOption);
+  const geocoder = new kakao.maps.services.Geocoder();
 
-      const marker = new google.maps.Marker({
-        position: location,
+  geocoder.addressSearch(fullAddress, function(result, status) {
+    if (status === kakao.maps.services.Status.OK) {
+      const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+      // 지도 중심 이동
+      map.setCenter(coords);
+
+      // 마커 생성
+      const marker = new kakao.maps.Marker({
         map: map,
-        title: hospitalAddress
+        position: coords
       });
 
-      const infoWindow = new google.maps.InfoWindow({
-        content: `<div style="padding:6px 8px;">${hospitalAddress}</div>`
+      // 인포윈도우
+      const infowindow = new kakao.maps.InfoWindow({
+        content: `<div style="padding:6px 8px;text-align:center;">${hospitalName}</div>`
       });
-      infoWindow.open(map, marker);
+      infowindow.open(map, marker);
 
-      // ✅ 분석 카피 애니메이션 끝나면 지도 페이드인
+      // ✅ 분석 카피 애니메이션 끝난 뒤 지도 페이드인
       const triggerElement = document.querySelector(".animate-lines .line:nth-child(3)");
       triggerElement?.addEventListener("animationend", () => {
         document.getElementById("map-wrapper")?.classList.add("visible");
       }, { once: true });
     } else {
-      console.error("지오코딩 실패:", status);
+      console.error("카카오 지오코딩 실패:", status);
     }
   });
 }
 
-window.addEventListener("load", loadGoogleMap);
-
+// 페이지 로드 시 지도 실행
+window.addEventListener("load", loadKakaoMap);
 
 });

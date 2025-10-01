@@ -221,7 +221,7 @@ async function fetchSubmitForm() {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      ctaForm: true,
+      ctaForm: false,
       name: nameInput.value,
       phone: phoneInput.value,
       email: emailInput.value,

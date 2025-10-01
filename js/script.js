@@ -483,6 +483,7 @@ if (result.token) {
     function loadResponsiveVideo() {
       const video = document.querySelector(".intro__video-wrapper video");
       if (!video) return;
+
       const isNowMobile = window.innerWidth <= 768;
       const newSrc = isNowMobile ? video.dataset.mobileSrc : video.dataset.desktopSrc;
       const source = video.querySelector("source");
@@ -492,7 +493,9 @@ if (result.token) {
         video.load();
       }
     }
-    loadResponsiveVideo();
+
+// 최초 실행 + 화면 리사이즈 시 다시 실행
+    document.addEventListener("DOMContentLoaded", loadResponsiveVideo);
     window.addEventListener("resize", loadResponsiveVideo);
 
     const videoWrapper = document.querySelector(".intro__video-wrapper");

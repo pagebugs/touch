@@ -1778,7 +1778,7 @@ input:invalid::placeholder {
    GOOGLE MAPS WRAPPER + MAP
    ========================= */
 #map-wrapper {
-  width: 80vw;              /* PC 기준 */
+  width: 100vw;              /* PC 기준 */
   max-width: none;
   margin-top: 120px;
   opacity: 0;               /* 페이드인 전 숨김 */
@@ -1796,7 +1796,13 @@ input:invalid::placeholder {
   height: 60vh;             /* PC 높이 */
   min-height: 400px;        /* 너무 작아지지 않도록 */
   border-radius: 0;      /* PC에서는 모서리 둥글게 */
+  filter: grayscale(100%);
+  transition: filter 0.5s ease;
   overflow: hidden;
+}
+
+#map:hover {
+  filter: none; /* 마우스 올리면 컬러 복원 */
 }
 
 /* 반응형 */

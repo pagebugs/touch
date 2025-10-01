@@ -321,14 +321,16 @@ if (result.token) {
     const footer = document.querySelector(".site-footer");
     const { hospitalName, generalData, resData } = JSON.parse(localStorage.getItem("touchadData"));
     const introLeft = document.querySelector(".intro__left-pane");
+    const userName = localStorage.getItem("name") || "";  // 이름 불러오기
 
     // 비율 계산
     const agePercent = Math.round((resData[1].target / resData[0].target) * 100, 1);
     const genderPercent = Math.round((resData[2].target / resData[0].target) * 100, 1);
+    introLeft.innerHTML = `<span class="line">${userName}원장님!</span>`;
 
     const span = document.createElement("span");
     span.className = "line";
-    span.innerHTML = `지난 4주간, ${hospitalName} <span class="uspH">반경 700m</span> 내에서 <span class="uspH">${resData[0].target.toLocaleString()}</span>건의 <span class="uspH">${generalData.partnerCd} 관련 소비</span>가 있었습니다. 이 중 <span class="uspH">${generalData.age}는 ${isNaN(agePercent) ? 0 : agePercent}%, ${generalData.gender}은 ${isNaN(genderPercent) ? 0 : genderPercent}%</span>입니다.`;
+    span.innerHTML = `지난 4주간, <span class="uspH">${hospitalName}</span> 반경 1km 내에서 <span class="uspH">${resData[0].target.toLocaleString()}</span>건의 <span class="uspH">${generalData.partnerCd} 관련 소비</span>가 있었습니다. 이 중 ${generalData.age}는 <span class="uspH">${isNaN(agePercent) ? 0 : agePercent}%</span>, ${generalData.gender}은 <span class="uspH">${isNaN(genderPercent) ? 0 : genderPercent}%</span>입니다.`;
     introLeft.appendChild(span);
 
     // isMobile 체크

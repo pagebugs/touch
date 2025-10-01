@@ -485,14 +485,10 @@ if (result.token) {
       if (!video) return;
       const isNowMobile = window.innerWidth <= 768;
       const newSrc = isNowMobile ? video.dataset.mobileSrc : video.dataset.desktopSrc;
-      const currentSrcElement = video.querySelector("source");
-      const currentSrc = currentSrcElement ? currentSrcElement.getAttribute("src") : "";
-      if (newSrc && newSrc !== currentSrc) {
-        video.innerHTML = "";
-        const sourceElement = document.createElement("source");
-        sourceElement.setAttribute("src", newSrc);
-        sourceElement.setAttribute("type", "video/mp4");
-        video.appendChild(sourceElement);
+      const source = video.querySelector("source");
+
+      if (newSrc && source.getAttribute("src") !== newSrc) {
+        source.setAttribute("src", newSrc);
         video.load();
       }
     }

@@ -509,13 +509,14 @@ if (result.token) {
     window.addEventListener("resize", loadResponsiveVideo);
 
     // 애니메이션 끝난 뒤 보이게
-    const videoWrapper = document.querySelector(".intro__video-wrapper");
-    if (videoWrapper) {
-      const triggerElement = document.querySelector(".animate-lines .line:nth-child(3)");
-      triggerElement?.addEventListener("animationend", () => {
-        videoWrapper.classList.add("visible");
-      }, { once: true });
-    }
+const lines = document.querySelectorAll(".animate-lines .line");
+const lastLine = lines[lines.length - 1];
+
+if (lastLine) {
+  lastLine.addEventListener("animationend", () => {
+    document.getElementById("map-wrapper")?.classList.add("visible");
+  }, { once: true });
+}
 
     // PC 전용 초기화
     if (!isMobile) {

@@ -1264,7 +1264,9 @@ input, select {
   color: white;
 }
 
-#specialty {
+#specialty,
+#gender,
+#age {
   /* 이메일 스타일과 동일하게 적용 */
   width: 100%;
   padding: 8px 0px;
@@ -1745,4 +1747,28 @@ input:-webkit-autofill:active {
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(-20px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* 기본 포커스 */
+input:focus, select:focus {
+  outline: none;
+  border-bottom-color: #ffe600; /* 강조색 */
+}
+
+/* 유효하지 않은 경우 (브라우저 기본 대신 우리가 지정한 스타일 유지) */
+input:invalid, select:invalid {
+  border-bottom-color: rgba(255, 0, 0, 0.7); /* 빨간색 하이라이트 */
+  color: white; /* 글자색 강제로 유지 */
+  background: transparent; /* 배경도 초기화 방지 */
+}
+
+/* 유효한 경우 */
+input:valid, select:valid {
+  border-bottom-color: #ffe600;
+  color: white;
+}
+
+input:invalid::placeholder {
+  color: rgba(255, 255, 255, 0.5);
 }

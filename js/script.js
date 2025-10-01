@@ -119,10 +119,15 @@ document.addEventListener("DOMContentLoaded", () => {
             gender: genderOption.getAttribute("name"),
             age: ageOption.getAttribute("name"),
             partnerCd: partnerOption.getAttribute("name"),
+            addressBase: addressBaseInput.value,      // ✅ 추가
+            addressDetail: addressDetailInput.value   // ✅ 추가
           },
           resData: apiData,
         };
     localStorage.setItem("touchadData", JSON.stringify(localData));
+    // 필요하면 개별 키로도 따로 저장 (호환성용)
+    localStorage.setItem("address-base", addressBaseInput.value);
+    localStorage.setItem("address-detail", addressDetailInput.value);
 
     // ✅ 성공 시에는 overlay 유지 → 곧바로 r.html 이동
     if (!isTimedOut) {
@@ -704,43 +709,31 @@ function loadKakaoMap() {
   const mapEl = document.getElementById("map");
   if (!mapEl) return;
 
-  const hospitalName = localStorage.getItem("hospital-name") || "";
-  const addressBase = localStorage.getItem("address-base") || "";
-  const addressDetail = localStorage.getItem("address-detail") || "";
+  const touchadData = JSON.parse(localStorage.getItem("touchadData")) || {};
+  const hospitalName = touchadData.hospitalName || "";
+  const addressBase = touchadData.generalData?.addressBase || localStorage.getItem("address-base") || "";
+  const addressDetail = touchadData.generalData?.addressDetail || localStorage.getItem("address-detail") || "";
   const fullAddress = (addressBase + " " + addressDetail).trim();
 
-  const mapOption = {
-    center: new kakao.maps.LatLng(37.5665, 126.9780), // 초기 좌표: 서울 시청
-    level: 3
-  };
-
-  const map = new kakao.maps.Map(mapEl, mapOption);
+  const defaultCenter = new kakao.maps.LatLng(37.5665, 126.9780); // 서울 시청
+  const map = new kakao.maps.Map(mapEl, { center: defaultCenter, level: 3 });
   const geocoder = new kakao.maps.services.Geocoder();
+
+  if (!fullAddress) {
+    new kakao.maps.Marker({ map, position: defaultCenter });
+    return;
+  }
 
   geocoder.addressSearch(fullAddress, function(result, status) {
     if (status === kakao.maps.services.Status.OK) {
       const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-
-      // 지도 중심 이동
       map.setCenter(coords);
 
-      // 마커 생성
-      const marker = new kakao.maps.Marker({
-        map: map,
-        position: coords
-      });
-
-      // 인포윈도우
+      const marker = new kakao.maps.Marker({ map, position: coords });
       const infowindow = new kakao.maps.InfoWindow({
         content: `<div style="padding:6px 8px;text-align:center;">${hospitalName}</div>`
       });
       infowindow.open(map, marker);
-
-      // ✅ 분석 카피 애니메이션 끝난 뒤 지도 페이드인
-      const triggerElement = document.querySelector(".animate-lines .line:nth-child(3)");
-      triggerElement?.addEventListener("animationend", () => {
-        document.getElementById("map-wrapper")?.classList.add("visible");
-      }, { once: true });
     } else {
       console.error("카카오 지오코딩 실패:", status);
     }

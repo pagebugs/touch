@@ -1772,3 +1772,44 @@ input:valid, select:valid {
 input:invalid::placeholder {
   color: rgba(255, 255, 255, 0.5);
 }
+
+
+/* =========================
+   GOOGLE MAPS WRAPPER + MAP
+   ========================= */
+#map-wrapper {
+  width: 80vw;              /* PC 기준 */
+  max-width: none;
+  margin-top: 120px;
+  opacity: 0;               /* 페이드인 전 숨김 */
+  transform: translateY(30px);
+  transition: all 1s ease;
+}
+
+#map-wrapper.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#map {
+  width: 100vw;             /* 화면 가득 */
+  height: 60vh;             /* PC 높이 */
+  min-height: 400px;        /* 너무 작아지지 않도록 */
+  border-radius: 0;      /* PC에서는 모서리 둥글게 */
+  overflow: hidden;
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+  #map-wrapper {
+    width: 100vw;
+    margin-left: -20px;
+    margin-right: -20px;
+    margin-top: 60px;
+  }
+  #map {
+    height: 40vh;           /* 모바일에서는 좀 더 낮게 */
+    min-height: 250px;
+    border-radius: 0;       /* 꽉 차게 */
+  }
+}

@@ -326,11 +326,11 @@ if (result.token) {
     // 비율 계산
     const agePercent = Math.round((resData[1].target / resData[0].target) * 100, 1);
     const genderPercent = Math.round((resData[2].target / resData[0].target) * 100, 1);
-    introLeft.innerHTML = `<span class="line">${userName}원장님!</span>`;
+    introLeft.innerHTML = `<span class="line"><span class="uspH">${userName}</sapn>원장님!</span>`;
 
     const span = document.createElement("span");
     span.className = "line";
-    span.innerHTML = `지난 4주간, <span class="uspH">${hospitalName}</span> 반경 1km 내에서 <span class="uspH">${resData[0].target.toLocaleString()}</span>건의 <span class="uspH">${generalData.partnerCd} 관련 소비</span>가 있었습니다. 이 중 ${generalData.age}는 <span class="uspH">${isNaN(agePercent) ? 0 : agePercent}%</span>, ${generalData.gender}은 <span class="uspH">${isNaN(genderPercent) ? 0 : genderPercent}%</span>입니다.`;
+    span.innerHTML = `지난 4주간, <span class="uspH">${hospitalName}</span> 반경 1km 내에서 <span class="uspH">${resData[0].target.toLocaleString()}</span>건의 <span class="uspH">${generalData.partnerCd} 관련 소비</span>가 있었습니다. 이 중 ${generalData.age}는 <span class="uspH">${isNaN(agePercent) ? 0 : agePercent}%</span>, 그들 중 ${generalData.gender}은 <span class="uspH">${isNaN(genderPercent) ? 0 : genderPercent}%</span>입니다.`;
     introLeft.appendChild(span);
 
     // isMobile 체크
@@ -699,6 +699,50 @@ attachCTAEvent(".cta__button");
     clearTimeout(overlayTimeout);
   }
 
+  // map
+function loadGoogleMap() {
+  const mapEl = document.getElementById("map");
+  if (!mapEl) return;
+
+  const hospitalAddress = localStorage.getItem("hospital-name") || "";
+  const addressBase = localStorage.getItem("address-base") || "";
+  const addressDetail = localStorage.getItem("address-detail") || "";
+  const fullAddress = (addressBase + " " + addressDetail).trim();
+
+  const geocoder = new google.maps.Geocoder();
+  geocoder.geocode({ address: fullAddress }, (results, status) => {
+    if (status === "OK" && results[0]) {
+      const location = results[0].geometry.location;
+
+      const map = new google.maps.Map(mapEl, {
+        zoom: 16,
+        center: location,
+        disableDefaultUI: true
+      });
+
+      const marker = new google.maps.Marker({
+        position: location,
+        map: map,
+        title: hospitalAddress
+      });
+
+      const infoWindow = new google.maps.InfoWindow({
+        content: `<div style="padding:6px 8px;">${hospitalAddress}</div>`
+      });
+      infoWindow.open(map, marker);
+
+      // ✅ 분석 카피 애니메이션 끝나면 지도 페이드인
+      const triggerElement = document.querySelector(".animate-lines .line:nth-child(3)");
+      triggerElement?.addEventListener("animationend", () => {
+        document.getElementById("map-wrapper")?.classList.add("visible");
+      }, { once: true });
+    } else {
+      console.error("지오코딩 실패:", status);
+    }
+  });
+}
+
+window.addEventListener("load", loadGoogleMap);
 
 
 });

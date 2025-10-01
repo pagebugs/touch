@@ -1796,7 +1796,7 @@ input:invalid::placeholder {
   height: 60vh;             /* PC 높이 */
   min-height: 400px;        /* 너무 작아지지 않도록 */
   border-radius: 0;      /* PC에서는 모서리 둥글게 */
-  filter: grayscale(100%);
+  filter: grayscale(80%);
   transition: filter 0.5s ease;
   overflow: hidden;
 }

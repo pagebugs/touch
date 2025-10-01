@@ -715,34 +715,55 @@ function loadKakaoMap() {
   const hospitalName = touchadData.hospitalName || "";
   const addressBase = touchadData.generalData?.addressBase || localStorage.getItem("address-base") || "";
   const addressDetail = touchadData.generalData?.addressDetail || localStorage.getItem("address-detail") || "";
+  const specialty = touchadData.generalData?.specialty || "";  // ✅ 전문과 옵션 (사람이 읽는 값)
   const fullAddress = (addressBase + " " + addressDetail).trim();
 
-  const defaultCenter = new kakao.maps.LatLng(37.5665, 126.9780); // 서울 시청
-  const map = new kakao.maps.Map(mapEl, { center: defaultCenter, level: 3 });
+  // 기본 지도 생성 (서울 시청 좌표 기준)
+  const defaultCenter = new kakao.maps.LatLng(37.5665, 126.9780);
+  const map = new kakao.maps.Map(mapEl, { center: defaultCenter, level: 4 });
   const geocoder = new kakao.maps.services.Geocoder();
+  const ps = new kakao.maps.services.Places(map);
 
-  if (!fullAddress) {
-    new kakao.maps.Marker({ map, position: defaultCenter });
-    return;
+  // --- 1) 주소 기준으로 중심점 이동 (마커 없음)
+  if (fullAddress) {
+    geocoder.addressSearch(fullAddress, function(result, status) {
+      if (status === kakao.maps.services.Status.OK) {
+        const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+        map.setCenter(coords);
+
+        // --- 2) 주변 전문과 키워드 검색
+        if (specialty) {
+          ps.keywordSearch(specialty, function(data, status) {
+            if (status === kakao.maps.services.Status.OK) {
+              data.forEach(place => {
+                const marker = new kakao.maps.Marker({
+                  map,
+                  position: new kakao.maps.LatLng(place.y, place.x)
+                });
+
+                // 병원명 인포윈도우
+                const infowindow = new kakao.maps.InfoWindow({
+                  content: `<div style="padding:4px 6px;">${place.place_name}</div>`
+                });
+
+                kakao.maps.event.addListener(marker, "click", () => {
+                  infowindow.open(map, marker);
+                });
+              });
+            } else {
+              console.warn("전문과 검색 결과 없음:", status);
+            }
+          });
+        }
+      } else {
+        console.error("카카오 지오코딩 실패:", status);
+      }
+    });
   }
-
-  geocoder.addressSearch(fullAddress, function(result, status) {
-    if (status === kakao.maps.services.Status.OK) {
-      const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-      map.setCenter(coords);
-
-      const marker = new kakao.maps.Marker({ map, position: coords });
-      const infowindow = new kakao.maps.InfoWindow({
-        content: `<div style="padding:6px 8px;text-align:center;">${hospitalName}</div>`
-      });
-      infowindow.open(map, marker);
-    } else {
-      console.error("카카오 지오코딩 실패:", status);
-    }
-  });
 }
 
-// 페이지 로드 시 지도 실행
+// ✅ 페이지 로드 후 실행
 window.addEventListener("load", loadKakaoMap);
+
 
 });

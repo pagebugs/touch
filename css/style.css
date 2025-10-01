@@ -1,0 +1,1252 @@
+/* --- Google Font Import --- */
+@import url('https://cdn.jsdelivr.net/gh/sunn-us/SUIT/fonts/static/woff2/SUIT.css');
+
+/*
+================================
+    1. Reset & Basic Settings
+================================
+*/
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-family: 'SUIT', 'Pretendard', sans-serif;
+  scroll-behavior: smooth;
+  font-size: 14px;
+}
+
+/*
+================================
+    2. Main Layout (r.html)
+================================
+*/
+.scroll-container {
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: none;
+  background-color: black;
+  color: white;
+  transition: background-color 1.5s ease-in-out, color 1.5s ease-in-out;
+  position: relative;
+}
+
+.scroll-section {
+  min-height: 100vh;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 100%;
+  position: relative;
+  padding: 60px 20px;
+}
+
+/*
+================================
+    3. Common Components
+================================
+*/
+.section-container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 48px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.text-block {
+  margin-bottom: 2.5rem;
+  width: 100%;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+.highlight-copy {
+  font-weight: 700;
+}
+.usp {
+  font-weight: 500;
+  border-bottom: 2px dotted rgba(231, 76, 60, 0.8);
+  text-decoration: none;
+}
+.uspH {
+  font-weight: 700;
+}
+.download {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: inherit;
+  text-align: center;
+}
+
+/*
+================================
+    4. Site Header & Global UI
+================================
+*/
+.site-logo {
+  position: fixed;
+  top: 40px;
+  right: 10vw;
+  z-index: 1001;
+  font-size: 2rem;
+  font-weight: 600;
+  color: white;
+  mix-blend-mode: difference;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.scroll-indicator {
+  position: fixed;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 1000;
+}
+.scroll-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ccc;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.scroll-dot.active {
+  background: #E74C3C;
+  transform: scale(1.3);
+}
+
+/*
+================================
+    5. Animations & Effects
+================================
+*/
+/* Scroll-triggered animations */
+.animate-on-scroll {
+  transform: translateY(40px);
+  opacity: 0;
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+.animate-on-scroll.is-visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Initial load animations */
+.animate-lines .line {
+  display: block;
+  transform: translateY(40px);
+  opacity: 0;
+  animation: riseUp 1s ease-out forwards;
+}
+.animate-lines .line:nth-child(1) { animation-delay: 0s; }
+.animate-lines .line:nth-child(2) { animation-delay: 0.2s; }
+.animate-lines .line:nth-child(3) { animation-delay: 0.4s; }
+.animate-lines .line:nth-child(4) { animation-delay: 0.6s; }
+.animate-lines .line:nth-child(5) { animation-delay: 0.8s; }
+
+.animate-fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+  animation: fadeUp 1s ease-out 1.2s forwards;
+}
+
+@keyframes riseUp { to { transform: translateY(0); opacity: 1; } }
+@keyframes fadeUp { to { transform: translateY(0); opacity: 1; } }
+
+/* Mouse follower (Desktop only) */
+#mouse-follower {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #ffe600;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  pointer-events: none;
+  transition: transform 0.1s ease-out;
+}
+
+/*
+================================
+    6. Page Sections (r.html)
+================================
+*/
+
+/* --- SECTION: INTRO (r.html) --- */
+#intro {
+  justify-content: center;
+  gap: 2rem;
+  padding: 160px 20px 60px;
+}
+.intro-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 60px;
+  max-width: 1200px;
+  width: 100%;
+}
+.intro__left-pane {
+  flex: 1;
+  max-width: 700px;
+  font-size: 3rem;
+  font-weight: 200;
+  line-height: 1.4;
+  word-break: keep-all;
+}
+.intro__right-pane {
+  flex: 1;
+  text-align: right;
+  font-size: 1.25rem;
+  font-weight: 200;
+  line-height: 1.4;
+}
+
+/* --- SECTION: GOOGLE MAPS (r.html) --- */
+#map-wrapper {
+  width: 100vw;
+  max-width: none;
+  margin-top: 120px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1s ease;
+}
+#map-wrapper.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+#map {
+  width: 100vw;
+  height: 60vh;
+  min-height: 400px;
+  filter: grayscale(80%);
+  transition: filter 0.5s ease;
+  overflow: hidden;
+  border-radius: 24px; /* 데스크톱에서 모서리 둥글게 */
+}
+#map:hover {
+  filter: none;
+}
+
+/* --- SECTION: PARALLAX AREA (r.html) --- */
+.parallax-wrapper {
+  position: relative;
+  height: 244vh;
+  scroll-snap-align: start;
+}
+#map-section {
+  height: 60vh;
+  min-height: 60vh;
+  background: transparent;
+  padding: 0;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  z-index: 0;
+}
+.parallax__background {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.parallax__image {
+  width: 100%;
+  height: auto;
+  min-height: calc(60vh + 1px);
+  object-fit: cover;
+  will-change: transform;
+}
+.mobile-video-background {
+  display: none; /* Mobile only */
+}
+
+/* --- SECTION: ABOUT (r.html) --- */
+#about {
+  background: transparent;
+  color: inherit;
+  will-change: transform;
+}
+#about .text-block, #testimonials .text-block {
+    text-align: justify;
+    font-size: 3rem;
+    font-weight: 500;
+    max-width: 900px;
+}
+#about .text-block:nth-child(2) {
+    font-size: 3rem;
+    font-weight: 200;
+}
+#about .animate-on-scroll:nth-child(2) {
+  transition-delay: 0.3s;
+}
+
+/* --- SECTION: TESTIMONIALS (r.html) --- */
+#testimonials {
+  background: #fff;
+  color: inherit;
+  will-change: transform;
+  position: relative;
+  z-index: 1;
+  margin-top: -16vh;
+}
+.section-title {
+  width: 100%;
+  font-size: 3rem;
+  font-weight: 400;
+  color: #222;
+  margin-bottom: 3rem;
+  text-align: center;
+}
+.table-container {
+  position: relative;
+  width: 70vw;
+  max-width: none;
+  overflow: hidden;
+  min-height: calc(100% + 20px);
+}
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-top: 1px solid rgba(0, 0, 0, 0.5);
+  border-bottom: 1px solid #000;
+  margin-bottom: 100px;
+  white-space: pre-line;
+}
+.data-table th, .data-table td {
+  font-weight: 300;
+  padding: 10px;
+  border: none;
+  text-align: center;
+  font-size: 1.5rem;
+  color: #000;
+  word-break: break-all;
+}
+.data-table th {
+  background: rgba(255, 230, 0, 0.1);
+}
+.data-table thead tr {
+  border-bottom: 2px solid #000;
+}
+.data-table tbody tr {
+  border-bottom: 1px solid #000;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  position: relative;
+}
+.data-table tbody tr:last-child {
+  border-bottom: none;
+}
+.data-table tbody tr.active {
+  background: #e3f2fd;
+}
+.data-small {
+  font-size: 1.25rem;
+  display: block;
+  margin-top: 2px;
+}
+.specialty-highlight {
+  font-weight: 600;
+}
+.touch-hint {
+  display: none;
+  font-size: 12px;
+  color: #666;
+}
+.quote-overlay-row {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #ffe600;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-style: italic;
+  box-sizing: border-box;
+  padding: 10px;
+  pointer-events: none;
+  opacity: 0;
+  transition:
+    top 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    height 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    opacity 0.2s ease-out;
+  will-change: transform, top, height;
+}
+.quote-overlay-row.moving {
+  transform: scaleX(0.95) skewX(-2deg);
+}
+
+/* --- SECTION: SLIDING BANNER (r.html) --- */
+.sliding-banner-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 140px;
+  overflow: hidden;
+}
+.sliding-banner-wrapper {
+  animation: vertical-slide 10s infinite;
+}
+.sliding-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 140px;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #333;
+  box-sizing: border-box;
+}
+.sliding-banner-container:hover .sliding-banner-wrapper {
+  animation-play-state: paused;
+}
+@keyframes vertical-slide {
+  0%, 45% { transform: translateY(0); animation-timing-function: ease-in; }
+  50%, 95% { transform: translateY(-140px); animation-timing-function: ease-in; }
+  100% { transform: translateY(-280px); }
+}
+.banner-indicator {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+}
+.indicator-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+  animation-duration: 10s;
+  animation-iteration-count: infinite;
+}
+.indicator-dot:nth-child(1) { animation-name: active-dot-1; }
+.indicator-dot:nth-child(2) { animation-name: active-dot-2; }
+
+@keyframes active-dot-1 {
+  0%, 49.9% { background-color: #E74C3C; }
+  50%, 100% { background-color: rgba(0, 0, 0, 0.2); }
+}
+@keyframes active-dot-2 {
+  0%, 49.9% { background-color: rgba(0, 0, 0, 0.2); }
+  50%, 100% { background-color: #E74C3C; }
+}
+
+/* --- SECTION: CTA (r.html) --- */
+#cta {
+  background-color: #000;
+  color: #fff;
+  z-index: 2;
+}
+.cta__text-wrapper {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.cta__main-copy {
+  font-size: 3rem;
+  font-weight: 200;
+  color: #e2e2e2;
+}
+.cta__button {
+  background: #fff;
+  color: #000;
+  padding: 15px 30px;
+  border: 1px solid #fff;
+  border-radius: 999px;
+  font-size: 1.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin: 20px;
+  transition: opacity 1s ease-out, transform 1s ease-out, background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
+}
+.cta__button:hover {
+  background: #000;
+  color: #fff;
+}
+.cta__footer {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #ffe600;
+}
+.partnership-highlight {
+  display: block;
+  margin-top: 1.5rem;
+  font-weight: 600;
+  color: #e2e2e2;
+}
+
+/*
+================================
+    7. Floating CTA & Footer
+================================
+*/
+/* --- FLOATING CTA BUTTON (r.html) --- */
+.floating-cta {
+  position: fixed;
+  bottom: 40px;
+  right: 10vw;
+  z-index: 1002;
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  text-decoration: none;
+  overflow: hidden;
+  background-color: transparent;
+  border: 2px solid white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  mix-blend-mode: difference;
+}
+.floating-cta.expanded {
+  width: 330px;
+  border-radius: 999px;
+  background-color: black;
+  border-color: black;
+  mix-blend-mode: normal;
+}
+.floating-cta__icon {
+  font-size: 2rem;
+  font-weight: 600;
+  transition: opacity 0.2s ease-out;
+}
+.floating-cta.expanded .floating-cta__icon {
+  opacity: 0;
+}
+.floating-cta__text {
+  position: absolute;
+  white-space: nowrap;
+  opacity: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: white;
+  transition: opacity 0.3s ease-in-out 0.1s;
+}
+.floating-cta.expanded .floating-cta__text {
+  opacity: 1;
+}
+
+/* --- FOOTER (Common) --- */
+.site-footer {
+  position: relative;
+  width: 100%;
+  padding: 60px 20px 40px;
+  background-color: #000;
+  box-sizing: border-box;
+  white-space: pre-line;
+}
+.site-footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80vw;
+  height: 1px;
+  background-color: #555;
+}
+.footer-container {
+  max-width: 80vw;
+  margin: 0 auto;
+  font-size: 1.25rem;
+  line-height: 1.7;
+}
+.footer-info-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 30px;
+  font-weight: 200;
+  color: #e2e2e2;
+}
+.footer-info--right {
+  text-align: right;
+}
+.footer-info--co {
+  font-weight: 600;
+}
+.footer-copyright {
+  color: #888;
+  font-weight: 400;
+  font-size: 1rem;
+}
+.footer-link {
+  color: #e2e2e2;
+  text-decoration: none;
+  position: relative;
+  transition: color 0.3s ease;
+}
+.footer-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #E74C3C;
+  transition: width 0.4s ease;
+}
+.footer-link:hover {
+  color: #E74C3C;
+}
+.footer-link:hover::after {
+  width: 100%;
+}
+
+/*
+================================
+    8. 'touch.html' Specific Styles
+================================
+*/
+/* --- HERO SECTION (tt.html) --- */
+#hero-section {
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  box-sizing: border-box;
+  background-color: #000;
+}
+.bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 2;
+}
+.head-copy-wrapper {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  margin-bottom: 20px;
+  max-width: 600px;
+  color: #fff;
+}
+.head-copy-wrapper .line {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 200;
+  line-height: 1.5;
+  animation: riseUp 1s ease-out forwards;
+  word-break: keep-all;
+}
+.head-copy-wrapper .uspH {
+  font-weight: 500;
+  font-size: 2rem;
+}
+.head-copy-wrapper .now {
+  font-weight: 700;
+}
+.head-copy-wrapper .subline {
+  font-weight: 500;
+  font-size: 0.9rem;
+  margin-top: 10px;
+}
+
+/* --- GLASSMORPHISM FORM (tt.html) --- */
+.glass-form-wrapper {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 560px;
+  height: 540px;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  border: 0px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  padding: 40px 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+/* [수정] 가로 스크롤 방지를 위한 overflow: hidden 복원 */
+.multi-step-form {
+  overflow: hidden;
+}
+.form-indicator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.form-indicator .step-dot {
+  width: 8px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+}
+.form-indicator .step-dot.active {
+  background: #ffe600;
+}
+.form-steps-container {
+  display: flex;
+  width: 400%; /* 4 steps */
+  transition: transform 0.6s ease-in-out;
+  flex: 1;
+}
+.form-step {
+  width: 25%; /* 100 / 4 */
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+.form-section__title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 40px;
+  text-align: center;
+}
+.form-group {
+  margin-bottom: 30px;
+  max-width: 460px;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: 200;
+}
+.needed {
+  color: #ffe600;
+  font-size: 0.8rem;
+  margin-left: 8px;
+  font-weight: 500;
+}
+label {
+  display: block;
+  font-size: 1.25rem;
+  margin-bottom: 4px;
+  color: #fff;
+}
+input[type="text"], input[type="tel"], input[type="email"], select {
+  width: 100%;
+  padding: 8px 0px;
+  font-size: 1.5rem;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  font-family: 'SUIT', sans-serif;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+  border-radius: 0;
+  font-weight: 500;
+}
+select {
+  font-size: 1rem;
+  font-weight: 300;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg fill="white" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+}
+input:focus, select:focus {
+  outline: none;
+  border-bottom-color: #ffe600;
+}
+input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+  font-style: italic;
+  font-size: 1rem;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px black inset !important;
+    -webkit-text-fill-color: white !important;
+    transition: none !important;
+}
+input:invalid, select:invalid {
+  border-bottom-color: rgba(255, 0, 0, 0.7);
+}
+input:valid, select:valid {
+  border-bottom-color: #ffe600;
+}
+.address-search-group {
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+}
+.address-search-group .search-button {
+  padding: 10px 14px;
+  font-size: 1rem;
+  white-space: nowrap;
+  background: #ffe600;
+  color: #222;
+  border-radius: 8px;
+  font-weight: 300;
+  cursor: pointer;
+}
+.form-tip {
+  font-size: 0.9rem;
+  font-weight: 200;
+  line-height: 1.4;
+  color: #e0e0e0;
+  margin-top: 20px;
+  margin-bottom: 0;
+}
+.form-group.consent {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.form-group.consent label {
+    font-size: 1rem;
+    font-weight: 200;
+    margin: 0;
+    color: #e2e2e2;
+}
+.form-group.consent input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  background: transparent;
+  border: 1px solid #e2e2e2;
+  border-radius: 4px;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  outline: none;
+  position: relative;
+  flex-shrink: 0;
+}
+.form-group.consent input[type="checkbox"]:checked {
+  background-color: #ffe600;
+  border-color: #ffe600;
+}
+.form-group.consent input[type="checkbox"]:checked::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 5px;
+  width: 4px;
+  height: 8px;
+  border: solid #222;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+.form-navigation {
+  margin-top: auto;
+  padding-top: 20px;
+  text-align: center;
+}
+.nav-button {
+  background: #fff;
+  color: #000;
+  padding: 10px 25px;
+  border: 1px solid #fff;
+  border-radius: 999px;
+  font-size: 1.25rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 0 5px;
+}
+.nav-button.prev-button {
+  background: transparent;
+  color: white;
+}
+.nav-button.prev-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+.nav-button.next-button {
+  background: #ffe600;
+  color: #222;
+}
+.nav-button.next-button:hover {
+  background: #ffcc00;
+}
+.nav-button.submit-button {
+  background: #e74c3c;
+  color: white;
+  border-color: #e74c3c;
+}
+.nav-button.submit-button:hover {
+  background: #c0392b;
+}
+.nav-button.disabled {
+  background: #555;
+  color: #aaa;
+  border-color: #555;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/*
+================================
+    9. Modals & Overlays
+================================
+*/
+/* --- LOADING OVERLAY (tt.html) --- */
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.85);
+  z-index: 2000;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: #fff;
+  text-align: center;
+}
+#loadingOverlay{
+  display: none;
+}
+.wave-loader {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 6px;
+  height: 40px;
+  margin-bottom: 20px;
+}
+.wave-loader span {
+  display: block;
+  width: 6px;
+  height: 10px;
+  background: #ffe600;
+  border-radius: 2px;
+  animation: wave 1s ease-in-out infinite;
+}
+.wave-loader span:nth-child(1) { animation-delay: 0s; }
+.wave-loader span:nth-child(2) { animation-delay: 0.2s; }
+.wave-loader span:nth-child(3) { animation-delay: 0.4s; }
+.wave-loader span:nth-child(4) { animation-delay: 0.6s; }
+.wave-loader span:nth-child(5) { animation-delay: 0.8s; }
+@keyframes wave {
+  0%, 100% { height: 10px; }
+  50% { height: 35px; }
+}
+.processing-messages p {
+  display: none;
+  font-size: 1rem;
+  font-weight: 500;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+.processing-messages p.active {
+  display: block;
+  opacity: 1;
+}
+.error-message {
+  color: #ff4d4f;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* --- CTA MODAL (r.html) --- */
+#ctaModal {
+  display: none;
+  position: fixed;
+  z-index: 3000;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.7);
+  justify-content: center;
+  align-items: center;
+  font-family: 'SUIT', sans-serif;
+}
+#ctaModal .modal__content {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 40px 30px;
+  max-width: 420px;
+  width: 90%;
+  color: #fff;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.3);
+  text-align: left;
+  animation: fadeIn 0.3s ease-out;
+}
+#ctaModal .modal__close {
+  float: right;
+  font-size: 24px;
+  cursor: pointer;
+  color: #fff;
+  margin-bottom: 10px;
+}
+#ctaModal h2 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+#ctaModal p {
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+  color: #ddd;
+}
+#ctaModal input[type="text"], #ctaModal input[type="email"] {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 15px;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 10px;
+  background: rgba(255,255,255,0.05);
+  color: #fff;
+  font-size: 0.95rem;
+  outline: none;
+}
+#ctaModal input:focus {
+  border-color: #0B56D9;
+  background: rgba(255,255,255,0.1);
+}
+#ctaModal .cta-form-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+#ctaModal .cta-form-buttons button {
+  flex: 1;
+  padding: 12px 0;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+#ctaModal .cta-form-buttons .submit-btn {
+  background: #0B56D9;
+  color: #fff;
+}
+#ctaModal .cta-form-buttons .cancel-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- CTA SUBMIT OVERLAY (r.html) --- */
+#ctaOverlay .overlay-content {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 40px 30px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  color: #fff;
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+/*
+================================
+    10. MOBILE RESPONSIVE STYLES
+    (Consolidated for all pages)
+================================
+*/
+@media (max-width: 768px) {
+  /* --- Global & Layout --- */
+  html {
+    font-size: 12px;
+  }
+  .scroll-indicator, #mouse-follower {
+    display: none;
+  }
+  .scroll-section {
+    min-height: auto;
+    padding: 100px 20px;
+  }
+  .section-container {
+    width: 100%;
+    padding: 0;
+  }
+  .site-logo {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+
+  /* --- Parallax & Videos --- */
+  .parallax-wrapper { height: auto; }
+  #map-section {
+    height: 40vh;
+    min-height: auto;
+    padding: 0;
+    margin-top: 0;
+    position: relative;
+    overflow: hidden;
+    background-color: #000;
+  }
+  .parallax__background { display: none; }
+  .mobile-video-background {
+    display: block;
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+  }
+  .mobile-video-background video {
+    width: 100%; height: 100%;
+    object-fit: cover;
+  }
+
+  /* --- r.html Sections --- */
+  #intro { padding-top: 140px; }
+  .intro-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 50px;
+  }
+  .intro__left-pane { font-size: 2rem; }
+  .intro__right-pane { font-size: 1.5rem; text-align: left; }
+  #map-wrapper {
+    width: 100vw;
+    margin-left: -20px;
+    margin-right: -20px;
+    margin-top: 60px;
+  }
+  #map {
+    height: 40vh;
+    min-height: 250px;
+    border-radius: 0;
+  }
+  #about .section-container { align-items: flex-start; }
+  #about .text-block {
+    text-align: justify;
+    font-size: 2rem;
+  }
+  #about .text-block:nth-child(2) { font-size: 2rem; }
+  #testimonials { margin-top: 0; }
+  #testimonials .section-title {
+    font-size: 2rem;
+    text-align: left;
+  }
+  .table-container {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .data-table { min-width: 800px; }
+  .data-table th, .data-table td { font-size: 1.2rem; }
+  #cta .cta__main-copy { font-size: 1.5rem; }
+  #cta .cta__button { font-size: 1.25rem; font-weight: 700;}
+
+  /* --- tt.html Section --- */
+  #hero-section {
+    height: 100vh;
+    padding-top: 100px;
+  }
+  .head-copy-wrapper .line { font-size: 1.25rem; }
+  .head-copy-wrapper .uspH { font-size: 2rem; }
+  .glass-form-wrapper {
+    padding: 20px;
+    height: 400px;
+  }
+  .form-section__title { font-size: 1rem; }
+  label, input, select, .address-search-group .search-button, .nav-button {
+    font-size: 0.9rem;
+  }
+  .form-indicator { margin-bottom: 20px; }
+  .form-group.consent { gap: 5px; }
+  .form-steps-container { width: 400%; }
+  .form-step { width: 25%; }
+
+  /* --- Footer & Floating CTA --- */
+  .footer-container { width: 100%; max-width: 100%; }
+  .footer-info-wrapper { flex-direction: column; }
+  .footer-info--right { text-align: left; margin-top: 20px; }
+  .floating-cta { right: 20px; }
+  .floating-cta.expanded { width: 280px; }
+
+  /* --- Overlays & Modals --- */
+  .wave-loader {
+    width: 40px;
+    height: 40px;
+  }
+  .overlay-content p { font-size: 0.8rem; }
+
+  /* --- [추가] 모바일 전용 인용구 롤링 애니메이션 복원 --- */
+  .quote-overlay-row {
+    display: none;
+  }
+  .mobile-quote-display {
+    width: 100%;
+    height: 60px;
+    margin-bottom: 20px;
+    background-color: #f7f7f7;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 15px;
+    overflow: hidden;
+    position: relative;
+  }
+  .quote-item {
+    position: absolute;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: #333;
+    opacity: 0;
+    animation-name: roll-quote;
+    animation-duration: 4s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+  }
+  @keyframes roll-quote {
+    0% { transform: translateY(20px); opacity: 0; }
+    15%, 75% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-20px); opacity: 0; }
+  }
+}

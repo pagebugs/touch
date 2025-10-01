@@ -716,14 +716,16 @@ function loadKakaoMap() {
   const addressDetail = touchadData.generalData?.addressDetail || localStorage.getItem("address-detail") || "";
   const fullAddress = (addressBase + " " + addressDetail).trim();
 
-  const defaultCenter = new kakao.maps.LatLng(37.5665, 126.9780); // 기본 중심: 서울 시청
+  // 기본 지도 (서울 시청 중심)
+  const defaultCenter = new kakao.maps.LatLng(37.5665, 126.9780);
   const map = new kakao.maps.Map(mapEl, { center: defaultCenter, level: 4 });
-  // ✅ 지도 조작 제한 (드래그, 휠 줌 막기)
-  let mapLocked = true;
 
+  // ✅ 지도 조작 기본 잠금
+  let mapLocked = true;
   map.setDraggable(false);
   map.setZoomable(false);
 
+  // 지도 클릭 시 조작 가능 → 외부 클릭 시 다시 잠금
   mapEl.addEventListener("click", () => {
     if (mapLocked) {
       map.setDraggable(true);
@@ -739,20 +741,23 @@ function loadKakaoMap() {
       mapLocked = true;
     }
   });
+
   const geocoder = new kakao.maps.services.Geocoder();
   const ps = new kakao.maps.services.Places(map);
 
-  // 1️⃣ 주소 → 중심점 이동
+  // --- 1) 주소 기준 중심점 이동
   if (fullAddress) {
     geocoder.addressSearch(fullAddress, function(result, status) {
       if (status === kakao.maps.services.Status.OK) {
         const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
         map.setCenter(coords);
 
-        // 2️⃣ 반경 2000m 안의 모든 병원 검색 (카테고리 HP8)
+        // --- 2) 반경 2000m 안의 모든 병원 검색 (카테고리 HP8)
         ps.categorySearch("HP8", function(data, status) {
           if (status === kakao.maps.services.Status.OK) {
             const bounds = new kakao.maps.LatLngBounds();
+            // 인포윈도우는 전역 1개만 사용
+            const infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
 
             data.forEach(place => {
               const marker = new kakao.maps.Marker({
@@ -760,21 +765,21 @@ function loadKakaoMap() {
                 position: new kakao.maps.LatLng(place.y, place.x)
               });
 
-              const infowindow = new kakao.maps.InfoWindow({
-                content: `<div style="padding:6px 8px; font-size:13px; line-height:1.4;">
-            <strong>${place.place_name || "상호명 없음"}</strong><br/>
-            ${place.road_address_name || place.address_name || ""}
-          </div>`
-              });
-
               kakao.maps.event.addListener(marker, "click", () => {
+                const content = `
+                  <div style="padding:6px 8px; font-size:13px; line-height:1.4; color:#000;">
+                    <strong>${place.place_name}</strong><br/>
+                    ${place.road_address_name || place.address_name || ""}
+                  </div>
+                `;
+                infowindow.setContent(content);
                 infowindow.open(map, marker);
               });
 
               bounds.extend(new kakao.maps.LatLng(place.y, place.x));
             });
 
-            // 3️⃣ 지도 범위를 병원들이 다 보이도록 자동 조정
+            // --- 3) 모든 병원이 화면에 보이도록 자동 조정
             map.setBounds(bounds);
           } else {
             console.warn("병원 검색 결과 없음:", status);
@@ -789,6 +794,7 @@ function loadKakaoMap() {
 
 // ✅ 페이지 로드 후 실행
 window.addEventListener("load", loadKakaoMap);
+
 
 
 });

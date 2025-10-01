@@ -491,13 +491,17 @@ if (result.token) {
       if (newSrc && source.getAttribute("src") !== newSrc) {
         source.setAttribute("src", newSrc);
         video.load();
+
+        // 강제로 재생 시도 (iOS 대응)
+        video.play().catch(err => console.log("autoplay blocked:", err));
       }
     }
 
-// 최초 실행 + 화면 리사이즈 시 다시 실행
-    document.addEventListener("DOMContentLoaded", loadResponsiveVideo);
+    // 최초 실행 + 리사이즈
+    window.addEventListener("load", loadResponsiveVideo);
     window.addEventListener("resize", loadResponsiveVideo);
 
+    // 애니메이션 끝난 뒤 보이게
     const videoWrapper = document.querySelector(".intro__video-wrapper");
     if (videoWrapper) {
       const triggerElement = document.querySelector(".animate-lines .line:nth-child(3)");

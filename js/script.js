@@ -821,17 +821,21 @@ window.addEventListener("load", loadKakaoMap);
       // 3. 소비건수 = 소비자수 (임시 가정)
       const consumerCount = resData[0].target || 0;
 
-      // 4. Config 기반 계산
-      const touchAdBudget = Number(config.Budget_TouchAd) || 0;
+      // 4. Config 기반 계산 (임시 역산 방식)
       const days = Number(config.Period_Days) || 0;
       const conversionRate = Number(config.Conversion_Rate) || 0;
+
+      // 터치애드 예산 = (소비자수 ÷ 1000) × CPM
+      const touchAdBudget = Math.round((consumerCount / 1000) * (Number(config.TouchAd_CPM) || 0));
+
+      // 네이버 CPC 비용 = 소비자수 × CPC
       const naverCost = consumerCount * (Number(config.Naver_CPC) || 0);
 
       // 5. 메시지 갱신
       const rightPane = document.querySelector(".intro__right-pane");
       rightPane.innerHTML = `
         비슷한 특성의 고객 <span class="highlight-copy">${consumerCount.toLocaleString()}명</span>에게 도달하기 위해,<br/>
-        필요한 <span class="highlight-copy">터치애드 예산은 ${touchAdBudget.toLocaleString()}원</span> (${days}일 동안 집행 예상)입니다.<br/>
+        필요한 <span class="highlight-copy">터치애드 예산은 약 ${touchAdBudget.toLocaleString()}원</span> (${days}일 동안 집행 예상)입니다.<br/>
         평균 <span class="highlight-copy">${(conversionRate * 100).toFixed(0)}% 수준의 고객 전환</span>을 기대할 수 있습니다.<br/>
         동일 조건의 <span class="highlight-copy">네이버 키워드 광고 집행 비용은 약 ${naverCost.toLocaleString()}원</span>이 소요 됩니다.
       `;
@@ -843,3 +847,4 @@ window.addEventListener("load", loadKakaoMap);
   // ✅ 페이지 로드 시 실행
   window.addEventListener("load", loadBudgetMessageWithCalc);
 })();
+

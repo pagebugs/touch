@@ -1006,6 +1006,7 @@ touch.html 전용 스타일
     input[type="email"]::placeholder,
     select::placeholder {
     color: rgba(255, 255, 255, 0.6); /* 투명도가 적용된 흰색 */
+    font-size: 1rem;
     }
 
 /* 자동 완성(autofill) 시 브라우저 기본 스타일 초기화 */

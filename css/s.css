@@ -114,27 +114,7 @@ label {
   transition-delay: 0.3s;
 }
 
-#address-base,
-#address-detail {
-  width: 100%;
-  padding: 8px 0px;
-  font-size: 1.5rem;
-  font-family: 'SUIT', sans-serif;
-  font-weight: 500;
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 0;
-  color: white;
-  box-sizing: border-box;
-  transition: border-color 0.3s ease;
-}
-
-#address-base:focus,
-#address-detail:focus {
-  outline: none;
-  border-bottom-color: #ffe600;
-}
+/* #address-base, #address-detail - 상위 input[type="text"] 스타일 상속, 추가 스타일 없음 */
 
 #age {
   width: 100%;
@@ -321,40 +301,9 @@ label {
 }
 
 /* E */
-#email {
-  width: 100%;
-  padding: 8px 0px;
-  font-size: 1.5rem;
-  font-family: 'SUIT', sans-serif;
-  font-weight: 500;
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 0;
-  color: white;
-  box-sizing: border-box;
-  transition: border-color 0.3s ease;
-}
+/* #email - 상위 input[type="email"] 스타일 상속, 추가 스타일 없음 */
 
-#email:focus {
-  outline: none;
-  border-bottom-color: #ffe600;
-}
-
-#email-domain-input {
-  width: 100%;
-  padding: 8px 0px;
-  font-size: 1.5rem;
-  font-family: 'SUIT', sans-serif;
-  font-weight: 500;
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 0;
-  color: white;
-  box-sizing: border-box;
-  transition: border-color 0.3s ease;
-}
+/* #email-domain-input - 상위 input[type="text"] 스타일 상속, 추가 스타일 없음 */
 
 #email-domain-select {
   width: 100%;
@@ -531,46 +480,10 @@ label {
 }
 
 /* N */
-#name {
-  width: 100%;
-  padding: 8px 0px;
-  font-size: 1.5rem;
-  font-family: 'SUIT', sans-serif;
-  font-weight: 500;
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 0;
-  color: white;
-  box-sizing: border-box;
-  transition: border-color 0.3s ease;
-}
-
-#name:focus {
-  outline: none;
-  border-bottom-color: #ffe600;
-}
+/* #name - 상위 input[type="text"] 스타일 상속, 추가 스타일 없음 */
 
 /* P */
-#phone {
-  width: 100%;
-  padding: 8px 0px;
-  font-size: 1.5rem;
-  font-family: 'SUIT', sans-serif;
-  font-weight: 500;
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 0;
-  color: white;
-  box-sizing: border-box;
-  transition: border-color 0.3s ease;
-}
-
-#phone:focus {
-  outline: none;
-  border-bottom-color: #ffe600;
-}
+/* #phone - 상위 input[type="tel"] 스타일 상속, 추가 스타일 없음 */
 
 #privacy-consent {
   width: 16px;

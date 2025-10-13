@@ -1,0 +1,446 @@
+/* =========================
+   모바일 반응형 스타일
+   ========================= */
+@media (max-width: 768px) {
+
+  /* --- 기본 설정 --- */
+  html {
+    font-size: 12px;
+  }
+
+  html, body {
+    overflow-x: hidden;
+  }
+
+  /* --- 레이아웃 공통 --- */
+  .scroll-indicator {
+    display: none; /* 우측 페이지 인디케이터 제거 */
+  }
+
+  #mouse-follower {
+    display: none; /* 마우스 팔로워 제거 */
+  }
+
+  .scroll-section {
+    min-height: auto;
+    padding: 100px 20px;
+  }
+
+  .section-container {
+    width: 100%;
+    padding: 0;
+  }
+
+  .site-logo {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+
+  /* --- Hero Section (입력 폼 페이지) --- */
+  #hero-section {
+    height: 100vh;
+    padding-top: 100px;
+  }
+
+  .head-copy-wrapper .line {
+    font-size: 1.25rem;
+  }
+
+  .head-copy-wrapper .uspH {
+    font-size: 2rem;
+  }
+
+  /* 멀티스텝 폼 */
+  .glass-form-wrapper {
+    padding: 20px;
+    height: 400px;
+  }
+
+  .form-steps-container {
+    width: 400%; /* 4단계 */
+  }
+
+  .form-step {
+    width: 25%; /* 100% / 4 */
+  }
+
+  .form-section__title {
+    font-size: 1rem;
+  }
+
+  label,
+  input,
+  select,
+  .email-group span,
+  .address-search-group .search-button,
+  .nav-button {
+    font-size: 0.9rem;
+  }
+
+  .form-indicator {
+    margin-bottom: 20px;
+  }
+
+  .form-group {
+    margin-bottom: 30px;
+  }
+
+  .form-group.consent {
+    gap: 5px;
+  }
+
+  /* 로딩 오버레이 */
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border-width: 4px;
+  }
+
+  .overlay-content p {
+    font-size: 0.8rem;
+  }
+
+  /* --- Intro Section (결과 페이지) --- */
+  #intro {
+    padding-top: 140px;
+  }
+
+  .intro-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 50px;
+  }
+
+  .intro__left-pane {
+    font-size: 2rem;
+  }
+
+  .intro__right-pane {
+    font-size: 1.5rem;
+    text-align: left;
+  }
+
+  .intro__video-wrapper {
+    width: 100vw;
+    margin-left: -20px;
+    margin-right: -20px;
+    margin-top: 60px;
+  }
+
+  /* --- About Section --- */
+  #about .section-container {
+    align-items: flex-start;
+  }
+
+  #about .text-block,
+  #about .text-block:nth-child(2) {
+    font-size: 2rem;
+    text-align: justify;
+  }
+
+  #about .footer-link.download {
+    font-size: 1.5rem;
+    text-align: left;
+  }
+
+  /* --- Parallax Wrapper --- */
+  .parallax-wrapper {
+    height: auto;
+  }
+
+  .parallax__background {
+    display: none;
+  }
+
+  /* --- Map Section --- */
+  #map-section {
+    height: 40vh;
+    min-height: auto;
+    margin-top: 0;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    background-color: #000;
+  }
+
+  /* 모바일 비디오 배경 */
+  .mobile-video-background {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+
+  .mobile-video-background video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* 카카오 지도 */
+  #map-wrapper {
+    width: 100vw;
+    margin-left: -20px;
+    margin-right: -20px;
+    margin-top: 60px;
+  }
+
+  #map {
+    height: 40vh;
+    min-height: 250px;
+    border-radius: 0;
+  }
+
+  #testimonials {
+    margin-top: 0;
+  }
+
+  /* --- Testimonials Section (표) --- */
+  #testimonials .section-title {
+    font-size: 2rem;
+    text-align: left;
+  }
+
+  .table-container {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    position: relative;
+  }
+
+  .data-table {
+    min-width: 800px;
+  }
+
+  .data-table th,
+  .data-table td {
+    font-size: 1.2rem;
+  }
+
+  /* 데스크톱용 마우스오버 말풍선 숨김 */
+  .quote-overlay-row {
+    display: none;
+  }
+
+  /* 모바일 롤링 멘트 디스플레이 */
+  .mobile-quote-display {
+    width: 100%;
+    height: 60px;
+    margin-bottom: 20px;
+    background-color: #f7f7f7;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 15px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .quote-item {
+    position: absolute;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: #333;
+    opacity: 0;
+    animation-name: roll-quote;
+    animation-duration: 4s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+  }
+
+  @keyframes roll-quote {
+    0% {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    15%, 75% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-20px);
+      opacity: 0;
+    }
+  }
+
+  .touch-hint {
+    display: block;
+    margin-top: 10px;
+    text-align: center;
+  }
+
+  /* --- CTA Section --- */
+  #cta .cta__main-copy {
+    font-size: 1.5rem;
+  }
+
+  #cta .cta__button {
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+
+  /* --- Footer --- */
+  .footer-container {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .footer-info-wrapper {
+    flex-direction: column;
+  }
+
+  .footer-info--right {
+    text-align: left;
+    margin-top: 20px;
+  }
+
+  /* --- 플로팅 버튼 --- */
+  .floating-cta {
+    right: 20px;
+  }
+
+  .floating-cta.expanded {
+    width: 280px;
+  }
+
+  /* 모바일에서는 클릭 이벤트로 제어 */
+  .floating-cta:hover {
+    /* 호버 효과 무효화 */
+  }
+
+  /* --- CTA 모달 --- */
+  #ctaModal .modal__content {
+    width: 95%;
+    max-width: 380px;
+    padding: 30px 20px;
+  }
+
+  #ctaModal h2 {
+    font-size: 1.2rem;
+  }
+
+  #ctaModal input[type="text"],
+  #ctaModal input[type="email"] {
+    font-size: 0.9rem;
+    padding: 10px 12px;
+  }
+
+  /* --- 슬라이딩 배너 --- */
+  .sliding-banner-container {
+    height: 120px;
+  }
+
+  .sliding-banner {
+    height: 120px;
+    font-size: 1.2rem;
+  }
+
+  @keyframes vertical-slide {
+    0% {
+      transform: translateY(0);
+    }
+    45% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-120px); /* 모바일 배너 높이 */
+    }
+    95% {
+      transform: translateY(-120px);
+    }
+    100% {
+      transform: translateY(-240px); /* 모바일 배너 높이 x 2 */
+    }
+  }
+
+  /* --- 기타 텍스트 조정 --- */
+  .download {
+    font-size: 1.25rem;
+  }
+
+  .data-small {
+    font-size: 1rem;
+  }
+
+  /* --- 폼 관련 추가 조정 --- */
+  .form-tip {
+    font-size: 0.8rem;
+    margin-top: 15px;
+  }
+
+  .needed {
+    font-size: 0.7rem;
+  }
+
+  /* --- 이메일 도메인 입력/선택 --- */
+  .email-group {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  #email-domain-input,
+  #email-domain-select {
+    font-size: 0.9rem;
+  }
+
+  /* --- 주소 검색 그룹 --- */
+  .address-search-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .address-search-group .search-button {
+    width: 100%;
+    margin-top: 8px;
+  }
+
+  /* --- 체크박스 크기 조정 --- */
+  .form-group.consent input[type="checkbox"] {
+    width: 14px;
+    height: 14px;
+  }
+
+  .form-group.consent label {
+    font-size: 0.9rem;
+  }
+
+  /* --- 오버레이 메시지 --- */
+  .processing-messages p {
+    font-size: 0.9rem;
+  }
+
+  .error-message {
+    font-size: 0.9rem;
+  }
+
+  /* --- Wave Loader --- */
+  .wave-loader {
+    height: 30px;
+  }
+
+  .wave-loader span {
+    width: 5px;
+  }
+
+  @keyframes wave {
+    0%, 100% { height: 8px; }
+    50% { height: 25px; }
+  }
+
+  /* --- CTA 오버레이 --- */
+  #ctaOverlay .overlay-content {
+    max-width: 350px;
+    padding: 30px 20px;
+  }
+
+  #ctaOverlay .overlay-content p {
+    font-size: 1.1rem;
+  }
+}

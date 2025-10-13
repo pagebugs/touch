@@ -72,16 +72,22 @@
     margin-bottom: 40px; /* 푸터와의 간격 확보 */
   }
 
+  .multi-step-form {
+  overflow: hidden; /* 가로 스크롤 숨김 */
+  }
+
   .form-steps-container {
-    width: 400%; /* 4단계 */
+  display: flex;
+  width: 400%; /* 4단계니까 400% */
+  transition: transform 0.6s ease-in-out;
+  flex: 1;
   }
 
   .form-step {
-    width: 25%;
-    padding: 0 10px;
-    box-sizing: border-box;
-    overflow: hidden; /* 내부 콘텐츠 넘침 방지 */
-  }
+  width: 25%; /* 100 / 4 */
+  padding: 0 10px;
+  box-sizing: border-box;
+ }
 
   .form-section__title {
     font-size: 1.2rem; /* 1rem → 1.2rem */

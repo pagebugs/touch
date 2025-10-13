@@ -920,21 +920,6 @@ touch.html 전용 스타일
       background: #ffe600;
     }
 
-    /* 폼 스텝 컨테이너 (슬라이드 애니메이션 적용) */
-    .form-steps-container {
-      display: flex;
-      width: 300%; /* 3개의 스텝이 가로로 나열되도록 */
-      transition: transform 0.6s ease-in-out;
-      flex: 1; /* 남은 공간을 채우도록 설정 */
-    }
-
-    /* 각 스텝 */
-    .form-step {
-      width: calc(100% / 3);
-      padding: 0 10px;
-      box-sizing: border-box;
-    }
-
     /* 폼 요소 스타일 */
     .form-section__title {
       font-size: 1.5rem;

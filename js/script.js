@@ -792,10 +792,24 @@ function loadKakaoMap() {
   }
 }
 
-// ✅ 페이지 로드 후 실행
-window.addEventListener("load", loadKakaoMap);
+// --- [지도 표시: 히어로 카피와 독립적으로 즉시 실행] --- //
+window.addEventListener("load", () => {
+  // ✅ 1. 맵 wrapper 즉시 표시
+  const mapWrapper = document.getElementById("map-wrapper");
+  if (mapWrapper) {
+    mapWrapper.classList.add("visible");
+    console.log("맵 래퍼가 즉시 표시되었습니다.");
+  } else {
+    console.warn("#map-wrapper 요소를 찾을 수 없습니다.");
+  }
 
-
+  // ✅ 2. 카카오 지도 로드 (SDK 로드 후 실행)
+  if (window.kakao && kakao.maps && kakao.maps.load) {
+    kakao.maps.load(loadKakaoMap);
+  } else {
+    console.error("카카오맵 SDK가 아직 로드되지 않았습니다. r.html의 <head>에서 SDK 스크립트를 확인하세요.");
+  }
+});
 
 });
 

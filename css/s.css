@@ -1149,6 +1149,25 @@ label {
   text-decoration: none;
 }
 
+.line {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 200;
+  line-height: 1.5;
+  animation: riseUp 1s ease-out forwards;
+  word-break: keep-all;
+}
+
+.uspH {
+  font-weight: 700;
+  font-size: 2rem;
+}
+
+.now {
+  font-weight: 700;
+}
+
+
 /* Site Logo */
 .site-logo {
   position: fixed;
@@ -1255,24 +1274,6 @@ label {
   margin-bottom: 20px;
   max-width: 600px;
   color: #fff;
-}
-
-.head-copy-wrapper .line {
-  display: block;
-  font-size: 1.5rem;
-  font-weight: 200;
-  line-height: 1.5;
-  animation: riseUp 1s ease-out forwards;
-  word-break: keep-all;
-}
-
-.head-copy-wrapper .uspH {
-  font-weight: 700;
-  font-size: 2rem;
-}
-
-.head-copy-wrapper .now {
-  font-weight: 700;
 }
 
 .head-copy-wrapper .subline {

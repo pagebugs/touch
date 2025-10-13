@@ -16,157 +16,172 @@
     <a href="#" class="site-logo">TOUCH AD</a>
 
     <main class="scroll-container">
-      <section id="intro" class="scroll-section">
-        <div class="intro-container">
-          <div class="intro__left-pane animate-lines">
-            <span class="line">원장님!</span>
-          </div>
-          <div class="intro__right-pane animate-fade-up">
-            비슷한 특성의 고객 5,000명에게 도달하기 위해,<br />
-            필요한 <span class="highlight-copy">터치애드 예산은 30만 원</span> (30일 동안 집행 예상)입니다.<br />
-            평균 <span class="highlight-copy">5% 수준의 고객 전환을 기대</span>할 수 있습니다.<br />
-            동일 조건의 <span class="highlight-copy">네이버 키워드 광고 집행 비용은 약 500만 원</span>이 소요 됩니다.
+      <!-- ✅ INTRO + MAP 통합 섹션 (100vh) -->
+      <section id="intro" class="scroll-section" style="height: 100vh; display: flex; flex-direction: column;">
+        <!-- 상단 60vh: 인트로 콘텐츠 -->
+        <div style="height: 60vh; display: flex; align-items: center; justify-content: center;">
+          <div class="intro-container">
+            <div class="intro__left-pane animate-lines">
+              <span class="line">원장님!</span>
+            </div>
+            <div class="intro__right-pane animate-fade-up">
+              비슷한 특성의 고객 5,000명에게 도달하기 위해,<br />
+              필요한 <span class="highlight-copy">터치애드 예산은 30만 원</span> (30일 동안 집행 예상)입니다.<br />
+              평균 <span class="highlight-copy">5% 수준의 고객 전환을 기대</span>할 수 있습니다.<br />
+              동일 조건의 <span class="highlight-copy">네이버 키워드 광고 집행 비용은 약 500만 원</span>이 소요 됩니다.
+            </div>
           </div>
         </div>
-        <div id="map-wrapper">
-          <div id="map"></div>
+
+        <!-- 하단 40vh: 지도 영역 -->
+        <div id="map-wrapper" style="height: 40vh; width: 100%;">
+          <div id="map" style="width: 100%; height: 100%;"></div>
         </div>
       </section>
 
-      <div id="parallax-area" class="parallax-wrapper">
-        <section id="about" class="scroll-section">
-          <div class="section-container">
-            <div class="text-block animate-on-scroll">
-              <span class="line">원장님! AI가 분석한 터치애드 데이터를 기반으로 우리 병원의 타겟을 확인해보세요.</span>
-            </div>
-            <div class="text-block animate-on-scroll">
-              <span class="line">터치애드는 결제와 이동 데이터를 모두 활용하는 국내 유일의 광고 플랫폼입니다.
-                <span class="usp">하루 50만 건 이상의 카드 결제 데이터를 통해 지금 어디서, 누가, 무엇을 소비했는지를 실시간으로 분석하여 실제 타겟 고객에게 유효한 광고를 집행</span>합니다.
-                또한, 교통카드 태깅 기반의 생활 반경·이동 동선 분석도 함께 이루어짐으로 단순한 관심이 아닌,<span class="usp">실제 구매력을 가진 타겟을 식별하여 시간·장소·상황까지 고려한 정밀 타겟팅</span>이 가능합니다.</span>
-            </div>
+      <!-- ✅ ABOUT 섹션 (100vh) -->
+      <section id="about" class="scroll-section" style="min-height: 100vh; display: flex; flex-direction: column; justify-content: center;">
+        <div class="section-container">
+          <div class="text-block animate-on-scroll">
+            <span class="line">원장님! AI가 분석한 터치애드 데이터를 기반으로 우리 병원의 타겟을 확인해보세요.</span>
           </div>
-          <div class="text-block animate-on-scroll"><a href="http://runcomm.co.kr" class="footer-link download">터치애드 상품설명서 다운로드</a></div>
-        </section>
-        <section id="map-section" class="scroll-section">
-          <div class="parallax__background">
-            <video class="parallax__image" autoplay muted loop playsinline>
-              <source src="mov/usp.mp4" type="video/mp4" />
-            </video>
+          <div class="text-block animate-on-scroll">
+            <span class="line">터치애드는 결제와 이동 데이터를 모두 활용하는 국내 유일의 광고 플랫폼입니다.
+              <span class="usp">하루 50만 건 이상의 카드 결제 데이터를 통해 지금 어디서, 누가, 무엇을 소비했는지를 실시간으로 분석하여 실제 타겟 고객에게 유효한 광고를 집행</span>합니다.
+              또한, 교통카드 태깅 기반의 생활 반경·이동 동선 분석도 함께 이루어짐으로 단순한 관심이 아닌,<span class="usp">실제 구매력을 가진 타겟을 식별하여 시간·장소·상황까지 고려한 정밀 타겟팅</span>이 가능합니다.</span>
           </div>
+        </div>
+        <div class="text-block animate-on-scroll"><a href="http://runcomm.co.kr" class="footer-link download">터치애드 상품설명서 다운로드</a></div>
 
-          <div class="mobile-video-background">
-            <video autoplay muted loop playsinline>
-              <source src="mov/usp_mobi.mp4" type="video/mp4" />
-            </video>
+        <!-- ✅ 배너 영역 이동 (testimonials에서 옮김) -->
+        <div class="sliding-banner-container" style="margin-top: 60px;">
+          <div class="sliding-banner-wrapper">
+            <div class="sliding-banner" style="background-color: #e9f5ff">
+              <span>첫 번째 배너 (5초간 노출)</span>
+            </div>
+            <div class="sliding-banner" style="background-color: #fff3e0">
+              <span>두 번째 배너 (5초간 노출)</span>
+            </div>
+            <div class="sliding-banner" style="background-color: #e9f5ff">
+              <span>첫 번째 배너 (5초간 노출)</span>
+            </div>
           </div>
-        </section>
+          <div class="banner-indicator">
+            <div class="indicator-dot"></div>
+            <div class="indicator-dot"></div>
+          </div>
+        </div>
+      </section>
 
-        <section id="testimonials" class="scroll-section">
-          <div class="section-container">
-            <h2 class="section-title animate-on-scroll"><span class="line">다른 원장님들도 터치애드로 인사이트를 얻고 있습니다</span></h2>
-            <div class="table-container animate-on-scroll" style="transition-delay: 0.5s">
-              <table class="data-table">
-                <thead>
-                  <tr>
-                    <th>날짜</th>
-                    <th>지역</th>
-                    <th>전문과</th>
-                    <th>관심소비항목</th>
-                    <th>주요소비층</th>
-                    <th>도달예산 <span class="data-small">(5000명기준)</span></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr data-quote="터치애드로 마케팅 비용을 70% 절감했습니다">
-                    <td>2025.06.24<span class="touch-hint">👆</span></td>
-                    <td>오류동</td>
-                    <td class="specialty-highlight">내과</td>
-                    <td>건강식품전문점<br /><span class="data-small">(1,320건)</span></td>
-                    <td>30대<br /><span class="data-small">(21%)</span></td>
-                    <td>약28만원</td>
-                  </tr>
-                  <tr data-quote="정확한 타겟팅으로 환자 만족도가 높아졌어요">
-                    <td>2025.06.23<span class="touch-hint">👆</span></td>
-                    <td>서초동</td>
-                    <td class="specialty-highlight">정형외과</td>
-                    <td>피트니스센터<br /><span class="data-small">(2,540건)</span></td>
-                    <td>20대<br /><span class="data-small">(33%)</span></td>
-                    <td>약31만원</td>
-                  </tr>
-                  <tr data-quote="숨쉬기 힘든 날, 그걸 눈치채는 건 데이터가 먼저였어요">
-                    <td>2025.06.12<span class="touch-hint">👆</span></td>
-                    <td>잠원동</td>
-                    <td class="specialty-highlight">이비인후과</td>
-                    <td>약국<br /><span class="data-small">(1,110건)</span></td>
-                    <td>10대이하<br /><span class="data-small">(38%)</span></td>
-                    <td>약25만원</td>
-                  </tr>
-                  <tr data-quote="광고비 대비 효과가 기존보다 3배 좋아졌습니다">
-                    <td>2025.06.21<span class="touch-hint">👆</span></td>
-                    <td>합정동</td>
-                    <td class="specialty-highlight">피부과</td>
-                    <td>미용실/피부관리숍<br /><span class="data-small">(1,980건)</span></td>
-                    <td>10~20대<br /><span class="data-small">(41%)</span></td>
-                    <td>약29만원</td>
-                  </tr>
-                  <tr data-quote="데이터 기반 마케팅의 힘을 실감했습니다">
-                    <td>2025.06.20<span class="touch-hint">👆</span></td>
-                    <td>신촌동</td>
-                    <td class="specialty-highlight">신경외과</td>
-                    <td>건강식품전문점<br /><span class="data-small">(1,650건)</span></td>
-                    <td>40대<br /><span class="data-small">(30%)</span></td>
-                    <td>약27만원</td>
-                  </tr>
-                  <tr data-quote="진료에만 집중할 수 있게 되었어요">
-                    <td>2025.06.29<span class="touch-hint">👆</span></td>
-                    <td>계산동</td>
-                    <td class="specialty-highlight">산부인과</td>
-                    <td>여성용품점<br /><span class="data-small">(2,210건)</span></td>
-                    <td>30대<br /><span class="data-small">(45%)</span></td>
-                    <td>약32만원</td>
-                  </tr>
-                  <tr data-quote="환자들이 정말 관심있어서 오시더라고요">
-                    <td>2025.06.18<span class="touch-hint">👆</span></td>
-                    <td>부평구</td>
-                    <td class="specialty-highlight">한의원</td>
-                    <td>다이어트/체형관리센터<br /><span class="data-small">(1,430건)</span></td>
-                    <td>50대<br /><span class="data-small">(28%)</span></td>
-                    <td>약26만원</td>
-                  </tr>
-                  <tr data-quote="상담 신청이 2배로 늘었습니다">
-                    <td>2025.06.17<span class="touch-hint">👆</span></td>
-                    <td>일산동구</td>
-                    <td class="specialty-highlight">정신건강의학과</td>
-                    <td>문화·교육서비스<br /><span class="data-small">(970건)</span></td>
-                    <td>30대<br /><span class="data-small">(36%)</span></td>
-                    <td>약30만원</td>
-                  </tr>
-                </tbody>
-              </table>
-              <div class="quote-overlay-row"></div>
-            </div>
-          </div>
-          <div class="sliding-banner-container">
-            <div class="sliding-banner-wrapper">
-              <div class="sliding-banner" style="background-color: #e9f5ff">
-                <span>첫 번째 배너 (5초간 노출)</span>
-              </div>
-              <div class="sliding-banner" style="background-color: #fff3e0">
-                <span>두 번째 배너 (5초간 노출)</span>
-              </div>
-              <div class="sliding-banner" style="background-color: #e9f5ff">
-                <span>첫 번째 배너 (5초간 노출)</span>
-              </div>
-            </div>
-            <div class="banner-indicator">
-              <div class="indicator-dot"></div>
-              <div class="indicator-dot"></div>
-            </div>
-          </div>
-        </section>
-      </div>
+      <!-- ✅ MAP-SECTION (패럴랙스 비디오) - 주석 처리 -->
+      <!--
+      <section id="map-section" class="scroll-section">
+        <div class="parallax__background">
+          <video class="parallax__image" autoplay muted loop playsinline>
+            <source src="mov/usp.mp4" type="video/mp4" />
+          </video>
+        </div>
 
-      <section id="cta" class="scroll-section">
+        <div class="mobile-video-background">
+          <video autoplay muted loop playsinline>
+            <source src="mov/usp_mobi.mp4" type="video/mp4" />
+          </video>
+        </div>
+      </section>
+      -->
+
+      <!-- ✅ TESTIMONIALS 섹션 - 주석 처리 -->
+      <!--
+      <section id="testimonials" class="scroll-section">
+        <div class="section-container">
+          <h2 class="section-title animate-on-scroll"><span class="line">다른 원장님들도 터치애드로 인사이트를 얻고 있습니다</span></h2>
+          <div class="table-container animate-on-scroll" style="transition-delay: 0.5s">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>날짜</th>
+                  <th>지역</th>
+                  <th>전문과</th>
+                  <th>관심소비항목</th>
+                  <th>주요소비인층</th>
+                  <th>도달예산 <span class="data-small">(5000명기준)</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr data-quote="터치애드로 마케팅 비용을 70% 절감했습니다">
+                  <td>2025.06.24<span class="touch-hint">👆</span></td>
+                  <td>오류동</td>
+                  <td class="specialty-highlight">내과</td>
+                  <td>건강식품전문점<br /><span class="data-small">(1,320건)</span></td>
+                  <td>30대<br /><span class="data-small">(21%)</span></td>
+                  <td>약28만원</td>
+                </tr>
+                <tr data-quote="정확한 타겟팅으로 환자 만족도가 높아졌어요">
+                  <td>2025.06.23<span class="touch-hint">👆</span></td>
+                  <td>서초동</td>
+                  <td class="specialty-highlight">정형외과</td>
+                  <td>피트니스센터<br /><span class="data-small">(2,540건)</span></td>
+                  <td>20대<br /><span class="data-small">(33%)</span></td>
+                  <td>약31만원</td>
+                </tr>
+                <tr data-quote="숨쉬기 힘든 날, 그걸 눈치채는 건 데이터가 먼저였어요">
+                  <td>2025.06.12<span class="touch-hint">👆</span></td>
+                  <td>잠원동</td>
+                  <td class="specialty-highlight">이비인후과</td>
+                  <td>약국<br /><span class="data-small">(1,110건)</span></td>
+                  <td>10대이하<br /><span class="data-small">(38%)</span></td>
+                  <td>약25만원</td>
+                </tr>
+                <tr data-quote="광고비 대비 효과가 기존보다 3배 좋아졌습니다">
+                  <td>2025.06.21<span class="touch-hint">👆</span></td>
+                  <td>합정동</td>
+                  <td class="specialty-highlight">피부과</td>
+                  <td>미용실/피부관리숍<br /><span class="data-small">(1,980건)</span></td>
+                  <td>10~20대<br /><span class="data-small">(41%)</span></td>
+                  <td>약29만원</td>
+                </tr>
+                <tr data-quote="데이터 기반 마케팅의 힘을 실감했습니다">
+                  <td>2025.06.20<span class="touch-hint">👆</span></td>
+                  <td>신촌동</td>
+                  <td class="specialty-highlight">신경외과</td>
+                  <td>건강식품전문점<br /><span class="data-small">(1,650건)</span></td>
+                  <td>40대<br /><span class="data-small">(30%)</span></td>
+                  <td>약27만원</td>
+                </tr>
+                <tr data-quote="진료에만 집중할 수 있게 되었어요">
+                  <td>2025.06.29<span class="touch-hint">👆</span></td>
+                  <td>계산동</td>
+                  <td class="specialty-highlight">산부인과</td>
+                  <td>여성용품점<br /><span class="data-small">(2,210건)</span></td>
+                  <td>30대<br /><span class="data-small">(45%)</span></td>
+                  <td>약32만원</td>
+                </tr>
+                <tr data-quote="환자들이 정말 관심있어서 오시더라고요">
+                  <td>2025.06.18<span class="touch-hint">👆</span></td>
+                  <td>부평구</td>
+                  <td class="specialty-highlight">한의원</td>
+                  <td>다이어트/체형관리센터<br /><span class="data-small">(1,430건)</span></td>
+                  <td>50대<br /><span class="data-small">(28%)</span></td>
+                  <td>약26만원</td>
+                </tr>
+                <tr data-quote="상담 신청이 2배로 늘었습니다">
+                  <td>2025.06.17<span class="touch-hint">👆</span></td>
+                  <td>일산동구</td>
+                  <td class="specialty-highlight">정신건강의학과</td>
+                  <td>문화·교육서비스<br /><span class="data-small">(970건)</span></td>
+                  <td>30대<br /><span class="data-small">(36%)</span></td>
+                  <td>약30만원</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="quote-overlay-row"></div>
+          </div>
+        </div>
+      </section>
+      -->
+
+      <!-- ✅ CTA 섹션 (100vh) -->
+      <section id="cta" class="scroll-section" style="min-height: 100vh; display: flex; align-items: center; justify-content: center;">
         <div class="section-container">
           <div class="cta__text-wrapper">
             <div class="text-block cta__main-copy animate-on-scroll">
@@ -181,6 +196,7 @@
           </div>
         </div>
       </section>
+
       <footer class="site-footer">
         <div class="footer-container">
           <div class="footer-info-wrapper">
@@ -200,14 +216,15 @@
       </footer>
     </main>
 
+    <!-- ✅ 스크롤 인디케이터 (testimonials 제거) -->
     <div class="scroll-indicator">
       <div class="scroll-dot active" data-section="intro"></div>
       <div class="scroll-dot" data-section="about"></div>
-      <div class="scroll-dot" data-section="testimonials"></div>
       <div class="scroll-dot" data-section="cta"></div>
     </div>
 
-    <div id="mouse-follower"></div>
+    <!-- ✅ Mouse Follower - 주석 처리 -->
+    <!-- <div id="mouse-follower"></div> -->
 
    <!-- CTA 버튼 (기존) -->
     <a href="#" class="floating-cta">
@@ -215,7 +232,7 @@
       <span class="floating-cta__text">잠재 고객 리포트 무료 신청</span>
     </a>
 
-<!-- 모달 -->
+    <!-- 모달 -->
     <div id="ctaModal" class="modal">
       <div class="modal__content">
         <span class="modal__close">&times;</span>

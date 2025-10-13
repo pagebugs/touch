@@ -310,11 +310,6 @@
     width: 280px;
   }
 
-  /* 모바일에서는 클릭 이벤트로 제어 */
-  .floating-cta:hover {
-    /* 호버 효과 무효화 */
-  }
-
   /* --- CTA 모달 --- */
   #ctaModal .modal__content {
     width: 95%;

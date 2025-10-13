@@ -55,9 +55,14 @@
 
   .head-copy-wrapper .uspH {
     font-size: 1.25rem;
-    font-weight: 500;
+    font-weight: 700;
   }
 
+  .head-copy-wrapper .usp {
+  font-weight: 500;
+  border-bottom: 2px dotted rgba(231, 76, 60, 0.8);
+  text-decoration: none;
+  }
   /* 멀티스텝 폼 */
   .glass-form-wrapper {
     padding: 30px 20px; /* 40px → 30px */

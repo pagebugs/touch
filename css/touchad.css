@@ -692,10 +692,6 @@ ETC
   font-weight: 700;
 }
 
-.uspH {
-  font-weight: 700;
-}
-
 .usp {
   font-weight: 500;
   border-bottom: 2px dotted rgba(231, 76, 60, 0.8);
@@ -866,7 +862,7 @@ touch.html 전용 스타일
 
     /* 첫 번째 줄에 폰트 두께를 강조 */
     .head-copy-wrapper .uspH {
-        font-weight: 500;
+        font-weight: 700;
         font-size: 2rem;
     }
     .head-copy-wrapper .now {

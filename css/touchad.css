@@ -143,8 +143,6 @@ PARALLAX AREA
 */
 .parallax-wrapper {
   position: relative;
-  /* 전체 높이 = 100vh(about) + 60vh(map) + 100vh(testimonials) - 16vh(겹침) = 244vh */
-  height: 244vh;
   scroll-snap-align: start;
 }
 
@@ -198,7 +196,6 @@ PARALLAX AREA
   position: relative; /* z-index를 적용하기 위해 추가 */
   z-index: 1;         /* 맵 이미지보다 위에 있도록 z-index 설정 */
     /* map-section 높이(80vh)의 20%인 16vh만큼 위로 당겨서 겹치게 함 */
-  margin-top: -16vh;
 }
 
 /*
@@ -1489,10 +1486,12 @@ input:invalid::placeholder {
   opacity: 0;               /* 페이드인 전 숨김 */
   transform: translateY(30px);
   transition: all 1s ease;
+  visibility: hidden;
 }
 
 #map-wrapper.visible {
   opacity: 1;
+  visibility: visible;
   transform: translateY(0);
 }
 

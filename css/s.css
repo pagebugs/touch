@@ -455,10 +455,12 @@ label {
   opacity: 0;
   transform: translateY(30px);
   transition: all 1s ease;
+  visibility: hidden;
 }
 
 #map-wrapper.visible {
   opacity: 1;
+  visibility: visible;
   transform: translateY(0);
 }
 

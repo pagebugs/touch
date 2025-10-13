@@ -65,6 +65,17 @@
   }
   /* 멀티스텝 폼 */
   .glass-form-wrapper {
+      position: relative;
+      z-index: 2;
+      width: 80%;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(10px);
+      border: 0px solid rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden; /* 슬라이드 액션을 위해 필수 */
     padding: 30px 20px; /* 40px → 30px */
     height: auto; /* 고정 높이 제거 */
     min-height: 450px; /* 최소 높이만 설정 */

@@ -54,7 +54,8 @@
   }
 
   .head-copy-wrapper .uspH {
-    font-size: 2rem;
+    font-size: 1.25rem;
+    font-weight: 500;
   }
 
   /* 멀티스텝 폼 */

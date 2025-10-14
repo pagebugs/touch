@@ -1,7 +1,3 @@
-/* ================================================
-   UNIVERSAL & ELEMENT 스타일 (중복 제거 완료)
-   ================================================ */
-
 /* --- Google Font Import --- */
 @import url('https://cdn.jsdelivr.net/gh/sunn-us/SUIT/fonts/static/woff2/SUIT.css');
 
@@ -15,649 +11,19 @@ html, body {
   font-family: 'SUIT', 'Pretendard', sans-serif;
   scroll-behavior: smooth;
   font-size: 14px;
-  background-color: black;
-  color: white;
+  overflow-x: hidden; /* 수평 스크롤 방지 */
 }
 
-/* --- Input/Select 공통 스타일 --- */
-input[type="text"],
-input[type="tel"],
-input[type="email"],
-select {
-  width: 100%;
-  padding: 8px 0px;
-  font-size: 1.5rem;
-  font-family: 'SUIT', sans-serif;
-  font-weight: 500;
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 0;
-  color: white;
-  box-sizing: border-box;
-  transition: border-color 0.3s ease;
-}
-
-input[type="text"]:focus,
-input[type="tel"]:focus,
-input[type="email"]:focus,
-select:focus {
-  outline: none;
-  border-bottom-color: #ffe600;
-}
-
-/* Placeholder 스타일 */
-input::placeholder,
-input[type="text"]::placeholder,
-input[type="tel"]::placeholder,
-input[type="email"]::placeholder {
-  color: #f2f2f2;
-  font-style: italic;
-  font-size: 1rem;
-}
-
-/* Autofill 스타일 */
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 1000px #000 inset !important;
-  -webkit-text-fill-color: white !important;
-  transition: none !important;
-}
-
-/* Invalid/Valid 상태 */
-input:not(:placeholder-shown):invalid,
-select:invalid {
-  border-bottom-color: rgba(255, 0, 0, 0.7);
-  color: white;
-}
-
-input:not(:placeholder-shown):valid,
-select:valid {
-  border-bottom-color: #ffe600;
-  color: white;
-}
-
-/* Label 스타일 */
-label {
-  display: block;
-  font-size: 1.25rem;
-  margin-bottom: 4px;
-  color: #fff;
-}
-
-/* ================================================
-   ID 선택자 스타일 (A-Z 순서, 중복 제거 완료)
-   ================================================ */
-
-/* A */
-#about {
-  background: transparent;
-  color: inherit;
-  will-change: transform;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-#about .text-block {
-  text-align: justify;
-  font-size: 3rem;
-  font-weight: 500;
-  max-width: 900px;
-}
-
-#about .text-block:nth-child(2) {
-  font-size: 3rem;
-  font-weight: 200;
-}
-
-#about .animate-on-scroll:nth-child(2) {
-  transition-delay: 0.3s;
-}
-
-/* #address-base, #address-detail - 상위 input[type="text"] 스타일 상속, 추가 스타일 없음 */
-
-#age {
-  width: 100%;
-  padding: 8px 0px;
-  font-size: 1rem;
-  background-color: #000;
-  border: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-  color: white;
-  font-family: 'SUIT', sans-serif;
-  box-sizing: border-box;
-  transition: border-color 0.3s ease;
-  border-radius: 0;
-  font-weight: 300;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  background-image: url('data:image/svg+xml;utf8,<svg fill="white" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
-  background-repeat: no-repeat;
-  background-position: right 8px center;
-}
-
-#age:focus {
-  outline: none;
-  border-bottom-color: #ffe600;
-}
-
-/* C */
-#cta {
-  background-color: #000;
-  color: #fff;
-  z-index: 2;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-#ctaEmail,
-#ctaHospital,
-#ctaName,
-#ctaPhone {
-  width: 100%;
-  padding: 12px 14px;
-  margin-bottom: 15px;
-  border: 1px solid rgba(255,255,255,0.2);
-  border-radius: 10px;
-  background: rgba(255,255,255,0.05);
-  color: #fff;
-  font-size: 0.95rem;
-  outline: none;
-}
-
-#ctaEmail:focus,
-#ctaHospital:focus,
-#ctaName:focus,
-#ctaPhone:focus {
-  border-color: #0B56D9;
-  background: rgba(255,255,255,0.1);
-}
-
-#ctaForm {
-  font-family: 'SUIT', sans-serif;
-}
-
-#ctaModal {
-  display: none;
-  position: fixed;
-  z-index: 3000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.7);
-  justify-content: center;
-  align-items: center;
-  font-family: 'SUIT', sans-serif;
-}
-
-#ctaModal .modal__content {
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(12px);
-  border-radius: 20px;
-  padding: 40px 30px;
-  max-width: 420px;
-  width: 90%;
-  color: #fff;
-  box-shadow: 0 6px 24px rgba(0,0,0,0.3);
-  text-align: left;
-  animation: fadeIn 0.3s ease-out;
-}
-
-#ctaModal .modal__close {
-  float: right;
-  font-size: 24px;
-  cursor: pointer;
-  color: #fff;
-  margin-bottom: 10px;
-}
-
-#ctaModal h2 {
-  margin-top: 0;
-  margin-bottom: 10px;
-  font-size: 1.4rem;
-  font-weight: 600;
-}
-
-#ctaModal p {
-  font-size: 0.95rem;
-  margin-bottom: 20px;
-  color: #ddd;
-}
-
-#ctaModal input[type="text"],
-#ctaModal input[type="email"] {
-  width: 100%;
-  padding: 12px 14px;
-  margin-bottom: 15px;
-  border: 1px solid rgba(255,255,255,0.2);
-  border-radius: 10px;
-  background: rgba(255,255,255,0.05);
-  color: #fff;
-  font-size: 0.95rem;
-  outline: none;
-}
-
-#ctaModal input:focus {
-  border-color: #0B56D9;
-  background: rgba(255,255,255,0.1);
-}
-
-#ctaModal .cta-form-buttons {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-}
-
-#ctaModal .cta-form-buttons button {
-  flex: 1;
-  padding: 12px 0;
-  border: none;
-  border-radius: 10px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.25s ease;
-}
-
-#ctaModal .cta-form-buttons .submit-btn {
-  background: #0B56D9;
-  color: #fff;
-}
-
-#ctaModal .cta-form-buttons .submit-btn:hover {
-  background: #0942a8;
-}
-
-#ctaModal .cta-form-buttons .cancel-btn {
-  background: rgba(255,255,255,0.15);
-  color: #fff;
-}
-
-#ctaModal .cta-form-buttons .cancel-btn:hover {
-  background: rgba(255,255,255,0.25);
-}
-
-#ctaOverlay {
-  background: rgba(0, 0, 0, 0.85);
-}
-
-#ctaOverlay .overlay-content {
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(10px);
-  border-radius: 12px;
-  padding: 40px 30px;
-  max-width: 400px;
-  width: 90%;
-  text-align: center;
-  color: #fff;
-  font-family: 'SUIT', sans-serif;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-}
-
-#ctaOverlay .overlay-content p,
-#ctaOverlay .overlay-content {
-  font-size: 1.25rem;
-  font-weight: 500;
-  line-height: 1.6;
-}
-
-/* E */
-/* #email - 상위 input[type="email"] 스타일 상속, 추가 스타일 없음 */
-
-/* #email-domain-input - 상위 input[type="text"] 스타일 상속, 추가 스타일 없음 */
-
-#email-domain-select {
-  width: 100%;
-  padding: 8px 0px;
-  font-size: 1rem;
-  background-color: #000;
-  border: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-  color: white;
-  font-family: 'SUIT', sans-serif;
-  box-sizing: border-box;
-  transition: border-color 0.3s ease;
-  border-radius: 0;
-  font-weight: 300;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  background-image: url('data:image/svg+xml;utf8,<svg fill="white" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
-  background-repeat: no-repeat;
-  background-position: right 8px center;
-  display: none;
-}
-
-#email-domain-toggle {
-  padding: 10px 14px;
-  font-size: 1rem;
-  white-space: nowrap;
-  background: #ffe600;
-  color: #222;
-  border-radius: 8px;
-  font-weight: 300;
-  cursor: pointer;
-}
-
-#errorMessage {
-  display: none;
-  color: #ff4d4f;
-  font-size: 1rem;
-  font-weight: 600;
-  text-align: center;
-  margin-top: 20px;
-}
-
-/* G */
-#gender {
-  width: 100%;
-  padding: 8px 0px;
-  font-size: 1rem;
-  background-color: #000;
-  border: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-  color: white;
-  font-family: 'SUIT', sans-serif;
-  box-sizing: border-box;
-  transition: border-color 0.3s ease;
-  border-radius: 0;
-  font-weight: 300;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  background-image: url('data:image/svg+xml;utf8,<svg fill="white" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
-  background-repeat: no-repeat;
-  background-position: right 8px center;
-}
-
-#gender:focus {
-  outline: none;
-  border-bottom-color: #ffe600;
-}
-
-/* H */
-#hero-section {
-  position: relative;
-  width: 100vw;
-  min-height: 100vh;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 0 20px;
-  box-sizing: border-box;
-  background-color: #000;
-}
-
-#hospital-name {
-  width: 100%;
-  padding: 8px 0px;
-  font-size: 1.5rem;
-  font-family: 'SUIT', sans-serif;
-  font-weight: 500;
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 0;
-  color: white;
-  box-sizing: border-box;
-  transition: border-color 0.3s ease;
-}
-
-#hospital-name:focus {
-  outline: none;
-  border-bottom-color: #ffe600;
-}
-
-/* I */
-#intro {
-  justify-content: center;
-  gap: 2rem;
-  padding: 160px 20px 60px;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-/* L */
-#loadingOverlay {
-  display: none;
-}
-
-/* M */
-#map {
-  width: 100vw;
-  height: 40vh;
-  min-height: 400px;
-  border-radius: 0;
-  filter: grayscale(80%);
-  transition: filter 0.5s ease;
-  overflow: hidden;
-}
-
-#map:hover {
-  filter: none;
-}
-
-#map-section {
-  height: 40vh;
-  min-height: 40vh;
-  background: transparent;
-  padding: 0;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  position: relative;
-  z-index: 0;
-}
-
-#map-wrapper {
-  width: 100vw;
-  max-width: none;
-  margin-top: 120px;
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 1s ease;
-  visibility: hidden;
-}
-
-#map-wrapper.visible {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-
-#mouse-follower {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background-color: #ffe600;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 9999;
-  pointer-events: none;
-  transition: transform 0.1s ease-out;
-}
-
-#multi-step-form {
-  overflow: hidden;
-}
-
-/* N */
-/* #name - 상위 input[type="text"] 스타일 상속, 추가 스타일 없음 */
-
-/* P */
-/* #phone - 상위 input[type="tel"] 스타일 상속, 추가 스타일 없음 */
-
-#privacy-consent {
-  width: 16px;
-  height: 16px;
-  background: transparent;
-  border: 1px solid #e2e2e2;
-  border-radius: 4px;
-  cursor: pointer;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  outline: none;
-  position: relative;
-  flex-shrink: 0;
-}
-
-#privacy-consent:checked {
-  background-color: #ffe600;
-  border-color: #ffe600;
-}
-
-#privacy-consent:checked::before {
-  content: '';
-  position: absolute;
-  top: 2px;
-  left: 5px;
-  width: 4px;
-  height: 8px;
-  border: solid #222;
-  border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
-}
-
-#processingMessages {
-  display: block;
-}
-
-#processingMessages p {
-  display: none;
-  font-size: 1rem;
-  font-weight: 500;
-  opacity: 0;
-  transition: opacity 0.5s;
-}
-
-#processingMessages p.active {
-  display: block;
-  opacity: 1;
-}
-
-/* R */
-#retryBtn {
-  padding: 10px 20px;
-  background: #ffe600;
-  color: #222;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 500;
-  cursor: pointer;
-  margin-top: 15px;
-}
-
-#retryBtn:hover {
-  background: #ffcc00;
-}
-
-/* S */
-#specialty {
-  width: 100%;
-  padding: 8px 0px;
-  font-size: 1rem;
-  background-color: #000;
-  border: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-  color: white;
-  font-family: 'SUIT', sans-serif;
-  box-sizing: border-box;
-  transition: border-color 0.3s ease;
-  border-radius: 0;
-  font-weight: 300;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  background-image: url('data:image/svg+xml;utf8,<svg fill="white" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
-  background-repeat: no-repeat;
-  background-position: right 8px center;
-}
-
-#specialty:focus {
-  outline: none;
-  border-bottom-color: #ffe600;
-}
-
-/* T */
-#testimonials {
-  background: #fff;
-  color: inherit;
-  will-change: transform;
-  position: relative;
-  z-index: 1;
-  margin-top: -16vh;
-}
-
-#testimonials .text-block {
-  text-align: justify;
-  font-size: 3rem;
-  font-weight: 500;
-  max-width: 900px;
-}
-
-/* U */
-#usp-content {
-  height: 20vh;
-  display: none;
-}
-
-/* W */
-#waveLoader {
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  gap: 6px;
-  height: 40px;
-  margin-bottom: 20px;
-}
-
-#waveLoader span {
-  display: block;
-  width: 6px;
-  height: 10px;
-  background: #ffe600;
-  border-radius: 2px;
-  animation: wave 1s ease-in-out infinite;
-}
-
-#waveLoader span:nth-child(1) { animation-delay: 0s; }
-#waveLoader span:nth-child(2) { animation-delay: 0.2s; }
-#waveLoader span:nth-child(3) { animation-delay: 0.4s; }
-#waveLoader span:nth-child(4) { animation-delay: 0.6s; }
-#waveLoader span:nth-child(5) { animation-delay: 0.8s; }
-
-@keyframes wave {
-  0%, 100% { height: 10px; }
-  50% { height: 35px; }
-}
-
-/* ================================================
-   CLASS 기반 스타일 (주요 누락된 것들만)
-   ================================================ */
-
-/* Main Layout */
+/* --- Main Layout --- */
 .scroll-container {
   height: 100vh;
-  overflow-y: scroll;
-  scroll-snap-type: none;
+  overflow-y: scroll; /* 스크롤 스냅을 부드럽게 처리 */
+  scroll-snap-type: none; /* 기본 배경은 첫 섹션에 맞춰 검은색으로 설정 */
   background-color: black;
   color: white;
   transition: background-color 1.5s ease-in-out, color 1.5s ease-in-out;
-  position: relative;
-  overflow-x: hidden;
+  position: relative; /* 반드시 있어야 getBoundingClientRect 기준 잡힘 */
+  overflow-x: hidden; /* 수평 스크롤 방지 */
 }
 
 .scroll-section {
@@ -673,7 +39,7 @@ label {
   padding: 60px 20px;
 }
 
-/* Common Components */
+/* --- Common Components --- */
 .section-container {
   max-width: 1200px;
   width: 100%;
@@ -684,7 +50,6 @@ label {
   justify-content: center;
   align-items: center;
 }
-
 .text-block {
   margin-bottom: 2.5rem;
   width: 100%;
@@ -692,7 +57,17 @@ label {
   white-space: pre-line;
 }
 
-/* Intro Section */
+/*
+================================
+SECTION 1: INTRO
+================================
+*/
+#intro {
+  justify-content: center;
+  gap: 2rem;
+  padding: 160px 20px 60px;
+}
+
 .intro-container {
   display: flex;
   flex-direction: row;
@@ -701,7 +76,6 @@ label {
   gap: 60px;
   max-width: 1200px;
   width: 100%;
-  height: 60vh;
 }
 
 .intro__left-pane {
@@ -722,8 +96,8 @@ label {
 }
 
 .intro__video-wrapper {
-  width: 80vw;
-  max-width: none;
+  width: 80vw;  /* ← 또는 100vw */
+  max-width: none; /* ← 기존 제한 제거 */
   margin-top: 120px;
   opacity: 0;
   transform: translateY(30px);
@@ -734,21 +108,19 @@ label {
   opacity: 1;
   transform: translateY(0);
 }
-
 .intro__video-wrapper video {
   width: 100%;
   height: auto;
   object-fit: cover;
 }
 
-/* Animations */
+/* Intro Animations */
 .animate-lines .line {
   display: block;
   transform: translateY(40px);
   opacity: 0;
   animation: riseUp 1s ease-out forwards;
 }
-
 .animate-lines .line:nth-child(1) { animation-delay: 0s; }
 .animate-lines .line:nth-child(2) { animation-delay: 0.2s; }
 .animate-lines .line:nth-child(3) { animation-delay: 0.4s; }
@@ -761,30 +133,30 @@ label {
   animation: fadeUp 1s ease-out 1.2s forwards;
 }
 
-@keyframes riseUp {
-  to { transform: translateY(0); opacity: 1; }
-}
+@keyframes riseUp { to { transform: translateY(0); opacity: 1; } }
+@keyframes fadeUp { to { transform: translateY(0); opacity: 1; } }
 
-@keyframes fadeUp {
-  to { transform: translateY(0); opacity: 1; }
-}
-
-.animate-on-scroll {
-  transform: translateY(40px);
-  opacity: 0;
-  transition: opacity 1s ease-out, transform 1s ease-out;
-}
-
-.animate-on-scroll.is-visible {
-  transform: translateY(0);
-  opacity: 1;
-}
-
-/* Parallax Area */
+/*
+================================
+PARALLAX AREA
+================================
+*/
 .parallax-wrapper {
   position: relative;
-  height: 244vh;
   scroll-snap-align: start;
+}
+
+/* 맵 섹션의 높이를 뷰포트의 60%로 지정 */
+#map-section {
+  height: 60vh;
+  min-height: 60vh; /* scroll-section 기본값 덮어쓰기 */
+  background: transparent;
+  padding: 0;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* 자신보다 큰 이미지를 잘라내기 위해 필수 */
+  position: relative; /* z-index를 적용하기 위해 추가 */
+  z-index: 0;         /* 섹션3보다 아래에 있도록 z-index 설정 */
 }
 
 .parallax__background {
@@ -798,13 +170,56 @@ label {
 
 .parallax__image {
   width: 100%;
+  /* height: auto로 설정하여 이미지 원본 비율 유지 */
   height: auto;
+  /* 어떤 경우에도 이미지가 컨테이너(80vh)보다 작아지지 않도록 최소 높이를 설정.
+    +1px를 하여 패럴렉스 계산이 항상 유효하도록 보장합니다.
+  */
   min-height: calc(60vh + 1px);
   object-fit: cover;
   will-change: transform;
 }
 
-/* Section Title */
+/* 페럴렉스 위에 올라오는 섹션들의 기본 스타일 */
+#about {
+  /* 배경을 투명하게 만들어 뒤의 지도가 보이게 함 */
+  background: transparent;
+  color: inherit;
+  will-change: transform;
+}
+
+#testimonials {
+  background: #fff;
+  color: inherit;
+  will-change: transform;
+  /* --- 수정된 부분 --- */
+  position: relative; /* z-index를 적용하기 위해 추가 */
+  z-index: 1;         /* 맵 이미지보다 위에 있도록 z-index 설정 */
+    /* map-section 높이(80vh)의 20%인 16vh만큼 위로 당겨서 겹치게 함 */
+}
+
+/*
+================================
+SECTION 2 & 3: ABOUT & TESTIMONIALS
+================================
+*/
+/* 흰 배경 위에 올라오는 텍스트 스타일 */
+#about .text-block, #testimonials .text-block {
+    text-align: justify;
+    font-size: 3rem;
+    font-weight: 500;
+    max-width: 900px;
+}
+
+#about .text-block:nth-child(2) {
+    font-size: 3rem;
+    font-weight: 200;
+}
+
+#about .animate-on-scroll:nth-child(2) {
+  transition-delay: 0.3s;
+}
+
 .section-title {
   width: 100%;
   font-size: 3rem;
@@ -814,25 +229,26 @@ label {
   text-align: center;
 }
 
-/* Table */
 .table-container {
   position: relative;
   width: 70vw;
   max-width: none;
   overflow: hidden;
-  min-height: calc(100% + 20px);
+  /* 패딩 대신 높이로 여유 공간 확보 */
+  min-height: calc(100% + 20px); /* 테이블 높이 + 여유 공간 */
 }
-
+/* 테이블의 가장 위, 아래 테두리만 남김 */
 .data-table {
   width: 100%;
   border-collapse: collapse;
   background: #fff;
   border-top: 1px solid rgba(0, 0, 0, 0.5);
   border-bottom: 1px solid #000;
-  margin-bottom: 100px;
-  white-space: pre-line;
+  margin-bottom: 100px; /* 아래쪽 여유 공간 */
+  white-space: pre-line
 }
 
+/* th와 td의 테두리를 모두 초기화 */
 .data-table th {
   background: rgba(255, 230, 0, 0.1);
   font-weight: 300;
@@ -844,20 +260,28 @@ label {
   word-break: break-all;
 }
 
-.data-table thead tr {
-  border-bottom: 2px solid #000;
+.data-small {
+  font-size: 1.25rem;
+  display: block;;
+  margin-top: 2px; /* ✅ 위 문단과 간격 줄임 */
 }
 
+/* 헤더 행(tr)에 하단 테두리를 주어 구분선을 만듦 */
+.data-table thead tr {
+  border-bottom: 2px solid #000; /* 헤더 구분선은 조금 두껍게 */
+}
+
+/* 본문의 각 행(tr)에 하단 테두리를 주어 가로줄을 만듦 */
 .data-table tbody tr {
   border-bottom: 1px solid #000;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  position: relative;
 }
 
+/* 마지막 행의 하단 테두리는 제거 (테이블의 border-bottom과 겹치므로) */
 .data-table tbody tr:last-child {
   border-bottom: none;
 }
+
+/* 기존 스타일은 그대로 유지됩니다 */
 
 .data-table td {
   background: #fff;
@@ -870,10 +294,21 @@ label {
   word-break: break-all;
 }
 
-.data-small {
-  font-size: 1.25rem;
-  display: block;
-  margin-top: 2px;
+.data-table tbody tr {
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  position: relative;
+}
+.data-table tbody tr.active {
+  background: #e3f2fd;
+}
+.specialty-highlight {
+  font-weight: 600;
+}
+.touch-hint {
+  display: none;
+  font-size: 12px;
+  color: #666;
 }
 
 .quote-overlay-row {
@@ -893,16 +328,34 @@ label {
   padding: 10px;
   pointer-events: none;
   opacity: 0;
-  transition: top 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275),
-              height 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275),
-              transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275),
-              opacity 0.2s ease-out;
+
+  /* --- 간단한 탄성 효과 --- */
+  transition:
+    top 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    height 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), /* transform 추가 */
+    opacity 0.2s ease-out;
   will-change: transform, top, height;
 }
 
-/* CTA Section */
+/* 마우스 오버 시 미세한 변형 효과 */
+.quote-overlay-row.moving {
+  transform: scaleX(0.95) skewX(-2deg); /* 살짝 기울어지고 압축되는 효과 */
+}
+
+/*
+================================
+SECTION 4: CTA (Call to Action)
+================================
+*/
+#cta {
+  background-color: #000;
+  color: #fff;
+  z-index: 2; /* 페럴렉스 영역보다 확실히 위에 오도록 */
+}
+
 .cta__text-wrapper {
-  text-align: center;
+  text-align: center; /* 기존 속성은 제거하거나 무시됩니다. */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -924,7 +377,6 @@ label {
   font-weight: 600;
   cursor: pointer;
   margin: 20px;
-  transition: opacity 1s ease-out, transform 1s ease-out, background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
 }
 
 .cta__button:hover {
@@ -944,8 +396,20 @@ label {
   font-weight: 600;
   color: #e2e2e2;
 }
-
-/* Scroll Indicator */
+/* 버튼의 스크롤 애니메이션과 호버 효과를 모두 적용하기 위한 코드 */
+.cta__button.animate-on-scroll {
+  /*
+    스크롤 효과(opacity, transform)와
+    호버 효과(background-color, color, border-color)를
+    하나의 transition 속성에 모두 정의합니다.
+  */
+  transition: opacity 1s ease-out, transform 1s ease-out, background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
+}
+/*
+================================
+GLOBAL UI & ANIMATIONS
+================================
+*/
 .scroll-indicator {
   position: fixed;
   top: 50%;
@@ -956,7 +420,6 @@ label {
   gap: 10px;
   z-index: 1000;
 }
-
 .scroll-dot {
   width: 8px;
   height: 8px;
@@ -965,22 +428,50 @@ label {
   cursor: pointer;
   transition: all 0.3s ease;
 }
-
 .scroll-dot.active {
   background: #E74C3C;
   transform: scale(1.3);
 }
 
-/* Footer */
+.animate-on-scroll {
+  transform: translateY(40px);
+  opacity: 0;
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+.animate-on-scroll.is-visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+#mouse-follower {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #ffe600; /* 노란색 (원하는 색상으로 변경 가능 ffe600) */
+  position: fixed; /* 화면에 고정 */
+  top: 0;
+  left: 0;
+  z-index: 9999; /* 다른 모든 요소들 위에 표시 */
+  pointer-events: none; /* 마우스 이벤트가 통과되도록 함 */
+  transition: transform 0.1s ease-out; /* 부드러운 따라다님 효과 */
+  /* transform은 JS에서 제어하므로 초기값은 설정하지 않음 */
+}
+
+/*
+================================
+FOOTER
+================================
+*/
 .site-footer {
   position: relative;
   width: 100%;
   padding: 60px 20px 40px;
-  background-color: #000;
+  background-color: #000; /* CTA 섹션과 동일한 배경색 */
   box-sizing: border-box;
-  white-space: pre-line;
+  white-space: pre-line
 }
 
+/* 80vw 회색 라인 */
 .site-footer::before {
   content: '';
   position: absolute;
@@ -989,13 +480,13 @@ label {
   transform: translateX(-50%);
   width: 80vw;
   height: 1px;
-  background-color: #555;
+  background-color: #555; /* 어두운 배경에 맞는 회색 */
 }
 
 .footer-container {
   max-width: 80vw;
   margin: 0 auto;
-  font-size: 1.25rem;
+  font-size: 1.25rem; /* cta__footer와 유사한 크기 */
   line-height: 1.7;
 }
 
@@ -1019,46 +510,55 @@ label {
 .footer-copyright {
   color: #888;
   font-weight: 400;
-  font-size: 1rem;
+  font-size: 1rem; /* cta__footer와 유사한 크기 */
 }
 
 .footer-link {
-  color: #e2e2e2;
-  text-decoration: none;
+  color: #e2e2e2; /* 기본 상태에서는 다른 텍스트와 동일한 색상 */
+  text-decoration: none; /* 기본 밑줄 제거 */
   position: relative;
   transition: color 0.3s ease;
 }
 
+/* 밑줄 애니메이션을 위한 가상 요소 */
 .footer-link::after {
   content: '';
   position: absolute;
   bottom: -2px;
   left: 0;
-  width: 0;
+  width: 0; /* 시작은 0% */
   height: 2px;
   background-color: #E74C3C;
-  transition: width 0.4s ease;
+  transition: width 0.4s ease; /* 왼쪽에서 오른쪽으로 펼쳐지는 애니메이션 */
 }
 
+/* 마우스 오버 시 */
 .footer-link:hover {
-  color: #E74C3C;
+  color: #E74C3C; /* 폰트 컬러를 노란색으로 */
 }
 
 .footer-link:hover::after {
-  width: 100%;
+  width: 100%; /* 밑줄이 완전히 펼쳐짐 */
 }
 
-/* Sliding Banner */
+
+
+/*
+================================
+SLIDING BANNER (ONE BY ONE)
+================================
+*/
 .sliding-banner-container {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 140px;
-  overflow: hidden;
+  height: 140px; /* 배너 영역 높이 */
+  overflow: hidden; /* 영역을 벗어나는 배너 숨김 */
 }
 
 .sliding-banner-wrapper {
+  /* 애니메이션: 이름, 총 시간, 반복설정 */
   animation: vertical-slide 10s infinite;
 }
 
@@ -1067,85 +567,117 @@ label {
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 140px;
+  height: 140px; /* 배너 이미지 높이 */
   font-size: 1.5rem;
   font-weight: 500;
   color: #333;
   box-sizing: border-box;
 }
 
+/* 배너 슬라이드 애니메이션 (총 10초) */
 @keyframes vertical-slide {
+  /* --- 첫 번째 배너 노출 (총 5초) --- */
   0% {
     transform: translateY(0);
-    animation-timing-function: ease-in;
+    animation-timing-function: ease-in; /* 다음 움직임은 가속하며 시작 */
   }
+  /* 4.5초간 유지 (전체 시간의 45%) */
   45% {
     transform: translateY(0);
   }
+
+  /* --- 두 번째 배너 노출 (총 5초) --- */
+  /* 0.5초 동안 두 번째 배너로 이동 (전체 시간의 50%) */
   50% {
-    transform: translateY(-140px);
-    animation-timing-function: ease-in;
+    transform: translateY(-140px); /* 배너 높이만큼 위로 이동 */
+    animation-timing-function: ease-in; /* 다음 움직임은 가속하며 시작 */
   }
+  /* 4.5초간 유지 (전체 시간의 95%) */
   95% {
     transform: translateY(-140px);
   }
+
+  /* --- 다시 처음으로 --- */
+  /* 0.5초 동안 복제된 첫 번째 배너로 이동하며 한 사이클 완료 */
   100% {
     transform: translateY(-280px);
   }
 }
 
+/* 마우스 올리면 잠시 멈춤 */
 .sliding-banner-container:hover .sliding-banner-wrapper {
   animation-play-state: paused;
 }
 
-/* Banner Indicator */
+/*
+================================
+BANNER INDICATOR
+================================
+*/
 .banner-indicator {
+  /* 배너 컨테이너 위에 위치시키기 */
   position: absolute;
-  bottom: 15px;
+  bottom: 15px; /* 하단에서 15px 위 */
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: 10px;
-  z-index: 10;
+  gap: 10px; /* 점 사이의 간격 */
+  z-index: 10; /* 배너 이미지보다 위에 보이도록 설정 */
 }
 
 .indicator-dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.2); /* 비활성 상태 기본 색상 */
   transition: background-color 0.3s ease;
+  /* 배너와 동일한 10초 주기로 애니메이션을 무한 반복 */
   animation-duration: 10s;
   animation-iteration-count: infinite;
 }
 
+/* 첫 번째 점에 적용될 애니메이션 */
 .indicator-dot:nth-child(1) {
   animation-name: active-dot-1;
 }
 
+/* 두 번째 점에 적용될 애니메이션 */
 .indicator-dot:nth-child(2) {
   animation-name: active-dot-2;
 }
 
+
+/* 첫 번째 점을 위한 활성화/비활성화 키프레임 */
 @keyframes active-dot-1 {
+  /* 0~49.9% (첫 5초) 동안 활성 상태 */
   0%, 49.9% {
-    background-color: #E74C3C;
+    background-color: #E74C3C; /* 활성 상태 색상 */
   }
+  /* 50%~100% (다음 5초) 동안 비활성 상태 */
   50%, 100% {
     background-color: rgba(0, 0, 0, 0.2);
   }
 }
 
+/* 두 번째 점을 위한 활성화/비활성화 키프레임 */
 @keyframes active-dot-2 {
+  /* 0~49.9% (첫 5초) 동안 비활성 상태 */
   0%, 49.9% {
     background-color: rgba(0, 0, 0, 0.2);
   }
+  /* 50%~100% (다음 5초) 동안 활성 상태 */
   50%, 100% {
-    background-color: #E74C3C;
+    background-color: #E74C3C; /* 활성 상태 색상 */
   }
 }
 
-/* Misc */
+
+/*
+================================
+ETC
+================================
+*/
+
 .download {
   font-size: 1.5rem;
   font-weight: 500;
@@ -1163,42 +695,39 @@ label {
   text-decoration: none;
 }
 
-.line {
-  display: block;
-  font-size: 1.5rem;
-  font-weight: 200;
-  line-height: 1.5;
-  animation: riseUp 1s ease-out forwards;
-  word-break: keep-all;
-}
 
-.uspH {
-  font-weight: 700;
-  font-size: 2rem;
-}
-
-.now {
-  font-weight: 700;
-}
-
-
-/* Site Logo */
+/*
+================================
+SITE LOGO
+================================
+*/
 .site-logo {
   position: fixed;
   top: 40px;
   right: 10vw;
-  left: auto;
+  left: auto; /* 기존 left 속성의 영향을 받지 않도록 초기화합니다. */
   z-index: 1001;
   font-size: 2rem;
   font-weight: 600;
   color: white;
   mix-blend-mode: difference;
-  text-decoration: none;
-  transition: color 0.3s ease;
+  text-decoration: none; /* 링크 밑줄 제거 */
+  transition: color 0.3s ease; /* 색상 변경 시 부드러운 효과 */
 }
 
-/* Floating CTA Button */
+/* 로고에 마우스 오버 시
+.site-logo:hover {
+  color: #ffe600;
+  mix-blend-mode: normal; } */
+
+
+/*
+================================
+FLOATING CTA BUTTON (Refactored)
+================================
+*/
 .floating-cta {
+  /* 위치 및 기본 디자인 */
   position: fixed;
   bottom: 40px;
   right: 10vw;
@@ -1212,19 +741,24 @@ label {
   overflow: hidden;
   background-color: transparent;
   border: 2px solid white;
+
+  /* 애니메이션 */
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+
+  /* 색상 반전 */
   mix-blend-mode: difference;
 }
 
+/* 자바스크립트로 .expanded 클래스가 추가되었을 때의 공통 스타일 */
 .floating-cta.expanded {
-  width: 330px;
+  width: 330px; /* PC에서 펼쳐질 너비 */
   border-radius: 999px;
   background-color: black;
   border-color: black;
-  mix-blend-mode: normal;
+  mix-blend-mode: normal; /* 색상 반전 해제 */
 }
 
 .floating-cta__icon {
@@ -1251,133 +785,344 @@ label {
   opacity: 1;
 }
 
-/* ================================================
-   TOUCH.HTML 전용 스타일
-   ================================================ */
-
-/* Video Background */
-.bg-video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 1;
-}
-
-.video-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
-  z-index: 2;
-}
-
 .mobile-video-background {
   display: none;
 }
 
-/* Head Copy Wrapper */
-.head-copy-wrapper {
-  position: relative;
-  z-index: 3;
-  text-align: center;
-  margin-bottom: 20px;
-  max-width: 600px;
-  color: #fff;
+/*
+================================
+https://www.stilhaus-praxismarketing.de/
+================================
+*/
+
+/*
+================================
+touch.html 전용 스타일
+================================
+*/
+@import url('https://cdn.jsdelivr.net/gh/sunn-us/SUIT/fonts/static/woff2/SUIT.css');
+    /*
+    ================================
+    커스텀 스타일: BG 무비, 글래스모피즘, 멀티스텝 폼
+    ================================
+    */
+    /* 배경색과 기본 폰트 색상을 r_ask.html에 맞게 설정 */
+    html, body {
+      background-color: black;
+      color: white;
+      font-size: 14px;
+    }
+
+    /* 히어로 섹션: BG 무비와 폼이 위치하는 영역 */
+    #hero-section {
+      position: relative;
+      width: 100vw;
+      min-height: 100vh; /* BG 무비 영역 (푸터 높이를 고려한 80vh) */
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 0 20px;
+      box-sizing: border-box;
+    }
+
+    .bg-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+    }
+
+    /* 헤드 카피 영역 (인풋과 분리) */
+    .head-copy-wrapper {
+      position: relative;
+      z-index: 3;
+      text-align: center;
+      margin-bottom: 20px;
+      max-width: 600px;
+      color: #fff;
+    }
+
+    .head-copy-wrapper .line {
+        /* 기존 스타일 유지 */
+        display: block;
+        font-size: 1.5rem;
+        font-weight: 200;
+        line-height: 1.5;
+        animation: riseUp 1s ease-out forwards;
+        word-break: keep-all;
+    }
+
+    /* 첫 번째 줄에 폰트 두께를 강조 */
+    .head-copy-wrapper .uspH {
+        font-weight: 700;
+        font-size: 2rem;
+    }
+    .head-copy-wrapper .now {
+        font-weight: 700;
+    }
+
+    .head-copy-wrapper .subline {
+        font-weight: 500;
+        font-size: 0.9rem;
+        margin-top: 10px;
+    }
+
+    .head-copy-wrapper .line:nth-child(2) { animation-delay: 0.2s; }
+
+    @keyframes riseUp {
+      from { transform: translateY(40px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+
+    /* 글래스모피즘 폼 컨테이너 */
+    .glass-form-wrapper {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 560px;
+      height: 540px; /* 모든 스텝의 높이를 고정 */
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(10px);
+      border: 0px solid rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      padding: 40px 20px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden; /* 슬라이드 액션을 위해 필수 */
+    }
+
+    /* 인디케이터 (폼 상단) */
+    .form-indicator {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .form-indicator .step-dot {
+      width: 8px;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      transition: background-color 0.3s ease;
+    }
+    .form-indicator .step-dot.active {
+      background: #ffe600;
+    }
+
+    /* 폼 요소 스타일 */
+    .form-section__title {
+      font-size: 1.5rem;
+      font-weight: 500;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+    .form-group {
+    margin-bottom: 30px;
+    max-width: 460px; /* 예를 들어, 400px로 제한 */
+    margin-left: auto; /* 중앙 정렬을 위한 속성 */
+    margin-right: auto;
+    font-weight: 200;
+    }
+
+    .needed {
+    color: #ffe600;
+    font-size: 0.8rem;
+    margin-left: 8px;
+    font-weight: 500;
+    }
+
+    label {
+      display: block;
+      font-size: 1.25rem;
+      margin-bottom: 4px;
+      color: #fff;
+    }
+    /* 인풋 박스 디자인: 하단 언더라인만 표시 */
+    input[type="text"],
+    input[type="tel"],
+    input[type="email"],
+    select {
+      width: 100%;
+      padding: 8px 0px; /* 상하 패딩 조정 */
+      font-size: 1.5rem;
+      background: transparent; /* 배경 투명 */
+      border: none; /* 기본 보더 제거 */
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3); /* 하단 보더만 남김 */
+      color: white;
+      font-family: 'SUIT', sans-serif;
+      box-sizing: border-box;
+      transition: border-color 0.3s ease;
+      border-radius: 0; /* 둥근 모서리 제거 */
+      font-weight: 500;
+    }
+    input[type="text"]:focus,
+    input[type="tel"]:focus,
+    input[type="email"]:focus,
+    select:focus {
+      outline: none;
+      border-bottom-color: #ffe600; /* 포커스 시 색상 변경 */
+    }
+
+    /* placeholder 텍스트의 색상을 연한 회색으로 변경하는 예시 */
+    input::placeholder {
+    color: #f2f2f2;
+    font-style: italic;
+    font-size: 1rem;
+    }
+
+    /* 폼 요소 전체에 적용하려면 다음과 같이 작성합니다. */
+    input[type="text"]::placeholder,
+    input[type="tel"]::placeholder,
+    input[type="email"]::placeholder,
+    select::placeholder {
+    color: rgba(255, 255, 255, 0.6); /* 투명도가 적용된 흰색 */
+    font-size: 1rem;
+    }
+
+/* 자동 완성(autofill) 시 브라우저 기본 스타일 초기화 */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px black inset !important;
+    -webkit-text-fill-color: white !important;
+    transition: background-color 5000s ease-in-out 0s;
 }
 
-.head-copy-wrapper .subline {
-  font-weight: 500;
-  font-size: 0.9rem;
-  margin-top: 10px;
+/* 추가적으로 input의 기본 배경색과 폰트색을 재정의 */
+input, select {
+  background-color: black;
+  color: white;
 }
 
-.head-copy-wrapper .line:nth-child(2) {
-  animation-delay: 0.2s;
-}
-
-/* Glass Form Wrapper */
-.glass-form-wrapper {
-  position: relative;
-  z-index: 2;
+#specialty,
+#gender,
+#age {
+  /* 이메일 스타일과 동일하게 적용 */
   width: 100%;
-  max-width: 560px;
-  height: 540px;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(10px);
-  border: 0px solid rgba(255, 255, 255, 0.2);
-  border-radius: 10px;
-  padding: 40px 20px;
+  padding: 8px 0px;
+  font-size: 1rem;
+  background-color: #000;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  font-family: 'SUIT', sans-serif;
   box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
+  transition: border-color 0.3s ease;
+  border-radius: 0;
+  font-weight: 300;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg fill="white" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 8px center;
 }
 
-/* Form Indicator */
-.form-indicator {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 10px;
+
+    /* 네비게이션 버튼 영역 (하단 중앙 정렬) */
+    .form-navigation {
+      margin-top: auto;
+      padding-top: 20px;
+      text-align: center;
+    }
+    .nav-button {
+      background: #fff;
+      color: #000;
+      padding: 10px 25px;
+      border: 1px solid #fff;
+      border-radius: 999px;
+      font-size: 1.25rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin: 0 5px; /* 버튼 간 간격 */
+    }
+    .nav-button.prev-button {
+      background: transparent;
+      color: white;
+    }
+    .nav-button.prev-button:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+    .nav-button.next-button {
+      background: #ffe600;
+      color: #222;
+    }
+    .nav-button.next-button:hover {
+      background: #ffcc00;
+    }
+    .nav-button.submit-button {
+      background: #e74c3c;
+      color: white;
+      border-color: #e74c3c;
+    }
+    .nav-button.submit-button:hover {
+      background: #c0392b;
+    }
+
+    /* 버튼 비활성화 상태 */
+    .nav-button.disabled {
+      background: #555;
+      color: #aaa;
+      border-color: #555;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    /* 추후 추가될 섹션 스타일 */
+    #usp-content {
+      height: 20vh;
+      display: none; /* 현재는 숨김 */
+    }
+
+#hero-section {
+    background-color: #000;
 }
 
-.form-indicator .step-dot {
-  width: 8px;
-  height: 8px;
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 50%;
-  transition: background-color 0.3s ease;
+.bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1; /* 오버레이 아래에 위치 */
 }
 
-.form-indicator .step-dot.active {
-  background: #ffe600;
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* 불투명도 40%의 검정색 오버레이 */
+    z-index: 2; /* 비디오 위에 위치 */
 }
 
-/* Form Elements */
-.form-section__title {
-  font-size: 1.5rem;
-  font-weight: 500;
-  margin-bottom: 40px;
-  text-align: center;
-}
-
-.form-group {
-  margin-bottom: 30px;
-  max-width: 460px;
-  margin-left: auto;
-  margin-right: auto;
-  font-weight: 200;
-}
-
-.needed {
-  color: #ffe600;
-  font-size: 0.8rem;
-  margin-left: 8px;
-  font-weight: 500;
-}
-
-/* Consent Checkbox */
+/* 개인 정보 수집 동의 체크박스 스타일 */
 .form-group.consent {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 20px;
-  margin-bottom: 20px;
+    display: flex;
+    align-items: center; /* 체크박스와 라벨을 세로 중앙 정렬 */
+    gap: 8px; /* 체크박스와 텍스트 사이 간격 */
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .form-group.consent label {
-  font-size: 1rem;
-  font-weight: 200;
-  margin: 0;
-  color: #e2e2e2;
+    font-size: 1rem;
+    font-weight: 200;
+    margin: 0;
+    color: #e2e2e2;
 }
-
 .form-group.consent input[type="checkbox"] {
   width: 16px;
   height: 16px;
@@ -1392,12 +1137,10 @@ label {
   position: relative;
   flex-shrink: 0;
 }
-
 .form-group.consent input[type="checkbox"]:checked {
   background-color: #ffe600;
   border-color: #ffe600;
 }
-
 .form-group.consent input[type="checkbox"]:checked::before {
   content: '';
   position: absolute;
@@ -1410,99 +1153,33 @@ label {
   transform: rotate(45deg);
 }
 
-/* Address Search Group */
-.address-search-group {
-  display: flex;
-  gap: 10px;
-  align-items: flex-end;
-}
-
-.address-search-group .search-button {
-  padding: 10px 14px;
-  font-size: 1rem;
-  white-space: nowrap;
-  background: #ffe600;
-  color: #222;
-  border-radius: 8px;
-  font-weight: 300;
-  cursor: pointer;
-  border: none;
-}
+    .address-search-group { display: flex; gap: 10px; align-items: flex-end; }
+    .address-search-group .search-button {
+    padding: 10px 14px;
+    font-size: 1rem;
+    white-space: nowrap;
+    background: #ffe600;
+    color: #222;
+    border-radius: 8px;
+    font-weight: 300;
+    cursor: pointer;
+    }
 
 .form-tip {
-  font-size: 0.9rem;
-  font-weight: 200;
-  line-height: 1.4;
-  color: #e0e0e0;
-  margin-top: 20px;
-  margin-bottom: 0;
+    font-size: 0.9rem;
+    font-weight: 200;
+    line-height: 1.4;
+    color: #e0e0e0; /* 연한 회색 */
+    margin-top: 20px;
+    margin-bottom: 0;
 }
 
-/* Form Navigation */
-.form-navigation {
-  margin-top: auto;
-  padding-top: 20px;
-  text-align: center;
-}
-
-.nav-button {
-  background: #fff;
-  color: #000;
-  padding: 10px 25px;
-  border: 1px solid #fff;
-  border-radius: 999px;
-  font-size: 1.25rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  margin: 0 5px;
-}
-
-.nav-button.prev-button {
-  background: transparent;
-  color: white;
-}
-
-.nav-button.prev-button:hover {
-  background: rgba(255, 255, 255, 0.1);
-}
-
-.nav-button.next-button {
-  background: #ffe600;
-  color: #222;
-}
-
-.nav-button.next-button:hover {
-  background: #ffcc00;
-}
-
-.nav-button.submit-button {
-  background: #e74c3c;
-  color: white;
-  border-color: #e74c3c;
-}
-
-.nav-button.submit-button:hover {
-  background: #c0392b;
-}
-
-.nav-button.disabled {
-  background: #555;
-  color: #aaa;
-  border-color: #555;
-  cursor: not-allowed;
-  pointer-events: none;
-}
-
-/* Modal */
 .modal {
-  display: none;
+  display: none; /* 기본은 숨김 */
   position: fixed;
   z-index: 1000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
   background: rgba(0, 0, 0, 0.5);
   justify-content: center;
   align-items: center;
@@ -1520,20 +1197,24 @@ label {
 
 .modal__close {
   position: absolute;
-  top: 10px;
-  right: 15px;
+  top: 10px; right: 15px;
   font-size: 24px;
   cursor: pointer;
 }
 
-/* Loading Overlay */
-.overlay {
+
+/* =========================
+   1. 로딩 오버레이
+   ========================= */
+#loadingOverlay{
   display: none;
+}
+
+.overlay {
+  display: none; /* 기본은 숨김 */
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
   background: rgba(0,0,0,0.85);
   z-index: 2000;
   justify-content: center;
@@ -1543,9 +1224,7 @@ label {
   text-align: center;
 }
 
-.overlay-content {
-  text-align: center;
-}
+.overlay-content { text-align: center; }
 
 .spinner {
   width: 60px;
@@ -1562,18 +1241,31 @@ label {
   100% { transform: rotate(360deg); }
 }
 
-/* Multi-Step Form Container */
+/* =========================
+   2. 멀티스텝 폼 너비 수정 (3단계 → 4단계)
+   ========================= */
 .form-steps-container {
   display: flex;
-  width: 400%;
+  width: 400%; /* 4단계니까 400% */
   transition: transform 0.6s ease-in-out;
   flex: 1;
 }
-
 .form-step {
-  width: 25%;
+  width: 25%; /* 100 / 4 */
   padding: 0 10px;
   box-sizing: border-box;
+}
+
+/* =========================
+   3. 입력 시 번쩍임 현상 완화
+   ========================= */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px #000 inset !important;
+  -webkit-text-fill-color: #fff !important;
+  transition: none !important; /* 깜빡임 방지 */
 }
 
 .wave-loader {
@@ -1600,6 +1292,11 @@ label {
 .wave-loader span:nth-child(4) { animation-delay: 0.6s; }
 .wave-loader span:nth-child(5) { animation-delay: 0.8s; }
 
+@keyframes wave {
+  0%, 100% { height: 10px; }
+  50% { height: 35px; }
+}
+
 .processing-messages p {
   display: none;
   font-size: 1rem;
@@ -1607,14 +1304,13 @@ label {
   opacity: 0;
   transition: opacity 0.5s;
 }
-
 .processing-messages p.active {
   display: block;
   opacity: 1;
 }
 
 .error-message {
-  color: #ff4d4f;
+  color: #ff4d4f; /* 붉은 경고 톤 */
   font-size: 1rem;
   font-weight: 600;
   text-align: center;
@@ -1622,25 +1318,193 @@ label {
 }
 
 .multi-step-form {
-  overflow: hidden;
+  overflow: hidden; /* 가로 스크롤 숨김 */
 }
 
-/* Additional Utility Classes */
-.specialty-highlight {
+
+/* CTA 제출 완료 오버레이 스타일 */
+#ctaOverlay {
+  background: rgba(0, 0, 0, 0.85); /* 배경은 유지 */
+}
+
+#ctaOverlay .overlay-content {
+  background: rgba(0, 0, 0, 0.5);   /* 글래스모피즘 */
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 40px 30px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  color: #fff;
+  font-family: 'SUIT', sans-serif;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+#ctaOverlay .overlay-content p,
+#ctaOverlay .overlay-content {
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+/* ===== CTA 모달 (tt.html 입력폼 톤앤매너 적용) ===== */
+#ctaModal {
+  display: none; /* 기본은 숨김 */
+  position: fixed;
+  z-index: 3000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7); /* 배경 반투명 */
+  justify-content: center;
+  align-items: center;
+  font-family: 'SUIT', sans-serif;
+}
+
+#ctaModal .modal__content {
+  background: rgba(255, 255, 255, 0.08);  /* 반투명 배경 */
+  backdrop-filter: blur(12px);             /* 글래스 효과 */
+  border-radius: 20px;
+  padding: 40px 30px;
+  max-width: 420px;
+  width: 90%;
+  color: #fff;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.3);
+  text-align: left;
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* 닫기 버튼 */
+#ctaModal .modal__close {
+  float: right;
+  font-size: 24px;
+  cursor: pointer;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+/* 제목/설명 */
+#ctaModal h2 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 1.4rem;
   font-weight: 600;
 }
-
-.touch-hint {
-  display: none;
-  font-size: 12px;
-  color: #666;
+#ctaModal p {
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+  color: #ddd;
 }
 
-/* ================================================
-   키프레임 애니메이션 총정리
-   ================================================ */
+/* 인풋 공통 스타일 */
+#ctaModal input[type="text"],
+#ctaModal input[type="email"] {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 15px;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 10px;
+  background: rgba(255,255,255,0.05);
+  color: #fff;
+  font-size: 0.95rem;
+  outline: none;
+}
+#ctaModal input:focus {
+  border-color: #0B56D9;  /* 터치애드 포인트 컬러 */
+  background: rgba(255,255,255,0.1);
+}
 
+/* 버튼 영역 */
+#ctaModal .cta-form-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+#ctaModal .cta-form-buttons button {
+  flex: 1;
+  padding: 12px 0;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+#ctaModal .cta-form-buttons .submit-btn {
+  background: #0B56D9;
+  color: #fff;
+}
+#ctaModal .cta-form-buttons .submit-btn:hover {
+  background: #0942a8;
+}
+#ctaModal .cta-form-buttons .cancel-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+}
+#ctaModal .cta-form-buttons .cancel-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+/* 모달 애니메이션 */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(-20px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* 기본 포커스 */
+input:focus, select:focus {
+  outline: none;
+  border-bottom-color: #ffe600; /* 강조색 */
+}
+
+/* 유효하지 않은 경우 (브라우저 기본 대신 우리가 지정한 스타일 유지) */
+input:invalid, select:invalid {
+  border-bottom-color: rgba(255, 0, 0, 0.7); /* 빨간색 하이라이트 */
+  color: white; /* 글자색 강제로 유지 */
+  background: transparent; /* 배경도 초기화 방지 */
+}
+
+/* 유효한 경우 */
+input:valid, select:valid {
+  border-bottom-color: #ffe600;
+  color: white;
+}
+
+input:invalid::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+
+/* =========================
+   GOOGLE MAPS WRAPPER + MAP
+   ========================= */
+#map-wrapper {
+  width: 100vw;              /* PC 기준 */
+  max-width: none;
+  margin-top: 120px;
+  opacity: 0;               /* 페이드인 전 숨김 */
+  transform: translateY(30px);
+  transition: all 1s ease;
+  visibility: hidden;
+}
+
+#map-wrapper.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+#map {
+  width: 100vw;             /* 화면 가득 */
+  height: 60vh;             /* PC 높이 */
+  min-height: 400px;        /* 너무 작아지지 않도록 */
+  border-radius: 0;      /* PC에서는 모서리 둥글게 */
+  filter: grayscale(80%);
+  transition: filter 0.5s ease;
+  overflow: hidden;
+}
+
+#map:hover {
+  filter: none; /* 마우스 올리면 컬러 복원 */
 }

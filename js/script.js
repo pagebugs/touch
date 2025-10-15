@@ -716,6 +716,10 @@ function loadKakaoMap() {
   const addressDetail = touchadData.generalData?.addressDetail || localStorage.getItem("address-detail") || "";
   const fullAddress = (addressBase + " " + addressDetail).trim();
 
+  console.log("[DEBUG] addressBase:", addressBase);
+  console.log("[DEBUG] addressDetail:", addressDetail);
+  console.log("[DEBUG] fullAddress:", fullAddress);
+
   // 기본 지도 (서울 시청 중심)
   const defaultCenter = new kakao.maps.LatLng(37.5665, 126.9780);
   const map = new kakao.maps.Map(mapEl, { center: defaultCenter, level: 4 });

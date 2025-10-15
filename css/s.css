@@ -1163,6 +1163,7 @@ label {
   font-weight: 500;
   border-bottom: 2px dotted rgba(231, 76, 60, 0.8);
   text-decoration: none;
+  color: #fff;
 }
 
 .line {
@@ -1172,11 +1173,13 @@ label {
   line-height: 1.5;
   animation: riseUp 1s ease-out forwards;
   word-break: keep-all;
+  color: #fff;
 }
 
 .uspH {
   font-weight: 700;
   font-size: 2rem;
+  color: #fff;
 }
 
 .now {
@@ -1653,6 +1656,7 @@ label {
   position: relative;
   z-index: 3; /* ✅ Hero 위로 올라옴 */
   min-height: 100vh;
+  width: 100vw;
   background: #000;
   display: flex;
   flex-direction: column;
@@ -1682,7 +1686,7 @@ label {
 .mouse {
   width: 30px;
   height: 50px;
-  border: 2px solid;
+  border: 2px solid #fff;
   border-radius: 15px;
   position: relative;
   display: inline-block;
@@ -1690,6 +1694,7 @@ label {
 .wheel {
   width: 4px;
   height: 8px;
+  background: #fff;
   border-radius: 2px;
   position: absolute;
   top: 10px;
@@ -1701,15 +1706,4 @@ label {
   0% { opacity: 0; top: 10px; }
   50% { opacity: 1; top: 18px; }
   100% { opacity: 0; top: 25px; }
-}
-
-.mouse, .wheel {
-  color: #fff;
-  border-color: rgba(255,255,255,0.95);
-  background: rgba(255,255,255,0.95);
-}
-
-.usp,
-.line {
-  color: #fff !important;
 }

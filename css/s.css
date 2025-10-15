@@ -1656,7 +1656,7 @@ label {
   position: relative;
   z-index: 3; /* ✅ Hero 위로 올라옴 */
   min-height: 100vh;
-  width: 100vw;
+  width: 100%;
   background: #000;
   display: flex;
   flex-direction: column;

@@ -36,6 +36,18 @@ document.addEventListener("DOMContentLoaded", () => {
     let isTimedOut = false;  // 타임아웃 여부 플래그
     let msgInterval;         // 메시지 순환 interval ID
 
+    // --- [공통] 스크롤 애니메이션 Observer (tt.html 포함) ---
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll(".animate-on-scroll").forEach(el => observer.observe(el));
+
     // --- 2. 단계 전환 ---
     function updateForm() {
       formStepsContainer.style.transform = `translateX(-${(currentStep * 100) / totalSteps}%)`;

@@ -677,13 +677,14 @@ label {
 
 /* Common Components */
 .section-container {
-  width: 100vw;
+  width: 100%;
   margin: 0 auto;
   padding: 48px 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  max-width: 1200px; /* 원래 내부 여백 유지하려면 이걸로 조정 */
 }
 
 .text-block {
@@ -1659,6 +1660,7 @@ label {
   background-color: #000 !important; /* ✅ 완전 불투명 */
   box-sizing: border-box;
   overflow: hidden; /* ✅ 내부 투명 여백 제거 */
+  padding: 120px 0 80px; /* ✅ 좌우 padding 제거 */
 }
 
 #form-section::before {

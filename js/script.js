@@ -284,28 +284,50 @@ if (result.token) {
       });
     }
 
-    // --- 9. 우측 스크롤 인디케이터 ---
-    const mainContainer = document.querySelector(".scroll-container");
-    const sections = document.querySelectorAll(".scroll-section");
-    const sectionDots = document.querySelectorAll(".scroll-indicator .scroll-dot");
+      // --- 9. 우측 스크롤 인디케이터 (Hero 고정 구조 대응) ---
+      const mainContainer = document.querySelector(".scroll-container");
+      const sections = document.querySelectorAll(".scroll-section");
+      const sectionDots = document.querySelectorAll(".scroll-indicator .scroll-dot");
 
-    function handleScrollIndicator() {
-      const scrollTop = mainContainer.scrollTop;
-      let currentSectionId = "hero-section";
-      sections.forEach((section) => {
-        const rect = section.getBoundingClientRect();
-        if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
-          currentSectionId = section.id;
+      function handleScrollIndicator() {
+        let currentSectionId = "hero-section"; // 기본은 Hero active
+        const viewportMid = window.innerHeight / 2;
+
+        sections.forEach((section) => {
+          const rect = section.getBoundingClientRect();
+
+          // Hero는 position: fixed 상태라 제외
+          if (section.id === "hero-section") return;
+
+          // 화면 중앙 기준으로 섹션이 보이는지 판별
+          if (rect.top <= viewportMid && rect.bottom >= viewportMid) {
+            currentSectionId = section.id;
+          }
+        });
+
+        // Hero 고정형: form-section이 상단에 닿으면 hero 비활성화
+        const formSection = document.getElementById("form-section");
+        if (formSection && formSection.getBoundingClientRect().top <= 100) {
+          currentSectionId = "form-section";
         }
-      });
-      sectionDots.forEach((dot) => {
-        dot.classList.toggle("active", dot.dataset.section === currentSectionId);
-      });
-    }
 
-    if (mainContainer) {
-      mainContainer.addEventListener("scroll", handleScrollIndicator);
-    }
+        // footer가 절반 이상 노출되면 footer 활성화
+        const footer = document.querySelector(".site-footer");
+        if (footer) {
+          const footerRect = footer.getBoundingClientRect();
+          if (footerRect.top < viewportMid && footerRect.bottom > 0) {
+            currentSectionId = "site-footer";
+          }
+        }
+
+        // 인디케이터 dot 상태 갱신
+        sectionDots.forEach((dot) => {
+          dot.classList.toggle("active", dot.dataset.section === currentSectionId);
+        });
+      }
+
+      window.addEventListener("scroll", handleScrollIndicator);
+      handleScrollIndicator(); // 초기 호출
 
 
     updateForm(); // 초기화

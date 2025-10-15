@@ -1674,3 +1674,28 @@ label {
   left: 50%;
   transform: translateX(-50%);
 }
+
+.mouse {
+  width: 30px;
+  height: 50px;
+  border: 2px solid #fff;
+  border-radius: 15px;
+  position: relative;
+  display: inline-block;
+}
+.wheel {
+  width: 4px;
+  height: 8px;
+  background: #fff;
+  border-radius: 2px;
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: wheelMove 1.5s infinite;
+}
+@keyframes wheelMove {
+  0% { opacity: 0; top: 10px; }
+  50% { opacity: 1; top: 18px; }
+  100% { opacity: 0; top: 25px; }
+}

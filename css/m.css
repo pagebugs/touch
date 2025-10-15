@@ -545,11 +545,3 @@
     align-items: center;
   }
 }
-
-/* 스크롤 어퍼던스 */
-.scroll-down {
-  position: absolute;
-  bottom: 10%;
-  left: 50%;
-  transform: translateX(-50%);
-}

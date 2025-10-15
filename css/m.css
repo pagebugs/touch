@@ -39,14 +39,18 @@
 
   /* --- Hero Section (입력 폼 페이지) --- */
   #hero-section {
-    height: auto; /* 100vh 제거하여 콘텐츠 높이에 맞춤 */
     min-height: 100vh; /* 최소 높이만 보장 */
     padding-top: 100px;
     padding-bottom: 60px; /* 하단 여백 추가 */
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
   }
 
   .head-copy-wrapper {
     margin-bottom: 30px; /* 20px → 30px */
+    position: relative;
+    z-index: 2;
   }
 
   .head-copy-wrapper .line {
@@ -490,6 +494,7 @@
   /* 푸터: 하단 고정 해제 */
   .site-footer {
     position: relative; /* fixed 제거 */
+    z-index: 3;
     margin-top: 0;
   }
 
@@ -529,5 +534,22 @@
     font-size: 1rem; /* 기본 크기와 동일하게 */
     padding: 10px 0;
   }
+  #form-section {
+    position: relative;
+    z-index: 3; /* ✅ Hero 위로 올라옴 */
+    min-height: 100vh;
+    background: #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+}
 
+/* 스크롤 어퍼던스 */
+.scroll-down {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
 }

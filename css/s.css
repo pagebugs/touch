@@ -677,8 +677,7 @@ label {
 
 /* Common Components */
 .section-container {
-  max-width: 1200px;
-  width: 100%;
+  width: 100vw;
   margin: 0 auto;
   padding: 48px 20px;
   display: flex;
@@ -1677,12 +1676,13 @@ label {
   bottom: 10%;
   left: 50%;
   transform: translateX(-50%);
+  z-index: 3; /* ✅ hero-section 위의 카피와 같은 레벨로 올리기 */
 }
 
 .mouse {
   width: 30px;
   height: 50px;
-  border: 2px solid #fff;
+  border: 2px solid;
   border-radius: 15px;
   position: relative;
   display: inline-block;
@@ -1690,7 +1690,6 @@ label {
 .wheel {
   width: 4px;
   height: 8px;
-  background: #fff;
   border-radius: 2px;
   position: absolute;
   top: 10px;
@@ -1702,4 +1701,15 @@ label {
   0% { opacity: 0; top: 10px; }
   50% { opacity: 1; top: 18px; }
   100% { opacity: 0; top: 25px; }
+}
+
+.mouse, .wheel {
+  color: #fff;
+  border-color: rgba(255,255,255,0.95);
+  background: rgba(255,255,255,0.95);
+}
+
+.usp,
+.line {
+  color: #fff !important;
 }

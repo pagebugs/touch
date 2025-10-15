@@ -714,7 +714,7 @@ function loadKakaoMap() {
   const touchadData = JSON.parse(localStorage.getItem("touchadData")) || {};
   const addressBase = touchadData.generalData?.addressBase || localStorage.getItem("address-base") || "";
   const addressDetail = touchadData.generalData?.addressDetail || localStorage.getItem("address-detail") || "";
-  const fullAddress = (addressBase + " " + addressDetail).trim();
+  const fullAddress = addressBase.trim(); // ✅ 지오코딩은 주소 기본값만 사용
 
   console.log("[DEBUG] addressBase:", addressBase);
   console.log("[DEBUG] addressDetail:", addressDetail);

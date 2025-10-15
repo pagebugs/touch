@@ -658,6 +658,8 @@ label {
   transition: background-color 1.5s ease-in-out, color 1.5s ease-in-out;
   position: relative;
   overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
 }
 
 .scroll-section {
@@ -1265,6 +1267,7 @@ label {
   height: 100%;
   object-fit: cover;
   z-index: 0;
+  pointer-events: none; /* ✅ 스크롤/터치가 아래 컨테이너로 전달됨 */
 }
 
 .video-overlay {
@@ -1275,6 +1278,7 @@ label {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.7);
   z-index: 1;
+  pointer-events: none; /* ✅ 스크롤/터치가 아래 컨테이너로 전달됨 */
 }
 
 .mobile-video-background {

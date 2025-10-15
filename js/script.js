@@ -326,10 +326,10 @@ if (result.token) {
         });
       }
 
-      window.addEventListener("scroll", handleScrollIndicator);
+      if (mainContainer) {
+        mainContainer.addEventListener("scroll", handleScrollIndicator);
+      }
       handleScrollIndicator(); // 초기 호출
-
-
     updateForm(); // 초기화
   }
 

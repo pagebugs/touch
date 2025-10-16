@@ -830,6 +830,18 @@ function loadKakaoMap() {
   }
 }
 
+// --- 안정적 로딩 래퍼 --- //
+function safeLoadKakaoMap() {
+  const touchadData = JSON.parse(localStorage.getItem("touchadData") || "{}");
+  const base = touchadData.generalData?.addressBase || localStorage.getItem("address-base");
+  if (!base) {
+    console.warn("touchadData 미로딩 → 200ms 후 재시도");
+    setTimeout(safeLoadKakaoMap, 200);
+    return;
+  }
+  loadKakaoMap(); // ✅ 준비 완료 시 실제 지도 실행
+}
+
 // --- [지도 표시: 히어로 카피와 독립적으로 즉시 실행] --- //
 window.addEventListener("load", () => {
   // ✅ 1. 맵 wrapper 즉시 표시
@@ -843,9 +855,9 @@ window.addEventListener("load", () => {
 
   // ✅ 2. 카카오 지도 로드 (SDK 로드 후 실행)
   if (window.kakao && kakao.maps && kakao.maps.load) {
-    kakao.maps.load(loadKakaoMap);
+    kakao.maps.load(safeLoadKakaoMap);
   } else {
-    console.error("카카오맵 SDK가 아직 로드되지 않았습니다. r.html의 <head>에서 SDK 스크립트를 확인하세요.");
+    console.error("카카오맵 SDK가 아직 로드되지 않았습니다.");
   }
 });
 

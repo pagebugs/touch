@@ -1173,14 +1173,11 @@ label {
   font-weight: 300;
   line-height: 1.5;
   animation: riseUp 1s ease-out forwards;
-  word-break: keep-all;
   color: #fff;
 }
 
-.uspH {
-  font-weight: 700 important;
-  font-size: 2rem;
-  color: #fff;
+.intro__left-pane .uspH {
+  font-weight: 700;
 }
 
 .now {

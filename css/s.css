@@ -1845,7 +1845,7 @@ select:invalid {
 select option {
   font-size: 1rem;
   font-style: normal;
-  color: #000; /* OS 기본 드롭다운 색상 */
+  color: #fff; /* OS 기본 드롭다운 색상 */
 }
 
 select option[value=""] {

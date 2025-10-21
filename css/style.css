@@ -1846,7 +1846,7 @@ select:valid {
 select option {
   font-size: 1rem;
   font-style: normal;
-  color: #000; /* OS 기본 드롭다운 색상 */
+  color: #fff; /* OS 기본 드롭다운 색상 */
 }
 
 /* 4. 리스트 내의 '선택해주세요' 옵션만 회색/이탤릭 처리 */

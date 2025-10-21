@@ -1,0 +1,92 @@
+[33mcommit ae06cbe397f325519315df9bf30874f2552dd9a7[m
+Author: pagebugs <pagebugs@gmail.com>
+Date:   Tue Oct 21 11:34:58 2025 +0900
+
+    맵수정
+
+[1mdiff --git a/js/script.js b/js/script.js[m
+[1m--- a/js/script.js[m
+[1m+++ b/js/script.js[m
+[36m@@ -366,4 +436,3 @@[m
+[31m-    const agePercent = Math.round((resData[1].target / resData[0].target) * 100, 1);[m
+[31m-    const genderPercent = Math.round((resData[2].target / resData[0].target) * 100, 1);[m
+[32m+    );[m
+     introLeft.innerHTML = `<span class="line"><span class="uspH">${userName}</sapn>원장님!</span>`;[m
+ [m
+
+[33mcommit 1fb1da82ff13646aabe976d5fc0364427ddf3b01[m
+Author: pagebugs <pagebugs@gmail.com>
+Date:   Wed Oct 1 19:12:11 2025 +0900
+
+    Update script.js
+
+[1mdiff --git a/js/script.js b/js/script.js[m
+[1m--- a/js/script.js[m
+[1m+++ b/js/script.js[m
+[36m@@ -323,4 +332,4 @@[m
+     const agePercent = Math.round((resData[1].target / resData[0].target) * 100, 1);[m
+     const genderPercent = Math.round((resData[2].target / resData[0].target) * 100, 1);[m
+[31m-    introLeft.innerHTML = `<span class="line"><span class="uspH">${userName}</span> 원장님!</span>`;[m
+[32m+    introLeft.innerHTML = `<span class="line"><span class="uspH">${userName}</sapn>원장님!</span>`;[m
+ [m
+
+[33mcommit 12c15c90a3f473db2f368107f66db84b12432c94[m
+Author: pagebugs <pagebugs@gmail.com>
+Date:   Wed Oct 1 18:16:53 2025 +0900
+
+    보조메시지
+
+[1mdiff --git a/js/script.js b/js/script.js[m
+[1m--- a/js/script.js[m
+[1m+++ b/js/script.js[m
+[36m@@ -332,4 +323,4 @@[m
+     const agePercent = Math.round((resData[1].target / resData[0].target) * 100, 1);[m
+     const genderPercent = Math.round((resData[2].target / resData[0].target) * 100, 1);[m
+[31m-    introLeft.innerHTML = `<span class="line"><span class="uspH">${userName}</sapn>원장님!</span>`;[m
+[32m+    introLeft.innerHTML = `<span class="line"><span class="uspH">${userName}</span> 원장님!</span>`;[m
+ [m
+
+[33mcommit 45f4d6b742ade0c36e7017f53d224115f5192324[m
+Author: pagebugs <pagebugs@gmail.com>
+Date:   Wed Oct 1 13:19:36 2025 +0900
+
+    map
+
+[1mdiff --git a/js/script.js b/js/script.js[m
+[1m--- a/js/script.js[m
+[1m+++ b/js/script.js[m
+[36m@@ -327,4 +327,4 @@[m
+     const agePercent = Math.round((resData[1].target / resData[0].target) * 100, 1);[m
+     const genderPercent = Math.round((resData[2].target / resData[0].target) * 100, 1);[m
+[31m-    introLeft.innerHTML = `<span class="line">${userName}원장님!</span>`;[m
+[32m+    introLeft.innerHTML = `<span class="line"><span class="uspH">${userName}</sapn>원장님!</span>`;[m
+ [m
+
+[33mcommit 8a56976c9232d858cabf931a4d1ff150063b7f52[m
+Author: pagebugs <pagebugs@gmail.com>
+Date:   Wed Oct 1 13:04:36 2025 +0900
+
+    이름호출
+
+[1mdiff --git a/js/script.js b/js/script.js[m
+[1m--- a/js/script.js[m
+[1m+++ b/js/script.js[m
+[36m@@ -326,3 +327,4 @@[m
+     const agePercent = Math.round((resData[1].target / resData[0].target) * 100, 1);[m
+     const genderPercent = Math.round((resData[2].target / resData[0].target) * 100, 1);[m
+[32m+    introLeft.innerHTML = `<span class="line">${userName}원장님!</span>`;[m
+ [m
+
+[33mcommit c79701abced1e0e5e8eab89e425b71920fadc674[m
+Author: pagebugs <pagebugs@gmail.com>
+Date:   Tue Sep 23 15:03:27 2025 +0900
+
+    스크립트 파일 분리
+
+[1mdiff --git a/js/script.js b/js/script.js[m
+[1m--- /dev/null[m
+[1m+++ b/js/script.js[m
+[36m@@ -0,0 +252,3 @@[m
+[32m+    const agePercent = Math.round((resData[1].target / resData[0].target) * 100, 1);[m
+[32m+    const genderPercent = Math.round((resData[2].target / resData[0].target) * 100, 1);[m
+[32m+[m

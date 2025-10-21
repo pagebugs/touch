@@ -434,7 +434,7 @@ document.addEventListener("DOMContentLoaded", () => {
       (resData[2].target / resData[0].target) * 100,
       1
     );
-    introLeft.innerHTML = `<span class="line"><span class="uspH">${userName}</sapn>원장님!</span>`;
+    introLeft.innerHTML = `<span class="line"><span class="uspH">${userName}</span>원장님!</span>`;
 
     const span = document.createElement("span");
     span.className = "line";

@@ -18,7 +18,6 @@ body {
   font-size: 14px;
   background-color: black;
   color: white;
-  scrollbar-gutter: stable both-edges;;
 }
 
 /* --- Input/Select 공통 스타일 --- */
@@ -149,7 +148,7 @@ label {
 }
 
 #age option:first-child {
-  font-size: 1rem;
+  font-style: italic; /* 리스트 내 placeholder 구분 (선택 사항) */
   color: #aaa;
 }
 
@@ -385,7 +384,7 @@ label {
 }
 
 #gender option:first-child {
-  font-size: 1rem;
+  font-style: italic; /* 리스트 내 placeholder 구분 (선택 사항) */
   color: #aaa;
 }
 
@@ -604,7 +603,7 @@ label {
 }
 
 #specialty option:first-child {
-  font-size: 1rem;
+  font-style: italic; /* 리스트 내 placeholder 구분 (선택 사항) */
   color: #aaa;
 }
 
@@ -1217,7 +1216,7 @@ label {
 
 .usp {
   font-weight: 500;
-  border-bottom: 2px dotted rgba(231, 76, 60, 0.8);
+  border-bottom: 2px dotted rgba(231, 76, 60, 0.3);
   text-decoration: none;
   color: #fff;
 }
@@ -1319,7 +1318,7 @@ label {
   position: fixed;
   top: 50%;
   left: 50%;
-  min-width: 100vw;   /* ✅ 뷰포트 기준 보장 */
+  min-width: 100%;   /* ✅ 뷰포트 기준 보장 */
   min-height: 100vh;
   width: auto;
   height: auto;
@@ -1332,7 +1331,7 @@ label {
 .video-overlay {
   position: fixed;
   top: 0; left: 0;
-  width: 100vw;       /* ✅ overlay는 비디오와 같은 기준 */
+  width: 100%;       /* ✅ overlay는 비디오와 같은 기준 */
   height: 100vh;
   background-color: rgba(0,0,0,0.7);
   z-index: 1;
@@ -1816,4 +1815,17 @@ label {
     opacity: 0;
     top: 25px;
   }
+}
+
+/* 1. select 박스의 기본 (placeholder) 상태 스타일 */
+select:invalid {
+  font-size: 1rem;
+  font-style: italic;
+  color: #f2f2f2; /* 기존 input placeholder와 동일한 색상 */
+}
+
+/* 2. select 박스 내 모든 드롭다운 옵션 리스트 스타일 */
+select option {
+  font-size: 1rem;
+  font-style: normal; /* 리스트에서는 이탤릭체 유지 안 함 */
 }

@@ -1178,7 +1178,7 @@ label {
 }
 
 .uspH {
-  font-weight: 700;
+  font-weight: 700 important;
   font-size: 2rem;
   color: #fff;
 }

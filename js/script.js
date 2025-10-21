@@ -800,7 +800,7 @@ document.addEventListener("DOMContentLoaded", () => {
           ctaOverlay.style.display = "flex"; // ✅ 접수완료 오버레이 표시
           setTimeout(() => {
             ctaOverlay.style.display = "none";
-          }, 4000);
+          }, 3000);
         } else {
           alert("저장 중 문제가 발생했습니다.");
         }

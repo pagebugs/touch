@@ -124,7 +124,7 @@ label {
 #age {
   width: 100%;
   padding: 8px 0px;
-  font-size: 1rem;
+  font-size: 1.5rem;
   background-color: #000;
   border: none;
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
@@ -145,6 +145,11 @@ label {
 #age:focus {
   outline: none;
   border-bottom-color: #ffe600;
+}
+
+#age option:first-child {
+  font-size: 1rem;
+  color: #aaa;
 }
 
 /* C */
@@ -268,12 +273,12 @@ label {
 }
 
 #ctaModal .cta-form-buttons .submit-btn {
-  background: #0b56d9;
+  background: #340bd9;
   color: #fff;
 }
 
 #ctaModal .cta-form-buttons .submit-btn:hover {
-  background: #0942a8;
+  background: #340bd9;
 }
 
 #ctaModal .cta-form-buttons .cancel-btn {
@@ -360,7 +365,7 @@ label {
 #gender {
   width: 100%;
   padding: 8px 0px;
-  font-size: 1rem;
+  font-size: 1.5rem;
   background-color: #000;
   border: none;
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
@@ -376,6 +381,11 @@ label {
   background-image: url('data:image/svg+xml;utf8,<svg fill="white" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
   background-repeat: no-repeat;
   background-position: right 8px center;
+}
+
+#gender option:first-child {
+  font-size: 1rem;
+  color: #aaa;
 }
 
 #gender:focus {
@@ -569,7 +579,7 @@ label {
 #specialty {
   width: 100%;
   padding: 8px 0px;
-  font-size: 1rem;
+  font-size: 1.5rem;
   background-color: #000;
   border: none;
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
@@ -590,6 +600,11 @@ label {
 #specialty:focus {
   outline: none;
   border-bottom-color: #ffe600;
+}
+
+#specialty option:first-child {
+  font-size: 1rem;
+  color: #aaa;
 }
 
 /* T */
@@ -667,7 +682,7 @@ label {
 /* Main Layout */
 .scroll-container {
   height: 100vh;
-  overflow-y: scroll;
+  overflow-y: auto;
   scroll-snap-type: none;
   background-color: black;
   color: white;
@@ -694,6 +709,7 @@ label {
 /* Common Components */
 .section-container {
   width: 100%;
+  background: transparent;
   margin: 0 auto;
   padding: 48px 20px;
   display: flex;
@@ -1766,6 +1782,14 @@ label {
   transform: translateX(-50%);
   animation: wheelMove 1.5s infinite;
 }
+.scroll-txt {
+  text-align: center;
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 200;
+  line-height: 1.6;
+}
+
 @keyframes wheelMove {
   0% {
     opacity: 0;

@@ -848,7 +848,7 @@ document.addEventListener("DOMContentLoaded", () => {
     rotateProcessingMessages(); // 초기 실행
   }
 
-  // --- [오버레이] 20초 타임아웃 처리 --- //
+  // --- [오버레이] 60초 타임아웃 처리 --- //
   let overlayTimeout;
 
   // 오버레이 시작 시 타이머 가동
@@ -862,7 +862,7 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("processingMessages").style.display = "none";
       // 실패 메시지 노출
       document.getElementById("errorMessage").style.display = "block";
-    }, 30000); // 30초
+    }, 60000); // 60초
   }
 
   // API 완료되면 타임아웃 해제

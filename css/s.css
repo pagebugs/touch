@@ -3,7 +3,7 @@
    ================================================ */
 
 /* --- Google Font Import --- */
-@import url("https://cdn.jsdelivr.net/gh/sunn-us/SUIT/fonts/static/woff2/SUIT.css");
+@import url("https://cdn.jsdelivr.net/gh/sunn-us/SUIT/fonts/variable/stylesheet.css");
 
 /* --- Reset & Basic Settings --- */
 html,
@@ -13,7 +13,7 @@ body {
   width: 100vw;
   min-height: 100vh;
   overflow-x: hidden;
-  font-family: "SUIT", "Pretendard", sans-serif;
+  font-family: "SUIT Variable", "Pretendard", sans-serif;
   scroll-behavior: smooth;
   font-size: 14px;
   background-color: black;
@@ -1215,6 +1215,7 @@ label {
 
 .intro__left-pane .uspH {
   font-weight: 700;
+  color: #fff;
 }
 
 .now {

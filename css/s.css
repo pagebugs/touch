@@ -397,7 +397,7 @@ label {
 /* H */
 #hero-section {
   position: relative;
-  width: 100vw;
+  width: 100%;
   min-height: 100vh;
   overflow: hidden;
   display: flex;
@@ -683,6 +683,7 @@ label {
 /* Main Layout */
 .scroll-container {
   height: 100vh;
+  width: 100%;
   overflow-y: auto;
   scroll-snap-type: none;
   background-color: black;

@@ -62,9 +62,12 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 1000px #000 inset !important;
+-webkit-box-shadow: 0 0 0 1000px #000 inset !important;
   -webkit-text-fill-color: white !important;
-  transition: none !important;
+  /* 'transition: none'으로 잡히지 않는 순간적인 플래시 현상 방지 */
+  transition: background-color 9999s ease-in-out 0s,
+              color 9999s ease-in-out 0s,
+              none !important;
 }
 
 /* Invalid/Valid 상태 */
@@ -124,7 +127,7 @@ label {
 #age {
   width: 100%;
   padding: 8px 0px;
-  font-size: 1.5rem;
+  font-size: 1rem;
   background-color: #000;
   border: none;
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
@@ -365,7 +368,7 @@ label {
 #gender {
   width: 100%;
   padding: 8px 0px;
-  font-size: 1.5rem;
+  font-size: 1rem;
   background-color: #000;
   border: none;
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
@@ -579,7 +582,7 @@ label {
 #specialty {
   width: 100%;
   padding: 8px 0px;
-  font-size: 1.5rem;
+  font-size: 1rem;
   background-color: #000;
   border: none;
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
@@ -1817,15 +1820,41 @@ label {
   }
 }
 
-/* 1. select 박스의 기본 (placeholder) 상태 스타일 */
+#age,
+#gender,
+#specialty {
+  font-size: 1rem;
+  font-style: italic;
+  color: #f2f2f2; /* input placeholder와 동일 색상 */
+}
+
+#age:valid,
+#gender:valid,
+#specialty:valid {
+  font-size: 1.5rem;
+  font-style: normal;
+  color: white;
+}
+
 select:invalid {
   font-size: 1rem;
   font-style: italic;
   color: #f2f2f2; /* 기존 input placeholder와 동일한 색상 */
 }
 
-/* 2. select 박스 내 모든 드롭다운 옵션 리스트 스타일 */
 select option {
   font-size: 1rem;
-  font-style: normal; /* 리스트에서는 이탤릭체 유지 안 함 */
+  font-style: normal;
+  color: #000; /* OS 기본 드롭다운 색상 */
+}
+
+select option[value=""] {
+  color: #aaa;
+  font-style: italic;
+}
+
+select:valid {
+  font-size: 1.5rem; /* 선택 시 폰트 크기 키움 */
+  font-style: normal; /* 이탤릭체 제거 */
+  color: white;
 }

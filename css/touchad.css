@@ -1508,3 +1508,11 @@ input:invalid::placeholder {
 #map:hover {
   filter: none; /* 마우스 올리면 컬러 복원 */
 }
+
+.v-line {
+  background: #ddd;
+  border: 0;
+  height: 1px;
+  display: block;
+  width: 100%;
+}

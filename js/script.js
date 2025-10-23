@@ -440,7 +440,7 @@ document.addEventListener("DOMContentLoaded", () => {
     span.className = "line";
     span.innerHTML = `지난 4주간, <b>${hospitalName}</b> 반경 1km 내에서 <b>${resData[0].target.toLocaleString()}</b>건의 <b>${
       generalData.partnerCd
-    } 관련 소비<b>가 있었습니다. 이 중 ${
+    } 관련 소비</b>가 있었습니다. 이 중 ${
       generalData.age
     }는 <b>${
       isNaN(agePercent) ? 0 : agePercent

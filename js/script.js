@@ -434,19 +434,19 @@ document.addEventListener("DOMContentLoaded", () => {
       (resData[2].target / resData[0].target) * 100,
       1
     );
-    introLeft.innerHTML = `<span class="line"><span class="uspH">${userName}</span>원장님!</span>`;
+    introLeft.innerHTML = `<span class="line"><b>${userName}</b>원장님!</span>`;
 
     const span = document.createElement("span");
     span.className = "line";
-    span.innerHTML = `지난 4주간, <span class="uspH">${hospitalName}</span> 반경 1km 내에서 <span class="uspH">${resData[0].target.toLocaleString()}</span>건의 <span class="uspH">${
+    span.innerHTML = `지난 4주간, <b>${hospitalName}</b> 반경 1km 내에서 <b>${resData[0].target.toLocaleString()}</b>건의 <b>${
       generalData.partnerCd
-    } 관련 소비</span>가 있었습니다. 이 중 ${
+    } 관련 소비<b>가 있었습니다. 이 중 ${
       generalData.age
-    }는 <span class="uspH">${
+    }는 <b>${
       isNaN(agePercent) ? 0 : agePercent
-    }%</span>, 그들 중 ${generalData.gender}은 <span class="uspH">${
+    }%</b>, 그들 중 ${generalData.gender}은 <b>${
       isNaN(genderPercent) ? 0 : genderPercent
-    }%</span>입니다.`;
+    }%</b>입니다.`;
     introLeft.appendChild(span);
 
     // isMobile 체크

@@ -1541,6 +1541,7 @@ label {
   color: #e0e0e0;
   margin-top: 20px;
   margin-bottom: 0;
+  align-items: center;
 }
 
 /* Form Navigation */

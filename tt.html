@@ -89,6 +89,7 @@
             <div class="form-steps-container">
               <div class="form-step">
                 <h2 class="form-section__title">기본 정보</h2>
+                  <p class="form-tip">원장님의 성함과 연락처를 입력해주세요.</p>
                 <div class="form-group">
                   <label for="name">성함<span class="needed"> *</span></label>
                   <input type="text" id="name" name="name" required placeholder="예) 장준혁" />
@@ -104,6 +105,7 @@
               </div>
               <div class="form-step">
                 <h2 class="form-section__title">병원 정보</h2>
+                <p class="form-tip">원장님의 진료 분야에 맞춰, 연관도 높은 카드 소비 데이터를 기반으로 고객 흐름을 분석합니다.</p>
                 <div class="form-group">
                   <label for="hospital-name">병원이름<span class="needed"> *</span></label>
                   <input type="text" id="hospital-name" name="hospital-name" placeholder="예) 브라운성형외과" />
@@ -118,12 +120,12 @@
                     <option value="일반·치과·한방병원" name="정형외과">정형외과</option>
                     <option value="유사의료업" name="기타">기타</option>
                   </select>
-                  <p class="form-tip">원장님의 진료 분야에 맞춰, 연관도 높은 카드 소비 데이터를 기반으로 고객 흐름을 분석합니다.</p>
                 </div>
               </div>
 
               <div class="form-step">
                 <h2 class="form-section__title">위치 정보</h2>
+                  <p class="form-tip">원장님의 병원의 위치를 중심으로, 도달 가능한 생활권 내 이동 흐름을 분석합니다.</p>
                 <div class="form-group">
                   <label for="address-base">병원 주소<span class="needed"> *</span></label>
                   <div class="address-search-group">
@@ -143,12 +145,12 @@
                 <div class="form-group">
                   <label for="address-detail">상세 주소<span class="needed"> *</span></label>
                   <input type="text" id="address-detail" name="address-detail" required placeholder="상세 주소를 입력해주세요" />
-                  <p class="form-tip">원장님의 병원의 위치를 중심으로, 도달 가능한 생활권 내 이동 흐름을 분석합니다.</p>
                 </div>
               </div>
 
               <div class="form-step">
                 <h2 class="form-section__title">성별, 연령 정보</h2>
+                  <p class="form-tip">원장님께서 궁금하신 성별과 연령대를 선택해주세요.</p>
                 <div class="form-group">
                   <label for="gender">성별<span class="needed"> *</span></label>
                   <select id="gender" name="gender" required>
@@ -169,7 +171,6 @@
                     <option value="F" name="60대">60대</option>
                     <option value="G" name="70대 이상">70대 이상</option>
                   </select>
-                  <p class="form-tip">원장님께서 궁금하신 성별과 연령대를 선택해주세요.</p>
                 </div>
                 <div class="form-group consent">
                   <input type="checkbox" id="privacy-consent" name="privacy-consent" required />

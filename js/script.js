@@ -422,33 +422,66 @@ document.addEventListener("DOMContentLoaded", () => {
     const {hospitalName, generalData, resData} = JSON.parse(
       localStorage.getItem("touchadData")
     );
-    const introLeft = document.querySelector(".intro__left-pane");
-    const userName = localStorage.getItem("name") || ""; // 이름 불러오기
+const introLeft = document.querySelector(".intro__left-pane");
+if (!introLeft) {
+  console.error("intro__left-pane 요소를 찾을 수 없습니다.");
+} else {
+  introLeft.textContent = ""; // 혹시 이전 내용 제거
 
-    // 비율 계산
-    const agePercent = Math.round(
-      (resData[1].target / resData[0].target) * 100,
-      1
-    );
-    const genderPercent = Math.round(
-      (resData[2].target / resData[0].target) * 100,
-      1
-    );
-    introLeft.innerHTML = `<span class="line"><span class="uspH">${userName}</span>원장님!</span>`;
+  // 첫 번째 줄: “원장님!” 메시지
+  const line1 = document.createElement("span");
+  line1.className = "line";
 
-    const span = document.createElement("span");
-    span.className = "line";
-    span.innerHTML = `지난 4주간, <span class="uspH">${hospitalName}</span> 반경 1km 내에서 <span class="uspH">${resData[0].target.toLocaleString()}</span>건의 <span class="uspH">${
-      generalData.partnerCd
-    } 관련 소비</span>가 있었습니다. 이 중 ${
-      generalData.age
-    }는 <span class="uspH">${
-      isNaN(agePercent) ? 0 : agePercent
-    }%</span>, 그들 중 ${generalData.gender}은 <span class="uspH">${
-      isNaN(genderPercent) ? 0 : genderPercent
-    }%</span>입니다.`;
-    introLeft.appendChild(span);
+  const uspName = document.createElement("span");
+  uspName.className = "uspH";
+  uspName.textContent = userName;
 
+  line1.appendChild(uspName);
+  line1.appendChild(document.createTextNode("원장님!"));
+  introLeft.appendChild(line1);
+
+  // 두 번째 줄: 통계 문장
+  const line2 = document.createElement("span");
+  line2.className = "line";
+
+  // 안전한 텍스트 결합 (innerHTML 안 씀)
+  const text1 = document.createTextNode("지난 4주간, ");
+  const hospSpan = document.createElement("span");
+  hospSpan.className = "uspH";
+  hospSpan.textContent = hospitalName;
+
+  const text2 = document.createTextNode(` 반경 1km 내에서 `);
+  const targetSpan = document.createElement("span");
+  targetSpan.className = "uspH";
+  targetSpan.textContent = resData[0].target.toLocaleString();
+
+  const text3 = document.createTextNode("건의 ");
+  const partnerSpan = document.createElement("span");
+  partnerSpan.className = "uspH";
+  partnerSpan.textContent = `${generalData.partnerCd} 관련 소비`;
+
+  const text4 = document.createTextNode("가 있었습니다. 이 중 ");
+  const ageText = document.createTextNode(`${generalData.age}는 `);
+  const ageSpan = document.createElement("span");
+  ageSpan.className = "uspH";
+  ageSpan.textContent = `${isNaN(agePercent) ? 0 : agePercent}%`;
+
+  const text5 = document.createTextNode(", 그들 중 ");
+  const genderText = document.createTextNode(`${generalData.gender}은 `);
+  const genderSpan = document.createElement("span");
+  genderSpan.className = "uspH";
+  genderSpan.textContent = `${isNaN(genderPercent) ? 0 : genderPercent}%`;
+
+  const text6 = document.createTextNode("입니다.");
+
+  // 순서대로 line2에 추가
+  [
+    text1, hospSpan, text2, targetSpan, text3, partnerSpan,
+    text4, ageText, ageSpan, text5, genderText, genderSpan, text6
+  ].forEach(node => line2.appendChild(node));
+
+  introLeft.appendChild(line2);
+}
     // isMobile 체크
     const isMobile = window.innerWidth <= 768;
 

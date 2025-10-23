@@ -1233,8 +1233,9 @@ label {
   color: #fff;
 }
 
-.intro__left-pane .uspH {
+.uspH {
   font-weight: 700;
+  font-size: 1.5rem;
   color: #fff;
 }
 

@@ -352,7 +352,6 @@
     top: 10%;
     padding: 1rem;
   }
-}
 
   #cta .cta__main-copy {
     font-size: 1.5rem;
@@ -561,3 +560,4 @@
     justify-content: flex-start;
     align-items: center;
   }
+}

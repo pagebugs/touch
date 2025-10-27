@@ -1520,7 +1520,7 @@ input:invalid::placeholder {
 
   /* --- 기본 설정 --- */
   html {
-    font-size: 12px;
+    font-size: 14px;
   }
 
   html, body {
@@ -1719,6 +1719,13 @@ input:invalid::placeholder {
     text-align: left;
   }
 
+  #cta .cta__main-copy .highlight-copy {
+    font-size: 2rem;
+  }
+
+  #cta .cta__footer {
+    font-size: 1.5em;
+  }
   /* --- Parallax Wrapper --- */
   /* .parallax-wrapper {
     height: auto;

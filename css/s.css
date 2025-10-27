@@ -1410,7 +1410,7 @@ label {
   z-index: 2;
   width: 100%;
   max-width: 560px;
-  height: 540px;
+  height: 580px;
   background: rgba(0, 0, 0, 0.85);
   backdrop-filter: blur(10px);
   border: 0px solid rgba(255, 255, 255, 0.2);
@@ -1535,11 +1535,11 @@ label {
 }
 
 .form-tip {
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 200;
   line-height: 1.4;
   color: #e0e0e0;
-  margin-top: 20px;
+  margin-top: 8px;
   margin-bottom: 0;
   text-align: center;
   margin-bottom: 40px;

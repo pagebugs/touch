@@ -385,9 +385,9 @@ SECTION 4: CTA (Call to Action)
 }
 
 .cta__footer {
-  font-size: 3rem;
-  font-weight: 600;
-  color: rgba(231, 76, 60, 0.8);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #000;
 }
 
 .partnership-highlight {
@@ -398,11 +398,6 @@ SECTION 4: CTA (Call to Action)
 }
 /* 버튼의 스크롤 애니메이션과 호버 효과를 모두 적용하기 위한 코드 */
 .cta__button.animate-on-scroll {
-  /*
-    스크롤 효과(opacity, transform)와
-    호버 효과(background-color, color, border-color)를
-    하나의 transition 속성에 모두 정의합니다.
-  */
   transition: opacity 1s ease-out, transform 1s ease-out, background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
 }
 /*
@@ -687,6 +682,7 @@ ETC
 
 .highlight-copy {
   font-weight: 700;
+  color: #000;
 }
 
 .usp {

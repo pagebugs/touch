@@ -385,7 +385,7 @@ SECTION 4: CTA (Call to Action)
 }
 
 .cta__footer {
-  font-size: 1.75rem;
+  font-size: 3rem;
   font-weight: 600;
   color: rgba(231, 76, 60, 0.8);
 }
@@ -1872,9 +1872,6 @@ input:invalid::placeholder {
     padding: 1rem;
   }
 
-  #cta .cta__main-copy {
-    font-size: 1.5rem;
-  }
 
   #cta .cta__button {
     font-size: 1.25rem;

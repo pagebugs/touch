@@ -1057,12 +1057,12 @@ document.addEventListener("DOMContentLoaded", () => {
       // 5. 메시지 갱신
       const rightPane = document.querySelector(".intro__right-pane");
       rightPane.innerHTML = `
-        비슷한 특성의 고객 <span class="highlight-copy">${consumerCount.toLocaleString()}명</span>에게 도달하기 위해,<br/>
-        필요한 <span class="highlight-copy">터치애드 예산은 약 ${touchAdBudget.toLocaleString()}원</span> (${days}일 동안 집행 예상)입니다.<br/>
-        평균 <span class="highlight-copy">${(conversionRate * 100).toFixed(
+        비슷한 특성의 고객 <span class="intro_right_Bold">${consumerCount.toLocaleString()}명</span>에게 도달하기 위해,<br/>
+        필요한 <span class="intro_right_Bold">터치애드 예산은 약 ${touchAdBudget.toLocaleString()}원</span> (${days}일 동안 집행 예상)입니다.<br/>
+        평균 <span class="intro_right_Bold">${(conversionRate * 100).toFixed(
           0
         )}% 수준의 고객 전환</span>을 기대할 수 있습니다.<br/>
-        동일 조건의 <span class="highlight-copy">네이버 키워드 광고 집행 비용은 약 ${naverCost.toLocaleString()}원</span>이 소요 됩니다.
+        동일 조건의 <span class="intro_right_Bold">네이버 키워드 광고 집행 비용은 약 ${naverCost.toLocaleString()}원</span>이 소요 됩니다.
       `;
     } catch (err) {
       console.error("보조메시지 로딩 오류:", err);
